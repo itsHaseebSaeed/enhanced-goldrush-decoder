@@ -102,6 +102,7 @@ GoldRushDecoder.on(
                 ticker_symbol: Token0?.[0]?.contract_ticker_symbol,
                 ticker_logo: Token0?.[0]?.logo_urls?.token_logo_url,
                 pretty_quote: Token0?.[0]?.prices?.[0]?.pretty_price,
+                usd_value :  0
             },
             {
                 heading: "Token 1 Information",
@@ -110,6 +111,7 @@ GoldRushDecoder.on(
                 ticker_symbol: Token1?.[0]?.contract_ticker_symbol,
                 ticker_logo: Token1?.[0]?.logo_urls?.token_logo_url,
                 pretty_quote: Token1?.[0]?.prices?.[0]?.pretty_price,
+                usd_value :  0
             },
         ];
 

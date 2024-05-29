@@ -39,4 +39,6 @@ export enum DECODED_ACTION {
     INIT_ROUTER = "Init Router",
     ADD_ROUTER = "Add Router",
     REMOVE_ROUTER = "Remove Router",
+    DEPOSITED = "Deposited",
+    WITHDRAWN="withdrawn"
 }

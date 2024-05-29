@@ -89,6 +89,7 @@ GoldRushDecoder.on(
                 pretty_quote: prettifyCurrency(
                     TokenData?.[0]?.prices?.[0]?.price
                 ),
+                usd_value: TokenData?.[0]?.prices?.[0]?.price,
                 ticker_logo: TokenData?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: TokenData?.[0]?.contract_ticker_symbol,
             },
@@ -104,6 +105,12 @@ GoldRushDecoder.on(
                                 TokenData?.[0]?.contract_decimals ?? 0
                             ))
                 ),
+                usd_value: TokenData?.[0]?.prices?.[0]?.price *
+                (Number(decoded.netTokenToAccount) /
+                    Math.pow(
+                        10,
+                        TokenData?.[0]?.contract_decimals ?? 0
+                    )),
                 ticker_logo: TokenData?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: TokenData?.[0]?.contract_ticker_symbol,
             },
@@ -119,6 +126,12 @@ GoldRushDecoder.on(
                                 PtTokenData?.[0]?.contract_decimals ?? 0
                             ))
                 ),
+                usd_value: PtTokenData?.[0]?.prices?.[0]?.price *
+                (Number(decoded.netPtToAccount) /
+                    Math.pow(
+                        10,
+                        PtTokenData?.[0]?.contract_decimals ?? 0
+                    )),
                 ticker_logo: PtTokenData?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: PtTokenData?.[0]?.contract_ticker_symbol,
             },
@@ -134,6 +147,12 @@ GoldRushDecoder.on(
                                 SyTokenData?.[0]?.contract_decimals ?? 0
                             ))
                 ),
+                usd_value: SyTokenData?.[0]?.prices?.[0]?.price *
+                (Number(decoded.netSyInterm) /
+                    Math.pow(
+                        10,
+                        SyTokenData?.[0]?.contract_decimals ?? 0
+                    )),
                 ticker_logo: SyTokenData?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: SyTokenData?.[0]?.contract_ticker_symbol,
             },
@@ -238,6 +257,12 @@ GoldRushDecoder.on(
                                 YtTokenData?.[0]?.contract_decimals ?? 0
                             ))
                 ),
+                usd_value: YtTokenData?.[0]?.prices?.[0]?.price *
+                (Number(decoded.netYtToAccount) /
+                    Math.pow(
+                        10,
+                        YtTokenData?.[0]?.contract_decimals ?? 0
+                    )),
                 ticker_logo: YtTokenData?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: YtTokenData?.[0]?.contract_ticker_symbol,
             },
@@ -253,6 +278,12 @@ GoldRushDecoder.on(
                                 SyTokenData?.[0]?.contract_decimals ?? 0
                             ))
                 ),
+                usd_value: SyTokenData?.[0]?.prices?.[0]?.price *
+                (Number(decoded.netSyToAccount) /
+                    Math.pow(
+                        10,
+                        SyTokenData?.[0]?.contract_decimals ?? 0
+                    )),
                 ticker_logo: SyTokenData?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: SyTokenData?.[0]?.contract_ticker_symbol,
             },
@@ -501,6 +532,12 @@ GoldRushDecoder.on(
                                 PendleTokenData?.[0]?.contract_decimals ?? 0
                             ))
                 ),
+                usd_value: PendleTokenData?.[0]?.prices?.[0]?.price *
+                (Number(decoded.amount) /
+                    Math.pow(
+                        10,
+                        PendleTokenData?.[0]?.contract_decimals ?? 0
+                    )),
                 ticker_logo: PendleTokenData?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: PendleTokenData?.[0]?.contract_ticker_symbol,
             },

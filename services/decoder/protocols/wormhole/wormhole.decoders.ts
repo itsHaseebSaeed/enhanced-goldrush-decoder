@@ -9,6 +9,7 @@ import { decodeEventLog, type Abi } from "viem";
 import PORTAL_BRIDGE_ABI from "./abis/wormhole-portal-bridge.abi.json";
 import ETH_CORE_ABI from "./abis/wormhole-eth-core.abi.json";
 
+//Withdraw back to eth
 GoldRushDecoder.on(
     "wormhole:TransferRedeemed",
     [
@@ -79,6 +80,8 @@ GoldRushDecoder.on(
         };
     }
 );
+
+//Deposited from eth
 
 GoldRushDecoder.on(
     "wormhole:LogMessagePublished",

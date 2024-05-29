@@ -42,6 +42,8 @@ export type EventTokens = {
     ticker_symbol: string | null;
     ticker_logo: string | null;
     pretty_quote: string;
+    usd_quote?: number;
+    usd_value?: number;
 }[];
 
 export interface EventType {
@@ -50,7 +52,7 @@ export interface EventType {
     name: string;
     protocol?: {
         name: string;
-        logo: string;
+        logo?: string;
     };
     tokens?: EventTokens;
     nfts?: EventNFTs;

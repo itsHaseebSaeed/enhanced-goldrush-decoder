@@ -13,7 +13,6 @@ GoldRushDecoder.native((tx, options): EventType | null => {
         category: DECODED_EVENT_CATEGORY.DEX,
         name: "Native Transfer",
         protocol: {
-            logo: tx.gas_metadata.logo_url,
             name: tx.gas_metadata.contract_name,
         },
         details: [
@@ -34,6 +33,7 @@ GoldRushDecoder.native((tx, options): EventType | null => {
                 value: tx.value?.toString() || "0",
                 decimals: tx.gas_metadata.contract_decimals,
                 pretty_quote: tx.pretty_value_quote,
+                usd_value: tx.value_quote,
                 ticker_logo: tx.gas_metadata.logo_url,
                 ticker_symbol: tx.gas_metadata.contract_ticker_symbol,
             },

@@ -81,12 +81,13 @@ GoldRushDecoder.fallback(
             },
         ];
 
+        
+
         const parsedData: EventType = {
             action: DECODED_ACTION.TRANSFERRED,
             category: DECODED_EVENT_CATEGORY.TOKEN,
             name: "Transfer",
             protocol: {
-                logo: log_event.sender_logo_url as string,
                 name: log_event.sender_name as string,
             },
             ...(options.raw_logs ? { raw_log: log_event } : {}),
@@ -108,16 +109,16 @@ GoldRushDecoder.fallback(
                         to: date,
                     }
                 );
+            
+            let usd_value = data?.[0]?.items?.[0]?.price *
+                (Number(decoded.value) /
+                    Math.pow(
+                        10,
+                        data?.[0]?.items?.[0]?.contract_metadata
+                            ?.contract_decimals ?? 18
+                    )) ?? 0;
 
-            const pretty_quote = prettifyCurrency(
-                data?.[0]?.items?.[0]?.price *
-                    (Number(decoded.value) /
-                        Math.pow(
-                            10,
-                            data?.[0]?.items?.[0]?.contract_metadata
-                                ?.contract_decimals ?? 18
-                        )) ?? 0
-            );
+            const pretty_quote = prettifyCurrency( usd_value);
 
             if (currencyToNumber(pretty_quote) < options.min_usd!) {
                 return null;
@@ -128,6 +129,7 @@ GoldRushDecoder.fallback(
                     decimals: data?.[0]?.contract_decimals ?? 18,
                     heading: "Token Amount",
                     pretty_quote: pretty_quote,
+                    usd_value:usd_value,
                     ticker_logo: data?.[0]?.logo_urls?.token_logo_url,
                     ticker_symbol: data?.[0]?.contract_ticker_symbol,
                     value: decoded.value.toString(),

@@ -109,6 +109,13 @@ GoldRushDecoder.on(
                                         +(inputToken?.contract_decimals ?? 18)
                                     ))
                     ),
+                    usd_quote: inputToken?.quote_rate ??
+                    0 *
+                        (Number(inputValue) /
+                            Math.pow(
+                                10,
+                                +(inputToken?.contract_decimals ?? 18)
+                            )),
                     heading: "Token In",
                 },
                 {
@@ -125,6 +132,13 @@ GoldRushDecoder.on(
                                         +(outputToken?.contract_decimals ?? 18)
                                     ))
                     ),
+                    usd_value:  outputToken?.quote_rate ??
+                    0 *
+                        (Number(outputValue) /
+                            Math.pow(
+                                10,
+                                +(outputToken?.contract_decimals ?? 18)
+                            )) ,
                     heading: "Token Out",
                 },
             ],
@@ -207,6 +221,16 @@ GoldRushDecoder.on(
                                         )
                                     ))
                     ),
+                    usd_value : data?.items?.[0]?.token_0?.quote_rate ??
+                    0 *
+                        (Number(decoded.amount0) /
+                            Math.pow(
+                                10,
+                                +(
+                                    data?.items?.[0]?.token_0
+                                        ?.contract_decimals ?? 18
+                                )
+                            )),
                     heading: "Token 0 Deposited",
                 },
                 {
@@ -230,6 +254,16 @@ GoldRushDecoder.on(
                                         )
                                     ))
                     ),
+                    usd_value : data?.items?.[0]?.token_1?.quote_rate ??
+                    0 *
+                        (Number(decoded.amount1) /
+                            Math.pow(
+                                10,
+                                +(
+                                    data?.items?.[0]?.token_1
+                                        ?.contract_decimals ?? 18
+                                )
+                            )),
                     heading: "Token 1 Deposited",
                 },
             ],
@@ -318,6 +352,16 @@ GoldRushDecoder.on(
                                         )
                                     ))
                     ),
+                    usd_value: data?.items?.[0]?.token_0?.quote_rate ??
+                    0 *
+                        (Number(decoded.amount0) /
+                            Math.pow(
+                                10,
+                                +(
+                                    data?.items?.[0]?.token_0
+                                        ?.contract_decimals ?? 18
+                                )
+                            )),
                     heading: "Token 0 Redeemed",
                 },
                 {
@@ -341,6 +385,16 @@ GoldRushDecoder.on(
                                         )
                                     ))
                     ),
+                    usd_value: data?.items?.[0]?.token_1?.quote_rate ??
+                    0 *
+                        (Number(decoded.amount1) /
+                            Math.pow(
+                                10,
+                                +(
+                                    data?.items?.[0]?.token_1
+                                        ?.contract_decimals ?? 18
+                                )
+                            )),
                     heading: "Token 1 Redeemed",
                 },
             ],
@@ -415,6 +469,16 @@ GoldRushDecoder.on(
                                         )
                                     ))
                     ),
+                    usd_value: data?.items?.[0]?.token_0?.quote_rate ??
+                    0 *
+                        (Number(decoded.reserve0) /
+                            Math.pow(
+                                10,
+                                +(
+                                    data?.items?.[0]?.token_0
+                                        ?.contract_decimals ?? 18
+                                )
+                            )),
                     heading: "Reserve 0",
                 },
                 {
@@ -438,6 +502,16 @@ GoldRushDecoder.on(
                                         )
                                     ))
                     ),
+                    usd_value: data?.items?.[0]?.token_1?.quote_rate ??
+                    0 *
+                        (Number(decoded.reserve1) /
+                            Math.pow(
+                                10,
+                                +(
+                                    data?.items?.[0]?.token_1
+                                        ?.contract_decimals ?? 18
+                                )
+                            )),
                     heading: "Reserve 1",
                 },
             ],
