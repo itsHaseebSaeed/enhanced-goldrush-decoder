@@ -73,6 +73,13 @@ GoldRushDecoder.on(
             }
         }
 
+        const inputTokenquoteRate = inputToken?.quote_rate ?? 0;
+        const adjustedValue = Number(inputValue) / Math.pow(10, inputToken?.contract_decimals ?? 18);
+        const inputTokenPrice = inputTokenquoteRate;
+        let inputTokenUsdValue = adjustedValue * inputTokenPrice;
+
+
+
         return {
             action: DECODED_ACTION.SWAPPED,
             category: DECODED_EVENT_CATEGORY.DEX,
@@ -99,23 +106,9 @@ GoldRushDecoder.on(
                     ticker_logo: inputToken?.logo_url ?? null,
                     ticker_symbol: inputToken?.contract_ticker_symbol ?? null,
                     value: inputValue.toString(),
-                    decimals: +(inputToken?.contract_decimals ?? 18),
-                    pretty_quote: prettifyCurrency(
-                        inputToken?.quote_rate ??
-                            0 *
-                                (Number(inputValue) /
-                                    Math.pow(
-                                        10,
-                                        +(inputToken?.contract_decimals ?? 18)
-                                    ))
-                    ),
-                    usd_quote: inputToken?.quote_rate ??
-                    0 *
-                        (Number(inputValue) /
-                            Math.pow(
-                                10,
-                                +(inputToken?.contract_decimals ?? 18)
-                            )),
+                    decimals: (inputToken?.contract_decimals ?? 18),
+                    pretty_quote: prettifyCurrency(inputTokenPrice),
+                    usd_value:  inputTokenUsdValue,
                     heading: "Token In",
                 },
                 {
@@ -137,7 +130,7 @@ GoldRushDecoder.on(
                         (Number(outputValue) /
                             Math.pow(
                                 10,
-                                +(outputToken?.contract_decimals ?? 18)
+                                (outputToken?.contract_decimals ?? 18)
                             )) ,
                     heading: "Token Out",
                 },
@@ -449,7 +442,6 @@ GoldRushDecoder.on(
             ...(options.raw_logs ? { raw_log: log_event } : {}),
             tokens: [
                 {
-                    ticker_logo: data?.items?.[0]?.token_0?.logo_url ?? null,
                     ticker_symbol:
                         data?.items?.[0]?.token_0?.contract_ticker_symbol ??
                         null,
@@ -463,7 +455,7 @@ GoldRushDecoder.on(
                                 (Number(decoded.reserve0) /
                                     Math.pow(
                                         10,
-                                        +(
+                                        (
                                             data?.items?.[0]?.token_0
                                                 ?.contract_decimals ?? 18
                                         )
@@ -474,7 +466,7 @@ GoldRushDecoder.on(
                         (Number(decoded.reserve0) /
                             Math.pow(
                                 10,
-                                +(
+                                (
                                     data?.items?.[0]?.token_0
                                         ?.contract_decimals ?? 18
                                 )
@@ -507,7 +499,7 @@ GoldRushDecoder.on(
                         (Number(decoded.reserve1) /
                             Math.pow(
                                 10,
-                                +(
+                                (
                                     data?.items?.[0]?.token_1
                                         ?.contract_decimals ?? 18
                                 )

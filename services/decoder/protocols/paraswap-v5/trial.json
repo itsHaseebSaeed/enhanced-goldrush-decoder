@@ -1,0 +1,236 @@
+{
+    "success": true,
+    "events": [
+        {
+            "action": "Native Token Transfer",
+            "category": "DEX",
+            "name": "Native Transfer",
+            "protocol": { "name": "Ether" },
+            "details": [
+                {
+                    "heading": "From",
+                    "value": "0x5d6eb0bfae697ccb4f6a615088bc5f9735b76d60",
+                    "type": "address"
+                },
+                {
+                    "heading": "To",
+                    "value": "0xdef171fe48cf0115b1d80b88dc8eab59176fee57",
+                    "type": "address"
+                }
+            ],
+            "tokens": [
+                {
+                    "heading": "Value",
+                    "value": "540000000000000000",
+                    "decimals": 18,
+                    "pretty_quote": "$2,088.58",
+                    "usd_value": 2088.5844544509873,
+                    "ticker_logo": "https://www.datocms-assets.com/86369/1669653891-eth.svg",
+                    "ticker_symbol": "ETH"
+                }
+            ]
+        },
+        {
+            "action": "Transferred",
+            "category": "Token",
+            "name": "Transfer",
+            "protocol": { "name": "Wrapped Ether" },
+            "details": [
+                {
+                    "heading": "From",
+                    "value": "0xDEF171Fe48CF0115B1d80b88dc8eAB59176FEe57",
+                    "type": "address"
+                },
+                {
+                    "heading": "To",
+                    "value": "0x831BF48183B999fDe45294b14B55199072f0801B",
+                    "type": "address"
+                }
+            ],
+            "tokens": [
+                {
+                    "decimals": 18,
+                    "heading": "Token Amount",
+                    "pretty_quote": "$2,103.22",
+                    "usd_value": 2103.223644,
+                    "ticker_logo": "https://logos.covalenthq.com/tokens/1/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2.png",
+                    "ticker_symbol": "WETH",
+                    "value": "540000000000000000"
+                }
+            ]
+        },
+        {
+            "action": "Transferred",
+            "category": "Token",
+            "name": "Transfer",
+            "protocol": { "name": "USD Coin" },
+            "details": [
+                {
+                    "heading": "From",
+                    "value": "0x831BF48183B999fDe45294b14B55199072f0801B",
+                    "type": "address"
+                },
+                {
+                    "heading": "To",
+                    "value": "0xDEF171Fe48CF0115B1d80b88dc8eAB59176FEe57",
+                    "type": "address"
+                }
+            ],
+            "tokens": [
+                {
+                    "decimals": 6,
+                    "heading": "Token Amount",
+                    "pretty_quote": "$2,099.77",
+                    "usd_value": 2099.7767418037233,
+                    "ticker_logo": "https://logos.covalenthq.com/tokens/1/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48.png",
+                    "ticker_symbol": "USDC",
+                    "value": "2096761808"
+                }
+            ]
+        },
+        {
+            "action": "Transferred",
+            "category": "Token",
+            "name": "Transfer",
+            "protocol": { "name": "USD Coin" },
+            "details": [
+                {
+                    "heading": "From",
+                    "value": "0xDEF171Fe48CF0115B1d80b88dc8eAB59176FEe57",
+                    "type": "address"
+                },
+                {
+                    "heading": "To",
+                    "value": "0xeF13101C5bbD737cFb2bF00Bbd38c626AD6952F7",
+                    "type": "address"
+                }
+            ],
+            "tokens": [
+                {
+                    "decimals": 6,
+                    "heading": "Token Amount",
+                    "pretty_quote": "$19.94",
+                    "usd_value": 19.9478788708823,
+                    "ticker_logo": "https://logos.covalenthq.com/tokens/1/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48.png",
+                    "ticker_symbol": "USDC",
+                    "value": "19919237"
+                }
+            ]
+        },
+        {
+            "action": "Transferred",
+            "category": "Token",
+            "name": "Transfer",
+            "protocol": { "name": "USD Coin" },
+            "details": [
+                {
+                    "heading": "From",
+                    "value": "0xDEF171Fe48CF0115B1d80b88dc8eAB59176FEe57",
+                    "type": "address"
+                },
+                {
+                    "heading": "To",
+                    "value": "0x5d6eb0BFaE697cCb4F6A615088BC5f9735b76D60",
+                    "type": "address"
+                }
+            ],
+            "tokens": [
+                {
+                    "decimals": 6,
+                    "heading": "Token Amount",
+                    "pretty_quote": "$2,079.82",
+                    "usd_value": 2079.828862932841,
+                    "ticker_logo": "https://logos.covalenthq.com/tokens/1/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48.png",
+                    "ticker_symbol": "USDC",
+                    "value": "2076842571"
+                }
+            ]
+        },
+        {
+            "action": "Swapped",
+            "category": "DEX",
+            "name": "Swap V3",
+            "protocol": {
+                "logo": "https://logos.covalenthq.com/tokens/1/0xdef171fe48cf0115b1d80b88dc8eab59176fee57.png",
+                "name": "Paraswap V5"
+            },
+            "details": [
+                {
+                    "heading": "UUID",
+                    "value": "0x3854c50fc47a4723a0a9a1e75ae5753e",
+                    "type": "address"
+                },
+                {
+                    "heading": "Beneficiary",
+                    "value": "0x5d6eb0BFaE697cCb4F6A615088BC5f9735b76D60",
+                    "type": "address"
+                },
+                {
+                    "heading": "Initiator",
+                    "value": "0x5d6eb0BFaE697cCb4F6A615088BC5f9735b76D60",
+                    "type": "address"
+                },
+                {
+                    "heading": "Expected Amount",
+                    "value": "2096.76",
+                    "type": "text"
+                }
+            ],
+            "tokens": [
+                {
+                    "decimals": 18,
+                    "heading": "Input",
+                    "pretty_quote": "$2,051.79",
+                    "ticker_logo": "https://www.datocms-assets.com/86369/1669619533-ethereum.png",
+                    "ticker_symbol": "ETH",
+                    "value": "540000000000000000"
+                },
+                {
+                    "decimals": 6,
+                    "heading": "Output",
+                    "pretty_quote": "$2,097.09",
+                    "ticker_logo": "https://logos.covalenthq.com/tokens/1/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48.png",
+                    "ticker_symbol": "USDC",
+                    "value": "2096761808"
+                }
+            ]
+        }
+    ],
+    "tx_metadata": {
+        "block_signed_at": "2024-03-07T21:54:11.000Z",
+        "block_height": 19386107,
+        "block_hash": "0xf2ad526d6aaf8b93abf06e693d0a624d03a920793f9b6d4103b58791ca50a255",
+        "tx_hash": "0x9edc99c0f53910a7e3ce099d9379d655748a8ace099ae64ec5fb9c5237640f37",
+        "tx_offset": 54,
+        "successful": true,
+        "from_address": "0x5d6eb0bfae697ccb4f6a615088bc5f9735b76d60",
+        "miner_address": "0x4838b106fce9647bdf1e7877bf73ce8b0bad5f97",
+        "from_address_label": null,
+        "to_address": "0xdef171fe48cf0115b1d80b88dc8eab59176fee57",
+        "to_address_label": null,
+        "value": "540000000000000000",
+        "value_quote": 2088.5844544509873,
+        "pretty_value_quote": "$2,088.58",
+        "gas_offered": 273275,
+        "gas_spent": 179411,
+        "gas_price": 65496401329,
+        "fees_paid": "11750774858837219",
+        "gas_quote": 45.44904758874243,
+        "pretty_gas_quote": "$45.45",
+        "gas_quote_rate": 3867.7489897240507,
+        "gas_metadata": {
+            "contract_decimals": 18,
+            "contract_name": "Ether",
+            "contract_ticker_symbol": "ETH",
+            "contract_address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "supports_erc": [],
+            "logo_url": "https://www.datocms-assets.com/86369/1669653891-eth.svg"
+        },
+        "explorers": [
+            {
+                "label": null,
+                "url": "https://etherscan.io/tx/0x9edc99c0f53910a7e3ce099d9379d655748a8ace099ae64ec5fb9c5237640f37"
+            }
+        ]
+    }
+}

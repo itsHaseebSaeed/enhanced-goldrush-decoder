@@ -1,0 +1,131 @@
+{
+    "success": true,
+    "events": [
+        {
+            "action": "Transferred",
+            "category": "Token",
+            "name": "Transfer",
+            "protocol": { "name": "Wrapped Ether" },
+            "details": [
+                {
+                    "heading": "From",
+                    "value": "0x1BEcf1Ac50F31C3441181563F9D350dDF72a2Bfa",
+                    "type": "address"
+                },
+                {
+                    "heading": "To",
+                    "value": "0xEC84271FeD60528BFFAe78f38A27Af77D48B4454",
+                    "type": "address"
+                }
+            ],
+            "tokens": [
+                {
+                    "decimals": 18,
+                    "heading": "Token Amount",
+                    "pretty_quote": "$2,163.50",
+                    "usd_value": 2163.500233806941,
+                    "ticker_logo": "https://logos.covalenthq.com/tokens/1/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2.png",
+                    "ticker_symbol": "WETH",
+                    "value": "571469869424614400"
+                }
+            ]
+        },
+        {
+            "action": "Transferred",
+            "category": "Token",
+            "name": "Transfer",
+            "protocol": { "name": "Swarm Markets" },
+            "details": [
+                {
+                    "heading": "From",
+                    "value": "0xEC84271FeD60528BFFAe78f38A27Af77D48B4454",
+                    "type": "address"
+                },
+                {
+                    "heading": "To",
+                    "value": "0x1BEcf1Ac50F31C3441181563F9D350dDF72a2Bfa",
+                    "type": "address"
+                }
+            ],
+            "tokens": [
+                {
+                    "decimals": 18,
+                    "heading": "Token Amount",
+                    "pretty_quote": "$2,175.50",
+                    "usd_value": 2175.50725508671,
+                    "ticker_logo": "https://logos.covalenthq.com/tokens/1/0xb17548c7b510427baac4e267bea62e800b247173.png",
+                    "ticker_symbol": "SMT",
+                    "value": "2696251912605675994042"
+                }
+            ]
+        },
+        {
+            "action": "Approval",
+            "category": "DEX",
+            "name": "Approval",
+            "protocol": {
+                "logo": "https://logos.covalenthq.com/tokens/1/0xb17548c7b510427baac4e267bea62e800b247173.png",
+                "name": "Swarm Markets"
+            },
+            "details": [
+                {
+                    "heading": "Owner",
+                    "value": "0xEC84271FeD60528BFFAe78f38A27Af77D48B4454",
+                    "type": "address"
+                },
+                {
+                    "heading": "Spender",
+                    "value": "0xE592427A0AEce92De3Edee1F18E0157C05861564",
+                    "type": "address"
+                }
+            ],
+            "tokens": [
+                {
+                    "heading": "Value",
+                    "value": "9601748714823209555145",
+                    "ticker_symbol": "SMT",
+                    "ticker_logo": "https://logos.covalenthq.com/tokens/1/0xb17548c7b510427baac4e267bea62e800b247173.png",
+                    "decimals": 18,
+                    "pretty_quote": "$7,747.30"
+                }
+            ]
+        }
+    ],
+    "tx_metadata": {
+        "block_signed_at": "2024-05-30T17:05:47.000Z",
+        "block_height": 19984032,
+        "block_hash": "0xf48ad90776162760479fde8713452b768213aecc7e25e1605995cc050d42b497",
+        "tx_hash": "0x9193f3c16a2d775586df2f5d6e9500ba221a14f290096ebb615f6592a3110beb",
+        "tx_offset": 24,
+        "successful": true,
+        "from_address": "0xec84271fed60528bffae78f38a27af77d48b4454",
+        "miner_address": "0x95222290dd7278aa3ddd389cc1e1d165cc4bafe5",
+        "from_address_label": null,
+        "to_address": "0xe592427a0aece92de3edee1f18e0157c05861564",
+        "to_address_label": null,
+        "value": "0",
+        "value_quote": 0,
+        "pretty_value_quote": "$0.00",
+        "gas_offered": 200000,
+        "gas_spent": 116951,
+        "gas_price": 24000000000,
+        "fees_paid": "2806824000000000",
+        "gas_quote": 10.62932674745959,
+        "pretty_gas_quote": "$10.63",
+        "gas_quote_rate": 3786.9587645892975,
+        "gas_metadata": {
+            "contract_decimals": 18,
+            "contract_name": "Ether",
+            "contract_ticker_symbol": "ETH",
+            "contract_address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "supports_erc": [],
+            "logo_url": "https://www.datocms-assets.com/86369/1669653891-eth.svg"
+        },
+        "explorers": [
+            {
+                "label": null,
+                "url": "https://etherscan.io/tx/0x9193f3c16a2d775586df2f5d6e9500ba221a14f290096ebb615f6592a3110beb"
+            }
+        ]
+    }
+}

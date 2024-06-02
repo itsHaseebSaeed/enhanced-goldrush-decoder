@@ -40,7 +40,7 @@ export type EventTokens = {
     value: string;
     decimals: number;
     ticker_symbol: string | null;
-    ticker_logo: string | null;
+    ticker_logo?: string | null;
     pretty_quote: string;
     usd_quote?: number;
     usd_value?: number;

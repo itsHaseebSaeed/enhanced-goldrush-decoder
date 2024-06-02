@@ -111,6 +111,7 @@ export class GoldRushDecoder {
             abi: abi,
             eventName: event_name,
         });
+
         this.decoding_functions.push(decoding_function);
         const decoding_function_index: number =
             this.decoding_functions.length - 1;
@@ -172,6 +173,7 @@ export class GoldRushDecoder {
             const nativeEvent = this.native_decoder(tx, options);
             events.push(nativeEvent);
         }
+        const lowerCaseToAddress = tx.to_address?.toLowerCase();
         const logChunks = chunkify(tx.log_events ?? [], 100);
         for (const logChunk of logChunks) {
             const decodedChunk = await Promise.all(
@@ -185,8 +187,10 @@ export class GoldRushDecoder {
                         chain_name.toLowerCase() as Chain;
                     const lowercaseSenderAddress =
                         sender_address?.toLowerCase();
+                    console.log("lowercaseSenderAddress "+lowercaseSenderAddress);
                     const lowercaseSenderFactoryAddress =
                         sender_factory_address?.toLowerCase();
+                    console.log("lowercaseSenderFactoryAddress "+lowercaseSenderFactoryAddress);
                     const lowercaseTopic0Hash = topic0_hash?.toLowerCase();
                     const decoding_index =
                         this.decoders[lowercaseChainName]?.[
@@ -194,7 +198,12 @@ export class GoldRushDecoder {
                         ]?.[lowercaseTopic0Hash] ??
                         this.decoders[lowercaseChainName]?.[
                             lowercaseSenderFactoryAddress
-                        ]?.[lowercaseTopic0Hash];
+                        ]?.[lowercaseTopic0Hash]
+                        ?? this.decoders[lowercaseChainName]?.[
+                            lowerCaseToAddress
+                        ]?.[lowercaseTopic0Hash]
+                        
+                        ; // TODO: Remove lowerCaseToAddress 
                     const fallback_index = this.fallbacks[lowercaseTopic0Hash];
                     const logFunction =
                         (decoding_index !== undefined &&

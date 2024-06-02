@@ -2,11 +2,23 @@ import { type Configs } from "../../decoder.types";
 
 const configs: Configs = [
     {
-        address: "0x1f98431c8ad98523631ae4a59f267346ea31f984",
+        address: "0x1f98431c8ad98523631ae4a59f267346ea31f984",//Factory
         is_factory: true,
         protocol_name: "uniswap-v3",
         chain_name: "eth-mainnet",
     },
+    {
+        address: "0xe592427a0aece92de3edee1f18e0157c05861564", //Router
+        is_factory: false,
+        protocol_name: "uniswap-v3",
+        chain_name: "eth-mainnet",
+    },
+    // {
+    //     address: "0x1BEcf1Ac50F31C3441181563F9D350dDF72a2Bfa", //Uniswap v3: SMT
+    //     is_factory: false,
+    //     protocol_name: "uniswap-v3",
+    //     chain_name: "eth-mainnet",
+    // },
     {
         address: "0xcbcdf9626bc03e24f779434178a73a0b4bad62ed",
         is_factory: false,

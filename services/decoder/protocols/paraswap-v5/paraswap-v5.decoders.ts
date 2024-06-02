@@ -85,15 +85,24 @@ GoldRushDecoder.on(
             },
         ];
 
+        const srcTokenUsdValue = srcToken?.[0]?.prices?.[0].price *
+        (Number(decoded.srcAmount) /
+            Math.pow(10, srcToken?.[0]?.contract_decimals ?? 0));
+        
+        const destTokenUsdValue = destToken?.[0]?.prices?.[0].price *
+        (Number(decoded.receivedAmount) /
+            Math.pow(
+                10,
+                destToken?.[0]?.contract_decimals ?? 0
+            ))
+
         const tokens: EventTokens = [
             {
                 decimals: srcToken?.[0]?.contract_decimals ?? 0,
                 heading: "Input",
-                pretty_quote: prettifyCurrency(
-                    srcToken?.[0]?.prices?.[0].price *
-                        (Number(decoded.srcAmount) /
-                            Math.pow(10, srcToken?.[0]?.contract_decimals ?? 0))
+                pretty_quote: prettifyCurrency(srcTokenUsdValue
                 ),
+                usd_value: srcTokenUsdValue,
                 ticker_logo: srcToken?.[0]?.logo_url ?? null,
                 ticker_symbol: srcToken?.[0]?.contract_ticker_symbol ?? null,
                 value: decoded.srcAmount.toString(),
@@ -101,14 +110,9 @@ GoldRushDecoder.on(
             {
                 decimals: destToken?.[0]?.contract_decimals ?? 0,
                 heading: "Output",
-                pretty_quote: prettifyCurrency(
-                    destToken?.[0]?.prices?.[0].price *
-                        (Number(decoded.receivedAmount) /
-                            Math.pow(
-                                10,
-                                destToken?.[0]?.contract_decimals ?? 0
-                            ))
+                pretty_quote: prettifyCurrency(destTokenUsdValue      
                 ),
+                usd_value:destTokenUsdValue,
                 ticker_logo: destToken?.[0]?.logo_url ?? null,
                 ticker_symbol: destToken?.[0]?.contract_ticker_symbol ?? null,
                 value: decoded.receivedAmount.toString(),

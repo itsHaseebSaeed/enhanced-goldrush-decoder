@@ -110,6 +110,13 @@ GoldRushDecoder.on(
             },
         ];
 
+        const usdValue = tx?.gas_quote_rate *
+            (Number(decoded.amount) /
+                Math.pow(
+                    10,
+                    tx?.gas_metadata?.contract_decimals ?? 18
+                ));
+
         const tokens: EventTokens = [
             {
                 heading: "Tokens Staked",
@@ -118,13 +125,9 @@ GoldRushDecoder.on(
                 ticker_symbol: tx?.gas_metadata?.contract_ticker_symbol,
                 ticker_logo: tx?.gas_metadata?.logo_url,
                 pretty_quote: prettifyCurrency(
-                    tx?.gas_quote_rate *
-                        (Number(decoded.amount) /
-                            Math.pow(
-                                10,
-                                tx?.gas_metadata?.contract_decimals ?? 18
-                            ))
+                    usdValue
                 ),
+                usd_value: usdValue
             },
         ];
 
@@ -799,7 +802,12 @@ GoldRushDecoder.on(
                 type: "address",
             },
         ];
-
+        const usdValue = (tx?.gas_quote_rate ?? 0) *
+            (Number(decoded.amountOfETH) /
+                Math.pow(
+                    10,
+                    +(tx?.gas_metadata?.contract_decimals ?? 18)
+                ));
         const tokens: EventTokens = [
             {
                 heading: "Amount Of ETH",
@@ -807,14 +815,10 @@ GoldRushDecoder.on(
                 decimals: tx?.gas_metadata?.contract_decimals,
                 ticker_symbol: tx?.gas_metadata?.contract_ticker_symbol,
                 ticker_logo: tx?.gas_metadata?.logo_url,
-                pretty_quote: prettifyCurrency(
-                    (tx?.gas_quote_rate ?? 0) *
-                        (Number(decoded.amountOfETH) /
-                            Math.pow(
-                                10,
-                                +(tx?.gas_metadata?.contract_decimals ?? 18)
-                            ))
+                pretty_quote: prettifyCurrency(usdValue
+                    
                 ),
+                usd_value:usdValue
             },
         ];
 
