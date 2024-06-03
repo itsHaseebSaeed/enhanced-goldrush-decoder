@@ -104,18 +104,20 @@ GoldRushDecoder.on(
                 }
             );
 
+        const usd_value = BorrowToken?.[0]?.prices?.[0]?.price *
+        (Number(decoded.amount) /
+            Math.pow(
+                10,
+                BorrowToken?.[0]?.contract_decimals ?? 0
+            ));
         const tokens: EventTokens = [
             {
                 decimals: BorrowToken?.[0]?.contract_decimals,
                 heading: "Borrow Amount",
                 pretty_quote: prettifyCurrency(
-                    BorrowToken?.[0]?.prices?.[0]?.price *
-                        (Number(decoded.amount) /
-                            Math.pow(
-                                10,
-                                BorrowToken?.[0]?.contract_decimals ?? 0
-                            ))
+                    usd_value
                 ),
+                usd_value:usd_value,
                 ticker_logo: BorrowToken?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: BorrowToken?.[0]?.contract_ticker_symbol,
                 value: String(decoded.amount),
@@ -128,6 +130,7 @@ GoldRushDecoder.on(
             name: "Borrow",
             protocol: {
                 logo: log_event.sender_logo_url as string,
+                address: log_event.sender_address as string,
                 name: "Aave V3",
             },
             ...(options.raw_logs ? { raw_log: log_event } : {}),
@@ -213,6 +216,13 @@ GoldRushDecoder.on(
             },
         ];
 
+        const usd_value = FlashLoanToken?.[0]?.prices?.[0]?.price *
+        (Number(decoded.premium) /
+            Math.pow(
+                10,
+                FlashLoanToken?.[0]?.contract_decimals ?? 0
+            ))
+
         const tokens: EventTokens = [
             {
                 decimals: FlashLoanToken?.[0]?.contract_decimals,
@@ -233,13 +243,9 @@ GoldRushDecoder.on(
                 decimals: FlashLoanToken?.[0]?.contract_decimals,
                 heading: "Flash Loan Premium",
                 pretty_quote: prettifyCurrency(
-                    FlashLoanToken?.[0]?.prices?.[0]?.price *
-                        (Number(decoded.premium) /
-                            Math.pow(
-                                10,
-                                FlashLoanToken?.[0]?.contract_decimals ?? 0
-                            ))
+                usd_value    
                 ),
+                usd_value:usd_value,
                 ticker_logo: FlashLoanToken?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: FlashLoanToken?.[0]?.contract_ticker_symbol,
                 value: String(decoded.premium),
@@ -252,6 +258,7 @@ GoldRushDecoder.on(
             name: "Flash Loan",
             protocol: {
                 logo: log_event.sender_logo_url as string,
+                address: log_event.sender_address as string,
                 name: "Aave V3",
             },
             ...(options.raw_logs ? { raw_log: log_event } : {}),
@@ -347,6 +354,13 @@ GoldRushDecoder.on(
                 ),
             ]);
 
+        const usd_value = debtToken?.[0]?.prices?.[0]?.price *
+            (Number(decoded.debtToCover) /
+                Math.pow(
+                    10,
+                    debtToken?.[0]?.contract_decimals ?? 0
+                ));
+        
         const tokens: EventTokens = [
             {
                 decimals: collateralToken?.[0]?.contract_decimals,
@@ -367,13 +381,9 @@ GoldRushDecoder.on(
                 decimals: debtToken?.[0]?.contract_decimals,
                 heading: "Debt Amount",
                 pretty_quote: prettifyCurrency(
-                    debtToken?.[0]?.prices?.[0]?.price *
-                        (Number(decoded.debtToCover) /
-                            Math.pow(
-                                10,
-                                debtToken?.[0]?.contract_decimals ?? 0
-                            ))
+                    usd_value
                 ),
+                usd_value:usd_value,
                 ticker_logo: debtToken?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: debtToken?.[0]?.contract_ticker_symbol,
                 value: String(decoded.debtToCover),
@@ -386,6 +396,7 @@ GoldRushDecoder.on(
             name: "Liquidation Call",
             protocol: {
                 logo: log_event.sender_logo_url as string,
+                address: log_event.sender_address as string,
                 name: "Aave V3",
             },
             ...(options.raw_logs ? { raw_log: log_event } : {}),
@@ -468,19 +479,22 @@ GoldRushDecoder.on(
                     to: date,
                 }
             );
+        
+        const usd_value =RepayToken?.[0]?.prices?.[0]?.price *
+        (Number(decoded.amount) /
+            Math.pow(
+                10,
+                RepayToken?.[0]?.contract_decimals ?? 0
+            ));
 
         const tokens: EventTokens = [
             {
                 decimals: RepayToken?.[0]?.contract_decimals,
                 heading: "Repay Amount",
-                pretty_quote: prettifyCurrency(
-                    RepayToken?.[0]?.prices?.[0]?.price *
-                        (Number(decoded.amount) /
-                            Math.pow(
-                                10,
-                                RepayToken?.[0]?.contract_decimals ?? 0
-                            ))
+                pretty_quote: prettifyCurrency(usd_value
+                    
                 ),
+                usd_value:usd_value,
                 ticker_logo: RepayToken?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: RepayToken?.[0]?.contract_ticker_symbol,
                 value: String(decoded.amount),
@@ -493,6 +507,7 @@ GoldRushDecoder.on(
             name: "Repay",
             protocol: {
                 logo: log_event.sender_logo_url as string,
+                address: log_event.sender_address as string,
                 name: "Aave V3",
             },
             ...(options.raw_logs ? { raw_log: log_event } : {}),
@@ -572,19 +587,21 @@ GoldRushDecoder.on(
                 decoded.reserve,
                 { from: date, to: date }
             );
+        const usd_value = SupplyToken?.[0]?.prices?.[0]?.price *
+            (Number(decoded.amount) /
+                Math.pow(
+                    10,
+                    SupplyToken?.[0]?.contract_decimals ?? 0
+                ));
 
         const tokens: EventTokens = [
             {
                 decimals: SupplyToken?.[0]?.contract_decimals,
                 heading: "Supply Amount",
-                pretty_quote: prettifyCurrency(
-                    SupplyToken?.[0]?.prices?.[0]?.price *
-                        (Number(decoded.amount) /
-                            Math.pow(
-                                10,
-                                SupplyToken?.[0]?.contract_decimals ?? 0
-                            ))
+                pretty_quote: prettifyCurrency(usd_value
+                    
                 ),
+                usd_value:usd_value,
                 ticker_logo: SupplyToken?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: SupplyToken?.[0]?.contract_ticker_symbol,
                 value: String(decoded.amount),
@@ -597,6 +614,7 @@ GoldRushDecoder.on(
             name: "Supply",
             protocol: {
                 logo: log_event.sender_logo_url as string,
+                address: log_event.sender_address as string,
                 name: "Aave V3",
             },
             ...(options.raw_logs ? { raw_log: log_event } : {}),
@@ -674,18 +692,20 @@ GoldRushDecoder.on(
                 }
             );
 
+        const usd_value = RepayToken?.[0]?.prices?.[0]?.price *
+            (Number(decoded.amount) /
+                Math.pow(
+                    10,
+                    RepayToken?.[0]?.contract_decimals ?? 0
+                ));
         const tokens: EventTokens = [
             {
                 decimals: RepayToken?.[0]?.contract_decimals,
                 heading: "Withdraw Amount",
-                pretty_quote: prettifyCurrency(
-                    RepayToken?.[0]?.prices?.[0]?.price *
-                        (Number(decoded.amount) /
-                            Math.pow(
-                                10,
-                                RepayToken?.[0]?.contract_decimals ?? 0
-                            ))
+                pretty_quote: prettifyCurrency(usd_value
+                    
                 ),
+                usd_value:usd_value,
                 ticker_logo: RepayToken?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: RepayToken?.[0]?.contract_ticker_symbol,
                 value: String(decoded.amount),
@@ -698,6 +718,7 @@ GoldRushDecoder.on(
             name: "Withdraw",
             protocol: {
                 logo: log_event.sender_logo_url as string,
+                address: log_event.sender_address as string,
                 name: "Aave V3",
             },
             ...(options.raw_logs ? { raw_log: log_event } : {}),

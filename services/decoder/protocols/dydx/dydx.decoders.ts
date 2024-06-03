@@ -28,7 +28,6 @@ GoldRushDecoder.on(
         value: bigint;
       };
     };
-
         
         const date = timestampParser(
             log_event.block_signed_at,
