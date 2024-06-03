@@ -33,7 +33,8 @@ GoldRushDecoder.on(
       category: DECODED_EVENT_CATEGORY.SYNTHTIC,
       name: "Issued",
       protocol: {
-        logo: log_event.sender_logo_url as string,
+            logo: log_event.sender_logo_url as string,
+            address: log_event.sender_address as string,
         name: log_event.sender_name as string,
       },
       ...(options.raw_logs ? { raw_log: log_event } : {}),
@@ -82,7 +83,9 @@ GoldRushDecoder.on(
       name: "Burned",
       protocol: {
         logo: log_event.sender_logo_url as string,
-        name: log_event.sender_name as string,
+            name: log_event.sender_name as string,
+            address: log_event.sender_address as string,
+
       },
       ...(options.raw_logs ? { raw_log: log_event } : {}),
       details: [

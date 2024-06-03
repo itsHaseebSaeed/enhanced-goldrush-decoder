@@ -52,6 +52,7 @@ export interface EventType {
     name: string;
     protocol?: {
         name: string;
+        address?: string;
         logo?: string;
     };
     tokens?: EventTokens;
