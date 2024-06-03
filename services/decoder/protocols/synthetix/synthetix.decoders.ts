@@ -4,6 +4,7 @@ import { GoldRushDecoder } from "../../decoder";
 import { EventType } from "../../decoder.types";
 import SynthetixABI from "./abis/synthetix.implementation.abi.json";  // Add the ABI file path
 import { DECODED_ACTION, DECODED_EVENT_CATEGORY } from "../../decoder.constants";
+import { timestampParser } from "../../../../utils/functions/timestamp-parser";
 
 // Decoder for the Synthetix Issued event
 GoldRushDecoder.on(
@@ -75,7 +76,29 @@ GoldRushDecoder.on(
       };
     };
 
-    const usdValue = Number(decoded.value) / 1e18; // Assuming SNX has 18 decimals
+
+    const date = timestampParser(
+      log_event.block_signed_at,
+      "YYYY-MM-DD"
+  );
+  const { data } =
+  await covalent_client.PricingService.getTokenPrices(
+      chain_name,
+      "USD",
+      log_event.sender_address,
+      {
+          from: date,
+          to: date,
+      }
+  );
+
+let usd_value = data?.[0]?.items?.[0]?.price *
+  (Number(decoded.value) /
+      Math.pow(
+          10,
+          data?.[0]?.items?.[0]?.contract_metadata
+              ?.contract_decimals ?? 18
+          )) ?? 0;
 
     return {
       action: DECODED_ACTION.BURN,
@@ -97,7 +120,7 @@ GoldRushDecoder.on(
         {
           heading: "Value",
           type: "text",
-          value: usdValue.toString(),
+          value: usd_value.toString(),
         },
       ],
     };
