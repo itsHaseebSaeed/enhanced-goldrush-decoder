@@ -6,6 +6,7 @@ export enum DECODED_EVENT_CATEGORY {
     TOKEN = "Token",
     SYNTHTIC = "Synthtic",
     MARGIN = "Margin",
+    VAULT="Vault",
     SWAP = "Swap",
     DEFI = "DeFi",
     BRIDGE = "Bridge",
