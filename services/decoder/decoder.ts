@@ -201,9 +201,8 @@ export class GoldRushDecoder {
                         ]?.[lowercaseTopic0Hash]
                         ?? this.decoders[lowercaseChainName]?.[
                             lowerCaseToAddress
-                        ]?.[lowercaseTopic0Hash]
-                        
-                        ; // TODO: Remove lowerCaseToAddress 
+                        ]?.[lowercaseTopic0Hash]; // TODO: Remove lowerCaseToAddress 
+                    
                     const fallback_index = this.fallbacks[lowercaseTopic0Hash];
                     const logFunction =
                         (decoding_index !== undefined &&
