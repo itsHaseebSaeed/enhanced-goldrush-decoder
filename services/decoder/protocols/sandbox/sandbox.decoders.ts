@@ -1,0 +1,179 @@
+import { GoldRushDecoder } from "../../decoder";
+import { type EventDetails, type EventType } from "../../decoder.types";
+import {
+    DECODED_ACTION,
+    DECODED_EVENT_CATEGORY,
+} from "../../decoder.constants";
+import { decodeEventLog, type Abi } from "viem";
+import ERC721ABI from "./abis/sandbox-land-token.abi.json";
+import ERC20ABI from "./abis/sandbox-sand-token.abi.json";
+
+import { currencyToNumber, timestampParser } from "../../../../utils/functions";
+import { prettifyCurrency } from "@covalenthq/client-sdk";
+
+GoldRushDecoder.on(
+      "sandbox:Transfer",
+      ["eth-mainnet"],
+      ERC721ABI as Abi,
+      async (log_event, tx, chain_name, covalent_client, options): Promise<EventType | null> => {
+            const { raw_log_data, raw_log_topics } = log_event;
+
+        let decoded:
+            | {
+                  from: string;
+                  to: string;
+                  value: bigint;
+                  tokenId?: never;
+              }
+            | {
+                  from: string;
+                  to: string;
+                  tokenId: bigint;
+                  value?: never;
+              };
+
+        try {
+            const { args } = decodeEventLog({
+                abi: ERC20ABI,
+                topics: raw_log_topics as [],
+                data: raw_log_data as `0x${string}`,
+                eventName: "Transfer",
+            }) as {
+                eventName: "Transfer";
+                args: {
+                    from: string;
+                    to: string;
+                    value: bigint;
+                };
+            };
+            decoded = args;
+        } catch (error) {
+            const { args } = decodeEventLog({
+                abi: ERC721ABI,
+                topics: raw_log_topics as [],
+                data: raw_log_data as `0x${string}`,
+                eventName: "Transfer",
+            }) as {
+                eventName: "Transfer";
+                args: {
+                    from: string;
+                    to: string;
+                    tokenId: bigint;
+                };
+            };
+            decoded = args;
+        }
+
+        const details: EventDetails = [
+            {
+                heading: "From",
+                value: decoded.from,
+                type: "address",
+            },
+            {
+                heading: "To",
+                value: decoded.to,
+                type: "address",
+            },
+        ];
+
+        
+
+        const parsedData: EventType = {
+            action: DECODED_ACTION.TRANSFERRED,
+            category: DECODED_EVENT_CATEGORY.METAVERSE,
+            name: "Transfer",
+            protocol: {
+                name: log_event.sender_name as string,
+            },
+            ...(options.raw_logs ? { raw_log: log_event } : {}),
+            details: details,
+        };
+
+        if (decoded.value) {
+            const date = timestampParser(
+                log_event.block_signed_at,
+                "YYYY-MM-DD"
+            );
+            const { data } =
+                await covalent_client.PricingService.getTokenPrices(
+                    chain_name,
+                    "USD",
+                    log_event.sender_address,
+                    {
+                        from: date,
+                        to: date,
+                    }
+                );
+            
+            let usd_value = data?.[0]?.items?.[0]?.price *
+                (Number(decoded.value) /
+                    Math.pow(
+                        10,
+                        data?.[0]?.items?.[0]?.contract_metadata
+                            ?.contract_decimals ?? 18
+                    )) ?? 0;
+
+            const pretty_quote = prettifyCurrency( usd_value);
+
+            if (currencyToNumber(pretty_quote) < options.min_usd!) {
+                return null;
+            }
+
+            parsedData.tokens = [
+                {
+                    decimals: data?.[0]?.contract_decimals ?? 18,
+                    heading: "Token Amount",
+                    pretty_quote: pretty_quote,
+                    usd_value:usd_value,
+                    ticker_logo: data?.[0]?.logo_urls?.token_logo_url,
+                    ticker_symbol: data?.[0]?.contract_ticker_symbol,
+                    value: decoded.value.toString(),
+                },
+            ];
+              parsedData.name ="Transfer ERC20"
+        } else if (decoded.tokenId) {
+            const { data } =
+                await covalent_client.NftService.getNftMetadataForGivenTokenIdForContract(
+                    chain_name,
+                    log_event.sender_address,
+                    decoded.tokenId.toString(),
+                    {
+                        withUncached: true,
+                    }
+                );
+
+            parsedData.nfts = [
+                {
+                    heading: "NFT Transferred",
+                    collection_address: data?.items?.[0]?.contract_address,
+                    collection_name:
+                        data?.items?.[0]?.nft_data?.external_data?.name || null,
+                    token_identifier:
+                        data?.items?.[0]?.nft_data?.token_id?.toString() ||
+                        null,
+                    images: {
+                        "1024":
+                            data?.items?.[0]?.nft_data?.external_data
+                                ?.image_1024 || null,
+                        "512":
+                            data?.items?.[0]?.nft_data?.external_data
+                                ?.image_512 || null,
+                        "256":
+                            data?.items?.[0]?.nft_data?.external_data
+                                ?.image_256 || null,
+                        default:
+                            data?.items?.[0]?.nft_data?.external_data?.image ||
+                            null,
+                    },
+                },
+            ];
+            parsedData.name ="Transfer ERC721"
+
+        }
+
+        return parsedData;
+    }
+      
+    
+);
