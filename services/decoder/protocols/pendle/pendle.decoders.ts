@@ -90,7 +90,6 @@ GoldRushDecoder.on(
                     TokenData?.[0]?.prices?.[0]?.price
                 ),
                 usd_value: TokenData?.[0]?.prices?.[0]?.price,
-                ticker_logo: TokenData?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: TokenData?.[0]?.contract_ticker_symbol,
             },
             {
@@ -111,7 +110,6 @@ GoldRushDecoder.on(
                         10,
                         TokenData?.[0]?.contract_decimals ?? 0
                     )),
-                ticker_logo: TokenData?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: TokenData?.[0]?.contract_ticker_symbol,
             },
             {
@@ -132,7 +130,6 @@ GoldRushDecoder.on(
                         10,
                         PtTokenData?.[0]?.contract_decimals ?? 0
                     )),
-                ticker_logo: PtTokenData?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: PtTokenData?.[0]?.contract_ticker_symbol,
             },
             {
@@ -153,7 +150,6 @@ GoldRushDecoder.on(
                         10,
                         SyTokenData?.[0]?.contract_decimals ?? 0
                     )),
-                ticker_logo: SyTokenData?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: SyTokenData?.[0]?.contract_ticker_symbol,
             },
         ];
@@ -263,7 +259,6 @@ GoldRushDecoder.on(
                         10,
                         YtTokenData?.[0]?.contract_decimals ?? 0
                     )),
-                ticker_logo: YtTokenData?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: YtTokenData?.[0]?.contract_ticker_symbol,
             },
             {
@@ -284,7 +279,6 @@ GoldRushDecoder.on(
                         10,
                         SyTokenData?.[0]?.contract_decimals ?? 0
                     )),
-                ticker_logo: SyTokenData?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: SyTokenData?.[0]?.contract_ticker_symbol,
             },
         ];
@@ -396,7 +390,6 @@ GoldRushDecoder.on(
                 pretty_quote: prettifyCurrency(
                     TokenData?.[0]?.prices?.[0]?.price
                 ),
-                ticker_logo: TokenData?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: TokenData?.[0]?.contract_ticker_symbol,
             },
             {
@@ -411,7 +404,6 @@ GoldRushDecoder.on(
                                 TokenData?.[0]?.contract_decimals ?? 0
                             ))
                 ),
-                ticker_logo: TokenData?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: TokenData?.[0]?.contract_ticker_symbol,
             },
             {
@@ -426,7 +418,6 @@ GoldRushDecoder.on(
                                 YtTokenData?.[0]?.contract_decimals ?? 0
                             ))
                 ),
-                ticker_logo: YtTokenData?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: YtTokenData?.[0]?.contract_ticker_symbol,
             },
             {
@@ -441,7 +432,6 @@ GoldRushDecoder.on(
                                 SyTokenData?.[0]?.contract_decimals ?? 0
                             ))
                 ),
-                ticker_logo: SyTokenData?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: SyTokenData?.[0]?.contract_ticker_symbol,
             },
         ];
@@ -538,7 +528,6 @@ GoldRushDecoder.on(
                         10,
                         PendleTokenData?.[0]?.contract_decimals ?? 0
                     )),
-                ticker_logo: PendleTokenData?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: PendleTokenData?.[0]?.contract_ticker_symbol,
             },
         ];

@@ -179,7 +179,6 @@ GoldRushDecoder.on(
                         ))
             ),
             ticker_symbol: tokenPriceData?.[0]?.contract_ticker_symbol,
-            ticker_logo: tokenPriceData?.[0]?.logo_urls?.token_logo_url,
         });
 
         const { data } =

@@ -25,6 +25,7 @@ export const fetchTxFromHash = async (
                 withSafe: false,
             }
         );
+    
     const tx = data?.items?.[0];
     if (tx) {
         return tx;

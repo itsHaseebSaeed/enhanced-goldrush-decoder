@@ -126,7 +126,6 @@ GoldRushDecoder.on(
                     heading: "Token Amount",
                     pretty_quote: pretty_quote,
                     usd_value:usd_value,
-                    ticker_logo: data?.[0]?.logo_urls?.token_logo_url,
                     ticker_symbol: data?.[0]?.contract_ticker_symbol,
                     value: decoded.value.toString(),
                 },

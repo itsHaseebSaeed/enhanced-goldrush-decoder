@@ -207,7 +207,6 @@ GoldRushDecoder.on(
                                 JewelToken?.[0]?.contract_decimals ?? 0
                             ))
                 ),
-                ticker_logo: JewelToken?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: JewelToken?.[0]?.contract_ticker_symbol,
             },
             {
@@ -222,7 +221,6 @@ GoldRushDecoder.on(
                                 JewelToken?.[0]?.contract_decimals ?? 0
                             ))
                 ),
-                ticker_logo: JewelToken?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: JewelToken?.[0]?.contract_ticker_symbol,
             },
         ];
@@ -415,7 +413,6 @@ GoldRushDecoder.on(
                                 JewelToken?.[0]?.contract_decimals ?? 0
                             ))
                 ),
-                ticker_logo: JewelToken?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: JewelToken?.[0]?.contract_ticker_symbol,
             },
         ];

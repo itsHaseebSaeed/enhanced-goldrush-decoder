@@ -121,7 +121,6 @@ GoldRushDecoder.on(
                                     ))
                         ),
                         ticker_symbol: data?.[0]?.contract_ticker_symbol,
-                        ticker_logo: data?.[0]?.logo_urls?.token_logo_url,
                     });
                     break;
                 }

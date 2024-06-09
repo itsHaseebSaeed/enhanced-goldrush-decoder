@@ -145,7 +145,6 @@ GoldRushDecoder.fallback(
                         heading: "Value",
                         value: decoded.value.toString(),
                         ticker_symbol: sender_contract_ticker_symbol,
-                        ticker_logo: sender_logo_url,
                         decimals: sender_contract_decimals ?? 18,
                         pretty_quote: pretty_quote,
                     },

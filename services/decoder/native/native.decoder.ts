@@ -34,7 +34,6 @@ GoldRushDecoder.native((tx, options): EventType | null => {
                 decimals: tx.gas_metadata.contract_decimals,
                 pretty_quote: tx.pretty_value_quote,
                 usd_value: tx.value_quote,
-                ticker_logo: tx.gas_metadata.logo_url,
                 ticker_symbol: tx.gas_metadata.contract_ticker_symbol,
             },
         ],

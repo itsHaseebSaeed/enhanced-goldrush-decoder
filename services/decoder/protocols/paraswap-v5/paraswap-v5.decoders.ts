@@ -103,7 +103,6 @@ GoldRushDecoder.on(
                 pretty_quote: prettifyCurrency(srcTokenUsdValue
                 ),
                 usd_value: srcTokenUsdValue,
-                ticker_logo: srcToken?.[0]?.logo_url ?? null,
                 ticker_symbol: srcToken?.[0]?.contract_ticker_symbol ?? null,
                 value: decoded.srcAmount.toString(),
             },
@@ -113,7 +112,6 @@ GoldRushDecoder.on(
                 pretty_quote: prettifyCurrency(destTokenUsdValue      
                 ),
                 usd_value:destTokenUsdValue,
-                ticker_logo: destToken?.[0]?.logo_url ?? null,
                 ticker_symbol: destToken?.[0]?.contract_ticker_symbol ?? null,
                 value: decoded.receivedAmount.toString(),
             },

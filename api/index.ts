@@ -9,6 +9,9 @@ import { config as dotenvConfig } from "dotenv";
 import { GoldRushDecoder } from "../services";
 import { txRouter } from "../microservices/tx/tx.routes";
 import { timestampParser } from "../utils/functions";
+import { walletRouter } from "../microservices/wallet/wallet.routes";
+
+// Add the wallet router
 
 dotenvConfig();
 
@@ -25,6 +28,8 @@ app.get("/api/v1/healthcheck", (_req: Request, res: Response) => {
     });
 });
 app.use("/api/v1/tx", txRouter);
+app.use("/api/v1/wallet", walletRouter);
+
 app.use("*", (_req: Request, res: Response) => {
     res.status(404).json({
         success: false,

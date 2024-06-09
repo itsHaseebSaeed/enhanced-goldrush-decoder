@@ -302,7 +302,6 @@ GoldRushDecoder.on(
                         10,
                         TokenData?.[0]?.contract_decimals ?? 0
                     )),
-                ticker_logo: TokenData?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: TokenData?.[0]?.contract_ticker_symbol,
             },
             {
@@ -323,7 +322,6 @@ GoldRushDecoder.on(
                         10,
                         ezETHData?.[0]?.contract_decimals ?? 0
                     )),
-                ticker_logo: ezETHData?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: ezETHData?.[0]?.contract_ticker_symbol,
             },
         ];

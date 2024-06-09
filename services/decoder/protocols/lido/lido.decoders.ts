@@ -123,7 +123,6 @@ GoldRushDecoder.on(
                 value: decoded.amount.toString(),
                 decimals: tx?.gas_metadata?.contract_decimals,
                 ticker_symbol: tx?.gas_metadata?.contract_ticker_symbol,
-                ticker_logo: tx?.gas_metadata?.logo_url,
                 pretty_quote: prettifyCurrency(
                     usdValue
                 ),
@@ -214,7 +213,6 @@ GoldRushDecoder.on(
                 value: decoded.preTotalEther.toString(),
                 decimals: tx?.gas_metadata?.contract_decimals,
                 ticker_symbol: tx?.gas_metadata?.contract_ticker_symbol,
-                ticker_logo: tx?.gas_metadata?.logo_url,
                 pretty_quote: prettifyCurrency(
                     (tx?.gas_quote_rate ?? 0) *
                         (Number(decoded.preTotalEther) /
@@ -229,7 +227,6 @@ GoldRushDecoder.on(
                 value: decoded.postTotalEther.toString(),
                 decimals: tx?.gas_metadata?.contract_decimals,
                 ticker_symbol: tx?.gas_metadata?.contract_ticker_symbol,
-                ticker_logo: tx?.gas_metadata?.logo_url,
                 pretty_quote: prettifyCurrency(
                     (tx?.gas_quote_rate ?? 0) *
                         (Number(decoded.postTotalEther) /
@@ -316,7 +313,6 @@ GoldRushDecoder.on(
                 value: decoded.preRebaseTokenAmount.toString(),
                 decimals: StakingToken?.[0]?.contract_decimals,
                 ticker_symbol: StakingToken?.[0]?.contract_ticker_symbol,
-                ticker_logo: StakingToken?.[0]?.logo_urls?.token_logo_url,
                 pretty_quote: prettifyCurrency(
                     (StakingToken?.[0]?.prices?.[0]?.price ?? 0) *
                         (Number(decoded.preRebaseTokenAmount) /
@@ -331,7 +327,6 @@ GoldRushDecoder.on(
                 value: decoded.postRebaseTokenAmount.toString(),
                 decimals: StakingToken?.[0]?.contract_decimals,
                 ticker_symbol: StakingToken?.[0]?.contract_ticker_symbol,
-                ticker_logo: StakingToken?.[0]?.logo_urls?.token_logo_url,
                 pretty_quote: prettifyCurrency(
                     (StakingToken?.[0]?.prices?.[0]?.price ?? 0) *
                         (Number(decoded.postRebaseTokenAmount) /
@@ -405,7 +400,6 @@ GoldRushDecoder.on(
                 value: decoded.preCLBalance.toString(),
                 decimals: tx?.gas_metadata?.contract_decimals,
                 ticker_symbol: tx?.gas_metadata?.contract_ticker_symbol,
-                ticker_logo: tx?.gas_metadata?.logo_url,
                 pretty_quote: prettifyCurrency(
                     (tx?.gas_quote_rate ?? 0) *
                         (Number(decoded.preCLBalance) /
@@ -420,7 +414,6 @@ GoldRushDecoder.on(
                 value: decoded.postCLBalance.toString(),
                 decimals: tx?.gas_metadata?.contract_decimals,
                 ticker_symbol: tx?.gas_metadata?.contract_ticker_symbol,
-                ticker_logo: tx?.gas_metadata?.logo_url,
                 pretty_quote: prettifyCurrency(
                     (tx?.gas_quote_rate ?? 0) *
                         (Number(decoded.postCLBalance) /
@@ -435,7 +428,6 @@ GoldRushDecoder.on(
                 value: decoded.withdrawalsWithdrawn.toString(),
                 decimals: tx?.gas_metadata?.contract_decimals,
                 ticker_symbol: tx?.gas_metadata?.contract_ticker_symbol,
-                ticker_logo: tx?.gas_metadata?.logo_url,
                 pretty_quote: prettifyCurrency(
                     (tx?.gas_quote_rate ?? 0) *
                         (Number(decoded.withdrawalsWithdrawn) /
@@ -450,7 +442,6 @@ GoldRushDecoder.on(
                 value: decoded.executionLayerRewardsWithdrawn.toString(),
                 decimals: tx?.gas_metadata?.contract_decimals,
                 ticker_symbol: tx?.gas_metadata?.contract_ticker_symbol,
-                ticker_logo: tx?.gas_metadata?.logo_url,
                 pretty_quote: prettifyCurrency(
                     (tx?.gas_quote_rate ?? 0) *
                         (Number(decoded.executionLayerRewardsWithdrawn) /
@@ -465,7 +456,6 @@ GoldRushDecoder.on(
                 value: decoded.postBufferedEther.toString(),
                 decimals: tx?.gas_metadata?.contract_decimals,
                 ticker_symbol: tx?.gas_metadata?.contract_ticker_symbol,
-                ticker_logo: tx?.gas_metadata?.logo_url,
                 pretty_quote: prettifyCurrency(
                     (tx?.gas_quote_rate ?? 0) *
                         (Number(decoded.postBufferedEther) /
@@ -523,7 +513,6 @@ GoldRushDecoder.on(
                 value: decoded.amount.toString(),
                 decimals: tx?.gas_metadata?.contract_decimals,
                 ticker_symbol: tx?.gas_metadata?.contract_ticker_symbol,
-                ticker_logo: tx?.gas_metadata?.logo_url,
                 pretty_quote: prettifyCurrency(
                     (tx?.gas_quote_rate ?? 0) *
                         (Number(decoded.amount) /
@@ -580,7 +569,6 @@ GoldRushDecoder.on(
                 value: decoded.amount.toString(),
                 decimals: tx?.gas_metadata?.contract_decimals,
                 ticker_symbol: tx?.gas_metadata?.contract_ticker_symbol,
-                ticker_logo: tx?.gas_metadata?.logo_url,
                 pretty_quote: prettifyCurrency(
                     (tx?.gas_quote_rate ?? 0) *
                         (Number(decoded.amount) /
@@ -730,7 +718,6 @@ GoldRushDecoder.on(
                 value: decoded.amountOfStETH.toString(),
                 decimals: StakingToken?.[0]?.contract_decimals,
                 ticker_symbol: StakingToken?.[0]?.contract_ticker_symbol,
-                ticker_logo: StakingToken?.[0]?.logo_urls?.token_logo_url,
                 pretty_quote: prettifyCurrency(
                     (StakingToken?.[0]?.prices?.[0]?.price ?? 0) *
                         (Number(decoded.amountOfStETH) /
@@ -814,7 +801,6 @@ GoldRushDecoder.on(
                 value: decoded.amountOfETH.toString(),
                 decimals: tx?.gas_metadata?.contract_decimals,
                 ticker_symbol: tx?.gas_metadata?.contract_ticker_symbol,
-                ticker_logo: tx?.gas_metadata?.logo_url,
                 pretty_quote: prettifyCurrency(usdValue
                     
                 ),
@@ -951,7 +937,6 @@ GoldRushDecoder.on(
                 value: decoded.amountOfETHLocked.toString(),
                 decimals: tx?.gas_metadata?.contract_decimals,
                 ticker_symbol: tx?.gas_metadata?.contract_ticker_symbol,
-                ticker_logo: tx?.gas_metadata?.logo_url,
                 pretty_quote: prettifyCurrency(
                     (tx?.gas_quote_rate ?? 0) *
                         (Number(decoded.amountOfETHLocked) /

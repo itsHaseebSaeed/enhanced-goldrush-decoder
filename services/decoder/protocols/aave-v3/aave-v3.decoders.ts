@@ -118,7 +118,6 @@ GoldRushDecoder.on(
                     usd_value
                 ),
                 usd_value:usd_value,
-                ticker_logo: BorrowToken?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: BorrowToken?.[0]?.contract_ticker_symbol,
                 value: String(decoded.amount),
             },
@@ -235,7 +234,6 @@ GoldRushDecoder.on(
                                 FlashLoanToken?.[0]?.contract_decimals ?? 0
                             ))
                 ),
-                ticker_logo: FlashLoanToken?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: FlashLoanToken?.[0]?.contract_ticker_symbol,
                 value: String(decoded.amount),
             },
@@ -246,7 +244,6 @@ GoldRushDecoder.on(
                 usd_value    
                 ),
                 usd_value:usd_value,
-                ticker_logo: FlashLoanToken?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: FlashLoanToken?.[0]?.contract_ticker_symbol,
                 value: String(decoded.premium),
             },
@@ -373,7 +370,6 @@ GoldRushDecoder.on(
                                 collateralToken?.[0]?.contract_decimals ?? 0
                             ))
                 ),
-                ticker_logo: collateralToken?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: collateralToken?.[0]?.contract_ticker_symbol,
                 value: String(decoded.liquidatedCollateralAmount),
             },
@@ -384,7 +380,6 @@ GoldRushDecoder.on(
                     usd_value
                 ),
                 usd_value:usd_value,
-                ticker_logo: debtToken?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: debtToken?.[0]?.contract_ticker_symbol,
                 value: String(decoded.debtToCover),
             },
@@ -495,7 +490,6 @@ GoldRushDecoder.on(
                     
                 ),
                 usd_value:usd_value,
-                ticker_logo: RepayToken?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: RepayToken?.[0]?.contract_ticker_symbol,
                 value: String(decoded.amount),
             },
@@ -602,7 +596,6 @@ GoldRushDecoder.on(
                     
                 ),
                 usd_value:usd_value,
-                ticker_logo: SupplyToken?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: SupplyToken?.[0]?.contract_ticker_symbol,
                 value: String(decoded.amount),
             },
@@ -706,7 +699,6 @@ GoldRushDecoder.on(
                     
                 ),
                 usd_value:usd_value,
-                ticker_logo: RepayToken?.[0]?.logo_urls?.token_logo_url,
                 ticker_symbol: RepayToken?.[0]?.contract_ticker_symbol,
                 value: String(decoded.amount),
             },

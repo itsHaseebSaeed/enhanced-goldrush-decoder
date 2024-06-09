@@ -103,7 +103,6 @@ GoldRushDecoder.on(
             ],
             tokens: [
                 {
-                    ticker_logo: inputToken?.logo_url ?? null,
                     ticker_symbol: inputToken?.contract_ticker_symbol ?? null,
                     value: inputValue.toString(),
                     decimals: (inputToken?.contract_decimals ?? 18),
@@ -112,7 +111,6 @@ GoldRushDecoder.on(
                     heading: "Token In",
                 },
                 {
-                    ticker_logo: outputToken?.logo_url ?? null,
                     ticker_symbol: outputToken?.contract_ticker_symbol ?? null,
                     value: outputValue.toString(),
                     decimals: +(outputToken?.contract_decimals ?? 18),
@@ -194,7 +192,6 @@ GoldRushDecoder.on(
             ],
             tokens: [
                 {
-                    ticker_logo: data?.items?.[0]?.token_0?.logo_url ?? null,
                     ticker_symbol:
                         data?.items?.[0]?.token_0?.contract_ticker_symbol ??
                         null,
@@ -227,7 +224,6 @@ GoldRushDecoder.on(
                     heading: "Token 0 Deposited",
                 },
                 {
-                    ticker_logo: data?.items?.[0]?.token_1?.logo_url ?? null,
                     ticker_symbol:
                         data?.items?.[0]?.token_1?.contract_ticker_symbol ??
                         null,
@@ -325,7 +321,6 @@ GoldRushDecoder.on(
             ],
             tokens: [
                 {
-                    ticker_logo: data?.items?.[0]?.token_0?.logo_url ?? null,
                     ticker_symbol:
                         data?.items?.[0]?.token_0?.contract_ticker_symbol ??
                         null,
@@ -358,7 +353,6 @@ GoldRushDecoder.on(
                     heading: "Token 0 Redeemed",
                 },
                 {
-                    ticker_logo: data?.items?.[0]?.token_1?.logo_url ?? null,
                     ticker_symbol:
                         data?.items?.[0]?.token_1?.contract_ticker_symbol ??
                         null,
@@ -474,7 +468,6 @@ GoldRushDecoder.on(
                     heading: "Reserve 0",
                 },
                 {
-                    ticker_logo: data?.items?.[0]?.token_1?.logo_url ?? null,
                     ticker_symbol:
                         data?.items?.[0]?.token_1?.contract_ticker_symbol ??
                         null,
