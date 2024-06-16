@@ -27,6 +27,8 @@ export type EventNFTs = {
     collection_name: string | null;
     token_identifier: string | null;
     collection_address: string;
+    price?: number;
+    pretty_quote?: string;
     images: {
         default: string | null;
         256: string | null;
@@ -38,10 +40,12 @@ export type EventNFTs = {
 export type EventTokens = {
     heading: string;
     value: string;
+    address?: string;
     decimals: number;
     ticker_symbol: string | null;
     ticker_logo?: string | null;
     pretty_quote: string;
+    quote_rate?: number;
     usd_quote?: number;
     usd_value?: number;
 }[];
@@ -57,7 +61,7 @@ export interface EventType {
     };
     tokens?: EventTokens;
     nfts?: EventNFTs;
-    details?: EventDetails;
+    details: EventDetails;
     raw_log?: LogEvent;
 }
 

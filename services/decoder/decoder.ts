@@ -188,6 +188,7 @@ export class GoldRushDecoder {
                     const lowercaseSenderAddress =
                         sender_address?.toLowerCase();
                     console.log("lowercaseSenderAddress "+lowercaseSenderAddress);
+                    // console.log(tx.tx_hash);
                     const lowercaseSenderFactoryAddress =
                         sender_factory_address?.toLowerCase();
                     console.log("lowercaseSenderFactoryAddress "+lowercaseSenderFactoryAddress);

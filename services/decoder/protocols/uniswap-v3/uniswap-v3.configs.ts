@@ -13,12 +13,25 @@ const configs: Configs = [
         protocol_name: "uniswap-v3",
         chain_name: "eth-mainnet",
     },
-    // {
-    //     address: "0x1BEcf1Ac50F31C3441181563F9D350dDF72a2Bfa", //Uniswap v3: SMT
-    //     is_factory: false,
-    //     protocol_name: "uniswap-v3",
-    //     chain_name: "eth-mainnet",
-    // },
+
+    {
+        address: "0x881D40237659C251811CEC9c364ef91dC08D300C", //MetaMask Swap Router
+        is_factory: false,
+        protocol_name: "uniswap-v3",
+        chain_name: "eth-mainnet",
+    },
+    {
+        address: "0x1111111254EEB25477B68fb85Ed929f73A960582", //1-inch Router
+        is_factory: false,
+        protocol_name: "uniswap-v3",
+        chain_name: "eth-mainnet",
+    },
+    {
+        address: "0xC36442b4a4522E871399CD717aBDD847Ab11FE88", //Uniswap V3 Position NFT
+        is_factory: false,
+        protocol_name: "uniswap-v3",
+        chain_name: "eth-mainnet",
+    },
     {
         address: "0xcbcdf9626bc03e24f779434178a73a0b4bad62ed",
         is_factory: false,

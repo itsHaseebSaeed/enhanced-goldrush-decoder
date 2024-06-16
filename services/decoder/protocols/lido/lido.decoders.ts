@@ -532,6 +532,7 @@ GoldRushDecoder.on(
                 logo: log_event.sender_logo_url as string,
                 name: "Lido" as string,
             },
+            details:[],
             ...(options.raw_logs ? { raw_log: log_event } : {}),
             tokens,
         };
@@ -588,6 +589,7 @@ GoldRushDecoder.on(
                 logo: log_event.sender_logo_url as string,
                 name: "Lido" as string,
             },
+            details:[],
             ...(options.raw_logs ? { raw_log: log_event } : {}),
             tokens,
         };

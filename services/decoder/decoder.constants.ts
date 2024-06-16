@@ -28,6 +28,7 @@ export enum DECODED_ACTION {
     SALE = "Sale",
     MINT = "Mint",
     BURN = "Burn",
+    COLLECT = "Collect",
     WITHDRAW = "Withdraw",
     DEPOSIT = "Deposit",
     ADD_LIQUIDITY = "Add Liquidity",

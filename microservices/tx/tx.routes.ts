@@ -15,6 +15,7 @@ import {
 } from "./tx.schema";
 import { decodeLogsFromTx, fetchTxFromHash } from "./tx.service";
 import { type Chain } from "@covalenthq/client-sdk";
+import { categorize } from "../wallet/wallet.service";
 
 export const txRouter = Router();
 
@@ -43,6 +44,7 @@ const handleDecode = async (
             safe_details,
             ...tx_metadata
         } = tx;
+
         const events = await decodeLogsFromTx(
             chain_name as Chain,
             tx,
@@ -52,6 +54,10 @@ const handleDecode = async (
                 min_usd,
             }
         );
+
+        const cate = await categorize(events);
+        console.log(cate);
+        
         const parsedTx = JSON.parse(
             JSON.stringify(tx_metadata, (_key, value) => {
                 return typeof value === "bigint" ? value.toString() : value;

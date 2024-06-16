@@ -81,7 +81,6 @@ GoldRushDecoder.fallback(
             },
         ];
 
-        
 
         const parsedData: EventType = {
             action: DECODED_ACTION.TRANSFERRED,
@@ -118,7 +117,7 @@ GoldRushDecoder.fallback(
                             ?.contract_decimals ?? 18
                     )) ?? 0;
 
-            const pretty_quote = prettifyCurrency( usd_value);
+            const pretty_quote = prettifyCurrency(usd_value);
 
             if (currencyToNumber(pretty_quote) < options.min_usd!) {
                 return null;
@@ -126,6 +125,7 @@ GoldRushDecoder.fallback(
 
             parsedData.tokens = [
                 {
+                    address: data?.[0]?.contract_address?? "",
                     decimals: data?.[0]?.contract_decimals ?? 18,
                     heading: "Token Amount",
                     pretty_quote: pretty_quote,
@@ -134,6 +134,9 @@ GoldRushDecoder.fallback(
                     value: decoded.value.toString(),
                 },
             ];
+
+            
+
         } else if (decoded.tokenId) {
             const { data } =
                 await covalent_client.NftService.getNftMetadataForGivenTokenIdForContract(
@@ -144,16 +147,36 @@ GoldRushDecoder.fallback(
                         withUncached: true,
                     }
                 );
+            
+                const transactionDate = new Date(log_event.block_signed_at);
+                const currentDate = new Date();
+                const timeDifference = Math.abs(currentDate.getTime() - transactionDate.getTime());
+                let daysDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+            
+                // Limit the maximum days to 365
+            daysDifference = Math.min(daysDifference, 365);
+            
+            const  priceData  =
+                await covalent_client.NftService.getNftMarketFloorPrice(
+                    chain_name,
+                    log_event.sender_address,
+                    {
+                        days: daysDifference,
+                        quoteCurrency:"USD"   
+                    }
+                );
 
             parsedData.nfts = [
                 {
                     heading: "NFT Transferred",
                     collection_address: data?.items?.[0]?.contract_address,
                     collection_name:
-                        data?.items?.[0]?.nft_data?.external_data?.name || null,
+                        data?.items?.[0]?.nft_data?.external_data?.name  || parsedData.protocol?.name|| null,
                     token_identifier:
                         data?.items?.[0]?.nft_data?.token_id?.toString() ||
                         null,
+                    price: priceData.data.items[0].floor_price_quote,
+                    pretty_quote: prettifyCurrency(priceData.data.items[0].floor_price_quote),
                     images: {
                         "1024":
                             data?.items?.[0]?.nft_data?.external_data

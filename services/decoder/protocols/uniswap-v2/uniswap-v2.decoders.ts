@@ -74,10 +74,14 @@ GoldRushDecoder.on(
         }
 
         const inputTokenquoteRate = inputToken?.quote_rate ?? 0;
-        const adjustedValue = Number(inputValue) / Math.pow(10, inputToken?.contract_decimals ?? 18);
+        const adjustedVInputalue = Number(inputValue) / Math.pow(10, inputToken?.contract_decimals ?? 18);
         const inputTokenPrice = inputTokenquoteRate;
-        let inputTokenUsdValue = adjustedValue * inputTokenPrice;
+        let inputTokenUsdValue = adjustedVInputalue * inputTokenPrice;
 
+        const outputTokenquoteRate = outputToken?.quote_rate ?? 0;
+        const adjustedOutputValue = Number(outputValue) / Math.pow(10, outputToken?.contract_decimals ?? 18);
+        const outputTokenPrice = outputTokenquoteRate;
+        let outputTokenUsdValue = adjustedOutputValue * outputTokenPrice;
 
 
         return {
@@ -85,7 +89,7 @@ GoldRushDecoder.on(
             category: DECODED_EVENT_CATEGORY.DEX,
             name: "Swap",
             protocol: {
-                logo: log_event.sender_logo_url as string,
+                // logo: log_event.sender_logo_url as string,
                 name: log_event.sender_name as string,
             },
             ...(options.raw_logs ? { raw_log: log_event } : {}),
@@ -100,37 +104,32 @@ GoldRushDecoder.on(
                     type: "address",
                     value: decoded.to,
                 },
+                {
+                    heading: "Pair",
+                    type: "address",
+                    value: exchange_contract
+                }
             ],
             tokens: [
                 {
                     ticker_symbol: inputToken?.contract_ticker_symbol ?? null,
                     value: inputValue.toString(),
                     decimals: (inputToken?.contract_decimals ?? 18),
-                    pretty_quote: prettifyCurrency(inputTokenPrice),
+                    pretty_quote: prettifyCurrency(inputTokenUsdValue),
                     usd_value:  inputTokenUsdValue,
                     heading: "Token In",
+                    quote_rate: inputTokenquoteRate
                 },
                 {
                     ticker_symbol: outputToken?.contract_ticker_symbol ?? null,
                     value: outputValue.toString(),
                     decimals: +(outputToken?.contract_decimals ?? 18),
                     pretty_quote: prettifyCurrency(
-                        outputToken?.quote_rate ??
-                            0 *
-                                (Number(outputValue) /
-                                    Math.pow(
-                                        10,
-                                        +(outputToken?.contract_decimals ?? 18)
-                                    ))
+                        outputTokenUsdValue
                     ),
-                    usd_value:  outputToken?.quote_rate ??
-                    0 *
-                        (Number(outputValue) /
-                            Math.pow(
-                                10,
-                                (outputToken?.contract_decimals ?? 18)
-                            )) ,
+                    usd_value:  outputTokenUsdValue ,
                     heading: "Token Out",
+                    quote_rate: outputTokenquoteRate
                 },
             ],
         };
@@ -168,18 +167,46 @@ GoldRushDecoder.on(
             };
         };
 
-        const { data } = await covalent_client.XykService.getPoolByAddress(
-            chain_name,
-            "uniswap_v2",
-            exchange_contract
-        );
+        let inputToken: Token | null = null,
+        outputToken: Token | null = null,
+        inputValue: bigint = BigInt(0),
+            outputValue: bigint = BigInt(0);
+    
+    
+
+    const { data } = await covalent_client.XykService.getPoolByAddress(
+        chain_name,
+        "uniswap_v2",
+        exchange_contract
+    );
+        
+
+    const tokens = data?.items?.[0];
+    if (tokens) {
+        const { token_0, token_1 } = tokens;
+            [inputToken, outputToken, inputValue, outputValue] = [
+                token_0,
+                token_1,
+                decoded.amount0,
+                decoded.amount1,
+            ];
+    }
+
+    const inputTokenquoteRate = inputToken?.quote_rate ?? 0;
+    const adjustedVInputalue = Number(inputValue) / Math.pow(10, inputToken?.contract_decimals ?? 18);
+    const inputTokenPrice = inputTokenquoteRate;
+    let token0UsdValue = adjustedVInputalue * inputTokenPrice;
+
+    const outputTokenquoteRate = outputToken?.quote_rate ?? 0;
+    const adjustedOutputValue = Number(outputValue) / Math.pow(10, outputToken?.contract_decimals ?? 18);
+    const outputTokenPrice = outputTokenquoteRate;
+    let token1UsdValue = adjustedOutputValue * outputTokenPrice;
 
         return {
             action: DECODED_ACTION.ADD_LIQUIDITY,
             category: DECODED_EVENT_CATEGORY.DEX,
             name: "Mint",
             protocol: {
-                logo: log_event.sender_logo_url as string,
                 name: log_event.sender_name as string,
             },
             ...(options.raw_logs ? { raw_log: log_event } : {}),
@@ -189,6 +216,11 @@ GoldRushDecoder.on(
                     type: "address",
                     value: decoded.sender,
                 },
+                {
+                    heading: "Pair",
+                    type: "address",
+                    value: exchange_contract
+                }
             ],
             tokens: [
                 {
@@ -200,27 +232,9 @@ GoldRushDecoder.on(
                         data?.items?.[0]?.token_0?.contract_decimals ?? 18
                     ),
                     pretty_quote: prettifyCurrency(
-                        data?.items?.[0]?.token_0?.quote_rate ??
-                            0 *
-                                (Number(decoded.amount0) /
-                                    Math.pow(
-                                        10,
-                                        +(
-                                            data?.items?.[0]?.token_0
-                                                ?.contract_decimals ?? 18
-                                        )
-                                    ))
+                        token0UsdValue
                     ),
-                    usd_value : data?.items?.[0]?.token_0?.quote_rate ??
-                    0 *
-                        (Number(decoded.amount0) /
-                            Math.pow(
-                                10,
-                                +(
-                                    data?.items?.[0]?.token_0
-                                        ?.contract_decimals ?? 18
-                                )
-                            )),
+                    usd_value : token0UsdValue,
                     heading: "Token 0 Deposited",
                 },
                 {
@@ -232,27 +246,9 @@ GoldRushDecoder.on(
                         data?.items?.[0]?.token_1?.contract_decimals ?? 18
                     ),
                     pretty_quote: prettifyCurrency(
-                        data?.items?.[0]?.token_1?.quote_rate ??
-                            0 *
-                                (Number(decoded.amount1) /
-                                    Math.pow(
-                                        10,
-                                        +(
-                                            data?.items?.[0]?.token_1
-                                                ?.contract_decimals ?? 18
-                                        )
-                                    ))
+                        token1UsdValue
                     ),
-                    usd_value : data?.items?.[0]?.token_1?.quote_rate ??
-                    0 *
-                        (Number(decoded.amount1) /
-                            Math.pow(
-                                10,
-                                +(
-                                    data?.items?.[0]?.token_1
-                                        ?.contract_decimals ?? 18
-                                )
-                            )),
+                    usd_value : token1UsdValue,
                     heading: "Token 1 Deposited",
                 },
             ],
@@ -290,7 +286,14 @@ GoldRushDecoder.on(
                 amount1: bigint;
                 to: string;
             };
-        };
+            };
+        
+            let inputToken: Token | null = null,
+            outputToken: Token | null = null,
+            inputValue: bigint = BigInt(0),
+                outputValue: bigint = BigInt(0);
+        
+        
 
         const { data } = await covalent_client.XykService.getPoolByAddress(
             chain_name,
@@ -298,12 +301,32 @@ GoldRushDecoder.on(
             exchange_contract
         );
 
+        const tokens = data?.items?.[0];
+        if (tokens) {
+            const { token_0, token_1 } = tokens;
+                [inputToken, outputToken, inputValue, outputValue] = [
+                    token_0,
+                    token_1,
+                    decoded.amount0,
+                    decoded.amount1,
+                ];
+        }
+
+        const inputTokenquoteRate = inputToken?.quote_rate ?? 0;
+        const adjustedVInputalue = Number(inputValue) / Math.pow(10, inputToken?.contract_decimals ?? 18);
+        const inputTokenPrice = inputTokenquoteRate;
+        let token0UsdValue = adjustedVInputalue * inputTokenPrice;
+
+        const outputTokenquoteRate = outputToken?.quote_rate ?? 0;
+        const adjustedOutputValue = Number(outputValue) / Math.pow(10, outputToken?.contract_decimals ?? 18);
+        const outputTokenPrice = outputTokenquoteRate;
+        let token1UsdValue = adjustedOutputValue * outputTokenPrice;
+
         return {
             action: DECODED_ACTION.REMOVE_LIQUIDITY,
             category: DECODED_EVENT_CATEGORY.DEX,
             name: "Burn",
             protocol: {
-                logo: log_event.sender_logo_url as string,
                 name: log_event.sender_name as string,
             },
             ...(options.raw_logs ? { raw_log: log_event } : {}),
@@ -318,6 +341,11 @@ GoldRushDecoder.on(
                     value: decoded.to,
                     type: "address",
                 },
+                {
+                    heading: "Pair",
+                    type: "address",
+                    value: exchange_contract
+                }
             ],
             tokens: [
                 {
@@ -329,27 +357,9 @@ GoldRushDecoder.on(
                         data?.items?.[0]?.token_0?.contract_decimals ?? 18
                     ),
                     pretty_quote: prettifyCurrency(
-                        data?.items?.[0]?.token_0?.quote_rate ??
-                            0 *
-                                (Number(decoded.amount0) /
-                                    Math.pow(
-                                        10,
-                                        +(
-                                            data?.items?.[0]?.token_0
-                                                ?.contract_decimals ?? 18
-                                        )
-                                    ))
+                        token0UsdValue
                     ),
-                    usd_value: data?.items?.[0]?.token_0?.quote_rate ??
-                    0 *
-                        (Number(decoded.amount0) /
-                            Math.pow(
-                                10,
-                                +(
-                                    data?.items?.[0]?.token_0
-                                        ?.contract_decimals ?? 18
-                                )
-                            )),
+                    usd_value: token0UsdValue,
                     heading: "Token 0 Redeemed",
                 },
                 {
@@ -361,27 +371,9 @@ GoldRushDecoder.on(
                         data?.items?.[0]?.token_1?.contract_decimals ?? 18
                     ),
                     pretty_quote: prettifyCurrency(
-                        data?.items?.[0]?.token_1?.quote_rate ??
-                            0 *
-                                (Number(decoded.amount1) /
-                                    Math.pow(
-                                        10,
-                                        +(
-                                            data?.items?.[0]?.token_1
-                                                ?.contract_decimals ?? 18
-                                        )
-                                    ))
+                        token1UsdValue
                     ),
-                    usd_value: data?.items?.[0]?.token_1?.quote_rate ??
-                    0 *
-                        (Number(decoded.amount1) /
-                            Math.pow(
-                                10,
-                                +(
-                                    data?.items?.[0]?.token_1
-                                        ?.contract_decimals ?? 18
-                                )
-                            )),
+                    usd_value: token1UsdValue,
                     heading: "Token 1 Redeemed",
                 },
             ],
@@ -419,20 +411,47 @@ GoldRushDecoder.on(
             };
         };
 
+        let inputToken: Token | null = null,
+            outputToken: Token | null = null,
+            inputValue: bigint = BigInt(0),
+            outputValue: bigint = BigInt(0);
+
         const { data } = await covalent_client.XykService.getPoolByAddress(
             chain_name,
             "uniswap_v2",
             exchange_contract
         );
+        const tokens = data?.items?.[0];
+        if (tokens) {
+            const { token_0, token_1 } = tokens;
+                [inputToken, outputToken, inputValue, outputValue] = [
+                    token_0,
+                    token_1,
+                    decoded.reserve0,
+                    decoded.reserve1,
+                ];
+        }
+
+        const inputTokenquoteRate = inputToken?.quote_rate ?? 0;
+        const adjustedVInputalue = Number(inputValue) / Math.pow(10, inputToken?.contract_decimals ?? 18);
+        const inputTokenPrice = inputTokenquoteRate;
+        let inputTokenUsdValue = adjustedVInputalue * inputTokenPrice;
+
+        const outputTokenquoteRate = outputToken?.quote_rate ?? 0;
+        const adjustedOutputValue = Number(outputValue) / Math.pow(10, outputToken?.contract_decimals ?? 18);
+        const outputTokenPrice = outputTokenquoteRate;
+        let outputTokenUsdValue = adjustedOutputValue * outputTokenPrice;
+
 
         return {
             action: DECODED_ACTION.UPDATE,
             category: DECODED_EVENT_CATEGORY.DEX,
             name: "Sync",
             protocol: {
-                logo: log_event.sender_logo_url as string,
+                // logo: log_event.sender_logo_url as string,
                 name: log_event.sender_name as string,
             },
+            details:[],
             ...(options.raw_logs ? { raw_log: log_event } : {}),
             tokens: [
                 {
@@ -444,27 +463,9 @@ GoldRushDecoder.on(
                         data?.items?.[0]?.token_0?.contract_decimals ?? 18
                     ),
                     pretty_quote: prettifyCurrency(
-                        data?.items?.[0]?.token_0?.quote_rate ??
-                            0 *
-                                (Number(decoded.reserve0) /
-                                    Math.pow(
-                                        10,
-                                        (
-                                            data?.items?.[0]?.token_0
-                                                ?.contract_decimals ?? 18
-                                        )
-                                    ))
+                        inputTokenUsdValue
                     ),
-                    usd_value: data?.items?.[0]?.token_0?.quote_rate ??
-                    0 *
-                        (Number(decoded.reserve0) /
-                            Math.pow(
-                                10,
-                                (
-                                    data?.items?.[0]?.token_0
-                                        ?.contract_decimals ?? 18
-                                )
-                            )),
+                    usd_value: inputTokenUsdValue,
                     heading: "Reserve 0",
                 },
                 {
@@ -476,27 +477,9 @@ GoldRushDecoder.on(
                         data?.items?.[0]?.token_1?.contract_decimals ?? 18
                     ),
                     pretty_quote: prettifyCurrency(
-                        data?.items?.[0]?.token_1?.quote_rate ??
-                            0 *
-                                (Number(decoded.reserve1) /
-                                    Math.pow(
-                                        10,
-                                        +(
-                                            data?.items?.[0]?.token_1
-                                                ?.contract_decimals ?? 18
-                                        )
-                                    ))
+                        outputTokenUsdValue
                     ),
-                    usd_value: data?.items?.[0]?.token_1?.quote_rate ??
-                    0 *
-                        (Number(decoded.reserve1) /
-                            Math.pow(
-                                10,
-                                (
-                                    data?.items?.[0]?.token_1
-                                        ?.contract_decimals ?? 18
-                                )
-                            )),
+                    usd_value: outputTokenUsdValue,
                     heading: "Reserve 1",
                 },
             ],
@@ -544,7 +527,7 @@ GoldRushDecoder.on(
             category: DECODED_EVENT_CATEGORY.DEX,
             name: "Pair Created",
             protocol: {
-                logo: log_event.sender_logo_url as string,
+                // logo: log_event.sender_logo_url as string,
                 name: log_event.sender_name as string,
             },
             ...(options.raw_logs ? { raw_log: log_event } : {}),
