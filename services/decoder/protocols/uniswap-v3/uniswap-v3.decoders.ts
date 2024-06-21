@@ -1,5 +1,5 @@
 import { GoldRushDecoder } from "../../decoder";
-import type { EventDetails, EventTokens } from "../../decoder.types";
+import type { Aggregators, EventDetails, EventTokens } from "../../decoder.types";
 import { type EventType } from "../../decoder.types";
 import {
     DECODED_ACTION,
@@ -14,6 +14,22 @@ import { timestampParser } from "../../../../utils/functions";
 import { Chain, CovalentClient, prettifyCurrency, type Token } from "@covalenthq/client-sdk";
 import { ethers } from "ethers";
 
+const infuraProvider = new ethers.InfuraProvider("mainnet", "578f8e9e011c421a91e20f214e86d7de");
+
+const fallbackProvider = new ethers.AlchemyProvider("mainnet", "NZbREPPNxLgSH3jD1DPQrmIy3p1NKbXm");
+
+const AGGREGATORS: Aggregators = [
+    {
+        address: "0x881D40237659C251811CEC9c364ef91dC08D300C", // MetaMask Swap Router
+        protocol_name: "metamask swap router",
+        chain_name: "eth-mainnet",
+    },
+    {
+        address: "0x1111111254EEB25477B68fb85Ed929f73A960582", // 1-inch Router
+        protocol_name: "1-inch router",
+        chain_name: "eth-mainnet",
+    },
+];
 
 GoldRushDecoder.on(
     "uniswap-v3:PoolCreated",
@@ -171,8 +187,7 @@ GoldRushDecoder.on(
             pairContract.token1()
         ]);
 
-        console.log(token0Address);
-        console.log(token1Address);
+
 
         const date = new Date(log_event.block_signed_at).toISOString().split('T')[0];
 
@@ -224,6 +239,11 @@ GoldRushDecoder.on(
                 heading: "Amount 1",
                 value: decoded.amount1.toString(),
                 type: "text",
+            },
+            {
+                heading: "Pair",
+                value: exchange_contract,
+                type: "address",
             },
         ];
 
@@ -278,7 +298,7 @@ GoldRushDecoder.on(
         covalent_client,
         options
     ): Promise<EventType> => {
-        const { raw_log_data, raw_log_topics } = log_event;
+        const { sender_address: exchange_contract, raw_log_data, raw_log_topics } = log_event;
 
         const { args: decoded } = decodeEventLog({
             abi: PairABI,
@@ -297,6 +317,33 @@ GoldRushDecoder.on(
                 amount1: bigint;
             };
         };
+
+        const pairContract = new ethers.Contract(exchange_contract, PairABI, infuraProvider);
+
+        const [token0Address, token1Address] = await Promise.all([
+            pairContract.token0(),
+            pairContract.token1()
+        ]);
+
+        const date = new Date(log_event.block_signed_at).toISOString().split('T')[0];
+
+        const [
+            { decimals: token0Decimals, symbol: token0Symbol },
+            { decimals: token1Decimals, symbol: token1Symbol },
+            token0Price,
+            token1Price
+        ] = await Promise.all([
+            getTokenDetails(token0Address, infuraProvider),
+            getTokenDetails(token1Address, infuraProvider),
+            getTokenPrice(covalent_client, chain_name, token0Address, date),
+            getTokenPrice(covalent_client, chain_name, token1Address, date)
+        ]);
+
+        const adjustedValue0 = Number(decoded.amount0) / Math.pow(10, token0Decimals);
+        const adjustedValue1 = Number(decoded.amount1) / Math.pow(10, token1Decimals);
+
+        const token0UsdValue = adjustedValue0 * token0Price;
+        const token1UsdValue = adjustedValue1 * token1Price;
 
         const details: EventDetails = [
             {
@@ -334,9 +381,14 @@ GoldRushDecoder.on(
                 value: decoded.amount1.toString(),
                 type: "text",
             },
+            {
+                heading: "Pair",
+                value: exchange_contract,
+                type: "address",
+            },
         ];
 
-        return {
+        const response = {
             action: DECODED_ACTION.MINT,
             category: DECODED_EVENT_CATEGORY.DEX,
             name: "Mint",
@@ -346,14 +398,33 @@ GoldRushDecoder.on(
             },
             ...(options.raw_logs ? { raw_log: log_event } : {}),
             details,
+            tokens: [
+                {
+                    address: token0Address,
+                    ticker_symbol: token0Symbol,
+                    value: decoded.amount0.toString(),
+                    decimals: Number(token0Decimals),
+                    pretty_quote: prettifyCurrency(token0UsdValue),
+                    usd_value: token0UsdValue,
+                    heading: "Token 0",
+                    quote_rate: token0Price,
+                },
+                {
+                    address: token1Address,
+                    ticker_symbol: token1Symbol,
+                    value: decoded.amount1.toString(),
+                    decimals: Number(token1Decimals),
+                    pretty_quote: prettifyCurrency(token1UsdValue),
+                    usd_value: token1UsdValue,
+                    heading: "Token 1",
+                    quote_rate: token1Price,
+                },
+            ],
         };
+
+        return response;
     }
 );
-
-const infuraProvider = new ethers.InfuraProvider("mainnet", "578f8e9e011c421a91e20f214e86d7de");
-
-const fallbackProvider = new ethers.AlchemyProvider("mainnet", "NZbREPPNxLgSH3jD1DPQrmIy3p1NKbXm");
-
 
 
 GoldRushDecoder.on(
@@ -368,7 +439,6 @@ GoldRushDecoder.on(
         options
     ): Promise<EventType> => {
         const { sender_address: exchange_contract, raw_log_data, raw_log_topics } = log_event;
-
         const { args: decoded } = decodeEventLog({
             abi: PairABI,
             topics: raw_log_topics as [],
@@ -403,10 +473,7 @@ GoldRushDecoder.on(
             token0Contract.symbol(),
             token1Contract.symbol(),
         ]);
-        console.log(token0Decimals);
-        console.log(token1Decimals);
-        console.log(token0Symbol);
-        console.log(token1Symbol);
+
 
         const date = new Date(log_event.block_signed_at).toISOString().split('T')[0];
 
@@ -424,7 +491,15 @@ GoldRushDecoder.on(
         const token0UsdValue = adjustedValue0 * token0Price;
         const token1UsdValue = adjustedValue1 * token1Price;
 
-        const details: EventDetails = [
+        const aggregator = AGGREGATORS.find(
+            (            agg: {     protocol_name: string;
+                chain_name: Chain;
+                address: string; }) => agg.address === decoded.sender || agg.address === decoded.recipient
+        );
+
+
+
+        let details: EventDetails = [
             {
                 heading: "Sender",
                 value: decoded.sender,
@@ -460,8 +535,30 @@ GoldRushDecoder.on(
                 value: decoded.tick.toString(),
                 type: "text",
             },
+            {
+                heading: "Pair",
+                value: exchange_contract,
+                type: "address",
+            },
+
+            
         ];
 
+        if (aggregator) {
+            details.push({
+                heading: "Aggregator",
+                value: aggregator.protocol_name,
+                type: "text",
+            });
+            details.push({
+                heading: "Aggregator Address",
+                value: aggregator.address,
+                type: "address",
+            });
+        }
+
+
+        
         const response = {
             action: DECODED_ACTION.SWAPPED,
             category: DECODED_EVENT_CATEGORY.DEX,
@@ -510,7 +607,7 @@ GoldRushDecoder.on(
         covalent_client,
         options
     ): Promise<EventType> => {
-        const { raw_log_data, raw_log_topics } = log_event;
+        const { sender_address: exchange_contract, raw_log_data, raw_log_topics } = log_event;
 
         const { args: decoded } = decodeEventLog({
             abi: PairABI,
@@ -527,7 +624,41 @@ GoldRushDecoder.on(
                 paid0: bigint;
                 paid1: bigint;
             };
-        };
+            };
+        
+            const pairContract = new ethers.Contract(exchange_contract, PairABI, infuraProvider);
+
+            const [token0Address, token1Address] = await Promise.all([
+                pairContract.token0(),
+                pairContract.token1()
+            ]);
+    
+            const date = new Date(log_event.block_signed_at).toISOString().split('T')[0];
+    
+            const [
+                { decimals: token0Decimals, symbol: token0Symbol },
+                { decimals: token1Decimals, symbol: token1Symbol },
+                token0Price,
+                token1Price
+            ] = await Promise.all([
+                getTokenDetails(token0Address, infuraProvider),
+                getTokenDetails(token1Address, fallbackProvider), // Use fallback provider for one of the requests
+                getTokenPrice(covalent_client, chain_name, token0Address, date),
+                getTokenPrice(covalent_client, chain_name, token1Address, date)
+            ]);
+    
+            const adjustedValue0 = Number(decoded.amount0) / Math.pow(10, token0Decimals);
+            const adjustedValue1 = Number(decoded.amount1) / Math.pow(10, token1Decimals);
+    
+            const token0UsdValue = adjustedValue0 * token0Price;
+        const token1UsdValue = adjustedValue1 * token1Price;
+
+
+        const adjustedPaidValue0 = Number(decoded.paid0) / Math.pow(10, token0Decimals);
+        const adjustedPaidValue1 = Number(decoded.paid1) / Math.pow(10, token1Decimals);
+        
+        const token0UsdPaidValue = adjustedPaidValue0 * token0Price;
+        const token1UsdPaidValue = adjustedPaidValue1 * token1Price;
 
         const details: EventDetails = [
             {
@@ -572,6 +703,30 @@ GoldRushDecoder.on(
             },
             ...(options.raw_logs ? { raw_log: log_event } : {}),
             details,
+            tokens: [
+                {
+                    address: token0Address,
+                    ticker_symbol: token0Symbol,
+                    value: decoded.amount0.toString(),
+                    decimals: Number(token0Decimals),
+                    pretty_quote: prettifyCurrency(token0UsdValue),
+                    usd_value: token0UsdValue,
+                    heading: "Token 0",
+                    quote_rate: token0Price,
+                    loan_paid_usd_value: token0UsdPaidValue
+                },
+                {
+                    address: token1Address,
+                    ticker_symbol: token1Symbol,
+                    value: decoded.amount1.toString(),
+                    decimals: Number(token1Decimals),
+                    pretty_quote: prettifyCurrency(token1UsdValue),
+                    usd_value: token1UsdValue,
+                    heading: "Token 1",
+                    quote_rate: token1Price,
+                    loan_paid_usd_value: token1UsdPaidValue
+                },]
+
         };
     }
 );
@@ -590,7 +745,6 @@ GoldRushDecoder.on(
     ): Promise<EventType> => {
         const { sender_address: exchange_contract, raw_log_data, raw_log_topics } = log_event;
         
-        console.log(log_event);
 
         const { args: decoded } = decodeEventLog({
             abi: PositionManagerABI,
@@ -607,7 +761,6 @@ GoldRushDecoder.on(
             };
             };
         
-        console.log("exchange_contract ",exchange_contract);
         
         const positionManagerContract = new ethers.Contract(log_event.sender_address, PositionManagerABI, infuraProvider);
 
@@ -616,8 +769,7 @@ GoldRushDecoder.on(
 
         const [token0Address, token1Address] = [position.token0, position.token1];
     
-            console.log(token0Address);
-            console.log(token1Address);
+    
     
             const date = new Date(log_event.block_signed_at).toISOString().split('T')[0];
     
@@ -661,7 +813,7 @@ GoldRushDecoder.on(
                 type: "text",
             },
             {
-                heading: "Pair",
+                heading: "Lp Token Address",
                 value: exchange_contract,
                 type: "address",
             },
@@ -702,6 +854,7 @@ GoldRushDecoder.on(
     }
 );
 
+
 GoldRushDecoder.on(
     "uniswap-v3:IncreaseLiquidity",
     ["eth-mainnet"],
@@ -713,8 +866,8 @@ GoldRushDecoder.on(
         covalent_client,
         options
     ): Promise<EventType> => {
-        const { raw_log_data, raw_log_topics } = log_event;
-
+        const { sender_address: exchange_contract, raw_log_data, raw_log_topics } = log_event;
+        
         const { args: decoded } = decodeEventLog({
             abi: PositionManagerABI,
             topics: raw_log_topics as [],
@@ -729,6 +882,34 @@ GoldRushDecoder.on(
                 amount1: bigint;
             };
         };
+                
+        const positionManagerContract = new ethers.Contract(log_event.sender_address, PositionManagerABI, infuraProvider);
+
+        // Assuming the Position Manager contract has a method to get position details
+        const position = await positionManagerContract.positions(decoded.tokenId);
+
+        const [token0Address, token1Address] = [position.token0, position.token1];
+ 
+
+        const date = new Date(log_event.block_signed_at).toISOString().split('T')[0];
+
+        const [
+            { decimals: token0Decimals, symbol: token0Symbol },
+            { decimals: token1Decimals, symbol: token1Symbol },
+            token0Price,
+            token1Price
+        ] = await Promise.all([
+            getTokenDetails(token0Address, infuraProvider),
+            getTokenDetails(token1Address, infuraProvider), // Use infuraProvider for both requests
+            getTokenPrice(covalent_client, chain_name, token0Address, date),
+            getTokenPrice(covalent_client, chain_name, token1Address, date)
+        ]);
+
+        const adjustedValue0 = Number(decoded.amount0) / Math.pow(10, token0Decimals);
+        const adjustedValue1 = Number(decoded.amount1) / Math.pow(10, token1Decimals);
+
+        const token0UsdValue = adjustedValue0 * token0Price;
+        const token1UsdValue = adjustedValue1 * token1Price;
 
         const details: EventDetails = [
             {
@@ -751,6 +932,11 @@ GoldRushDecoder.on(
                 value: decoded.amount1.toString(),
                 type: "text",
             },
+            {
+                heading: "Lp Token Address",
+                value: exchange_contract,
+                type: "address",
+            },
         ];
 
         return {
@@ -763,9 +949,32 @@ GoldRushDecoder.on(
             },
             ...(options.raw_logs ? { raw_log: log_event } : {}),
             details,
+            tokens: [
+                {
+                    address: token0Address,
+                    ticker_symbol: token0Symbol,
+                    value: decoded.amount0.toString(),
+                    decimals: Number(token0Decimals),
+                    pretty_quote: prettifyCurrency(token0UsdValue),
+                    usd_value: token0UsdValue,
+                    heading: "Token 0",
+                    quote_rate: token0Price,
+                },
+                {
+                    address: token1Address,
+                    ticker_symbol: token1Symbol,
+                    value: decoded.amount1.toString(),
+                    decimals: Number(token1Decimals),
+                    pretty_quote: prettifyCurrency(token1UsdValue),
+                    usd_value: token1UsdValue,
+                    heading: "Token 1",
+                    quote_rate: token1Price,
+                },
+            ]
         };
     }
 );
+
 
 
 GoldRushDecoder.on(

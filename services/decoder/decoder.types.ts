@@ -16,6 +16,12 @@ export type Configs = {
     is_factory: boolean;
 }[];
 
+export type Aggregators = {
+    protocol_name: string;
+    chain_name: Chain;
+    address: string;
+}[];
+
 export type EventDetails = {
     heading: string;
     value: string;
@@ -48,7 +54,22 @@ export type EventTokens = {
     quote_rate?: number;
     usd_quote?: number;
     usd_value?: number;
+    loan_paid_usd_value?: number;
 }[];
+
+export type EventToken = {
+    heading: string;
+    value: string;
+    address?: string;
+    decimals: number;
+    ticker_symbol: string | null;
+    ticker_logo?: string | null;
+    pretty_quote: string;
+    quote_rate?: number;
+    usd_quote?: number;
+    usd_value?: number;
+    loan_paid_usd_value?: number;
+};
 
 export interface EventType {
     category: DECODED_EVENT_CATEGORY;

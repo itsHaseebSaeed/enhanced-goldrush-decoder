@@ -1,31 +1,17 @@
-import { Chain, prettifyCurrency, type Token } from "@covalenthq/client-sdk";
+import { prettifyCurrency, type Token } from "@covalenthq/client-sdk";
 import { type Abi, decodeEventLog } from "viem";
 import { GoldRushDecoder } from "../../decoder";
-import { Aggregators, EventDetails, type EventType } from "../../decoder.types";
-import PairABI from "./abis/uniswap-v2.pair.abi.json";
-import FactoryABI from "./abis/uniswap-v2.factory.abi.json";
+import { type EventType } from "../../decoder.types";
+import PairABI from "./abis/sushiswap-v2.pair.abi.json";
+import FactoryABI from "./abis/sushiswap-v2.factory.abi.json";
 import {
     DECODED_ACTION,
     DECODED_EVENT_CATEGORY,
 } from "../../decoder.constants";
 
-const AGGREGATORS: Aggregators = [
-    {
-        address: "0x881D40237659C251811CEC9c364ef91dC08D300C", // MetaMask Swap Router
-        protocol_name: "metamask swap router",
-        chain_name: "eth-mainnet",
-    },
-    {
-        address: "0x1111111254EEB25477B68fb85Ed929f73A960582", // 1-inch Router
-        protocol_name: "1-inch router",
-        chain_name: "eth-mainnet",
-    },
-];
-
-
 GoldRushDecoder.on(
-    "uniswap-v2:Swap",
-    ["eth-mainnet", "defi-kingdoms-mainnet"],
+    "sushiswap-v2:Swap",
+    ["eth-mainnet"],
     PairABI as Abi,
     async (
         log_event,
@@ -34,12 +20,12 @@ GoldRushDecoder.on(
         covalent_client,
         options
     ): Promise<EventType> => {
+
         const {
             sender_address: exchange_contract,
             raw_log_data,
             raw_log_topics,
         } = log_event;
-
 
         const { args: decoded } = decodeEventLog({
             abi: PairABI,
@@ -65,7 +51,7 @@ GoldRushDecoder.on(
 
         const { data } = await covalent_client.XykService.getPoolByAddress(
             chain_name,
-            "uniswap_v2",
+            "sushiswap_v2",
             exchange_contract
         );
         const tokens = data?.items?.[0];
@@ -99,53 +85,32 @@ GoldRushDecoder.on(
         let outputTokenUsdValue = adjustedOutputValue * outputTokenPrice;
 
 
-        const aggregator = AGGREGATORS.find(
-            (            agg: {     protocol_name: string;
-                chain_name: Chain;
-                address: string; }) => agg.address === decoded.sender || agg.address === decoded.to
-        );
-
-
-        let details: EventDetails = [
-            {
-                heading: "Sender",
-                type: "address",
-                value: decoded.sender,
-            },
-            {
-                heading: "To",
-                type: "address",
-                value: decoded.to,
-            },
-            {
-                heading: "Pair",
-                type: "address",
-                value: exchange_contract
-            }
-        ];
-
-        if (aggregator) {
-            details.push({
-                heading: "Aggregator",
-                value: aggregator.protocol_name,
-                type: "text",
-            });
-            details.push({
-                heading: "Aggregator Address",
-                value: aggregator.address,
-                type: "address",
-            });
-        }
         return {
             action: DECODED_ACTION.SWAPPED,
             category: DECODED_EVENT_CATEGORY.DEX,
             name: "Swap",
             protocol: {
                 // logo: log_event.sender_logo_url as string,
-                name: log_event.sender_name as string,
+                name: "Sushiswap",
             },
             ...(options.raw_logs ? { raw_log: log_event } : {}),
-            details ,
+            details: [
+                {
+                    heading: "Sender",
+                    type: "address",
+                    value: decoded.sender,
+                },
+                {
+                    heading: "To",
+                    type: "address",
+                    value: decoded.to,
+                },
+                {
+                    heading: "Pair",
+                    type: "address",
+                    value: exchange_contract
+                }
+            ],
             tokens: [
                 {
                     ticker_symbol: inputToken?.contract_ticker_symbol ?? null,
@@ -173,7 +138,7 @@ GoldRushDecoder.on(
 );
 
 GoldRushDecoder.on(
-    "uniswap-v2:Mint",
+    "sushiswap-v2:Mint",
     ["eth-mainnet"],
     PairABI as Abi,
     async (
@@ -212,7 +177,7 @@ GoldRushDecoder.on(
 
     const { data } = await covalent_client.XykService.getPoolByAddress(
         chain_name,
-        "uniswap_v2",
+        "sushiswap_v2",
         exchange_contract
     );
         
@@ -293,7 +258,7 @@ GoldRushDecoder.on(
 );
 
 GoldRushDecoder.on(
-    "uniswap-v2:Burn",
+    "sushiswap-v2:Burn",
     ["eth-mainnet"],
     PairABI as Abi,
     async (
@@ -333,7 +298,7 @@ GoldRushDecoder.on(
 
         const { data } = await covalent_client.XykService.getPoolByAddress(
             chain_name,
-            "uniswap_v2",
+            "sushiswap_v2",
             exchange_contract
         );
 
@@ -418,7 +383,7 @@ GoldRushDecoder.on(
 );
 
 GoldRushDecoder.on(
-    "uniswap-v2:Sync",
+    "sushiswap-v2:Sync",
     ["eth-mainnet"],
     PairABI as Abi,
     async (
@@ -454,7 +419,7 @@ GoldRushDecoder.on(
 
         const { data } = await covalent_client.XykService.getPoolByAddress(
             chain_name,
-            "uniswap_v2",
+            "sushiswap_v2",
             exchange_contract
         );
         const tokens = data?.items?.[0];
@@ -524,7 +489,7 @@ GoldRushDecoder.on(
 );
 
 GoldRushDecoder.on(
-    "uniswap-v2:PairCreated",
+    "sushiswap-v2:PairCreated",
     ["eth-mainnet"],
     FactoryABI as Abi,
     async (
@@ -554,7 +519,7 @@ GoldRushDecoder.on(
 
         const { data } = await covalent_client.XykService.getPoolByAddress(
             chain_name,
-            "uniswap_v2",
+            "sushiswap_v2",
             decoded.pair
         );
 

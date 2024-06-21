@@ -6,8 +6,8 @@ import { DECODED_ACTION, DECODED_EVENT_CATEGORY } from "../../../services/decode
 export const mapDexEventToReport = (decodedEvent: EventType): DexReport | null => {
     const commonFields = (inputToken: { heading: string; value: string; address?: string | undefined; decimals: number; ticker_symbol: string | null; ticker_logo?: string | null | undefined; pretty_quote: string; quote_rate?: number | undefined; usd_quote?: number | undefined; usd_value?: number | undefined; } | undefined, outputToken: { heading: string; value: string; address?: string | undefined; decimals: number; ticker_symbol: string | null; ticker_logo?: string | null | undefined; pretty_quote: string; quote_rate?: number | undefined; usd_quote?: number | undefined; usd_value?: number | undefined; } | undefined) => ({
         protocol: decodedEvent.protocol,
-        // aggregator_name: "",
-        // aggregator_address: "",
+        aggregator_name: decodedEvent.details.find(d => d.heading === "Aggregator")?.value ?? "",
+        aggregator_address: decodedEvent.details.find(d => d.heading === "Aggregator Address")?.value ?? "",
         // version: 0,
         // fork_version: 0,
         // fork: "",
@@ -15,7 +15,7 @@ export const mapDexEventToReport = (decodedEvent: EventType): DexReport | null =
         pair_address: decodedEvent.details.find(d => d.heading === "Pair")?.value ?? "",
         pair_lp_fee_bps: 0,
         lp_token_address: decodedEvent.details.find(d => d.heading === "Lp Token Address")?.value ?? "",
-        lp_token_ticker: "",
+        lp_token_ticker: decodedEvent.details.find(d => d.heading === "Token ID")?.value ?? "",
         lp_token_num_decimals: 0,
         lp_token_name: "",
         lp_token_value: "",

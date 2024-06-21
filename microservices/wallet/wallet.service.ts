@@ -9,6 +9,7 @@ import { CategorizedTransaction,DexReport,NftSalesReport,LendingReport, NftTrans
 import { DECODED_ACTION, DECODED_EVENT_CATEGORY } from "../../services/decoder/decoder.constants";
 import { mapDexEventToReport } from "../categorization/types/dex_details";
 import { mapTransferEventToReport } from "../categorization/types/transfer_details";
+import { mapStakingEventToReport } from "../categorization/types/staking_details";
 
 export const fetchTxsFromWallet = async (
     chain_name: Chain,
@@ -61,6 +62,7 @@ export const categorize = async (
         nft_transfer_details: [],
         nft_sale_details: [],
         lending_details: [],
+        staking_details:[],
         log_events: [],
     };
 
@@ -72,6 +74,12 @@ export const categorize = async (
                     cat.dex_details.push(dexReport);
                 }
                 break;
+                case DECODED_EVENT_CATEGORY.STAKING:
+                    const stakingReport = mapStakingEventToReport(event,events);
+                    if (stakingReport) {
+                        cat.staking_details.push(stakingReport);
+                    }
+                    break;
             case DECODED_EVENT_CATEGORY.TOKEN:
                 const transferReport = mapTransferEventToReport(event);
                 

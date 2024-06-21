@@ -16,7 +16,7 @@ const configs: Configs = [
     {
         address: "0x881D40237659C251811CEC9c364ef91dC08D300C", //MetaMask Swap Router
         is_factory: false,
-        protocol_name: "uniswap-v3",
+        protocol_name: "uniswap-v2",
         chain_name: "eth-mainnet",
     },
     {

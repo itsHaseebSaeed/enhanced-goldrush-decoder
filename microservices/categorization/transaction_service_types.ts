@@ -11,6 +11,9 @@ export interface CategorizedTransaction {
     nft_sale_details: NftSalesReport[];
     /** * The details for the lending protocol transaction. */
     lending_details: LendingReport[];
+
+    /** * The details for the lending protocol transaction. */
+    staking_details: StakingReport[];
     /** * The log events. */
     log_events?: LogEvent[];
 }
@@ -59,9 +62,9 @@ export interface DexReport {
         logo?: string;
     };
     // /** * Stores the aggregator responsible for the event. */
-    // aggregator_name: string;
+    aggregator_name?: string;
     // /** * Stores the contract address of the aggregator responsible for the event. */
-    // aggregator_address: string;
+    aggregator_address?: string;
     // /** * DEXs often have multiple version - e.g Uniswap V1, V2 and V3. The `version` field allows you to look at a specific version of the DEX. */
     // version: number;
     // /** * Similarly to the `version` field, `fork_version` gives you the version of the forked DEX. For example, most DEXs are a fork of Uniswap V2; therefore, `fork` = `aave` & `fork_version` = `2` */
@@ -112,6 +115,50 @@ export interface DexReport {
     /** * Stores the recipient of the transaction - recipients can be other wallets or smart contracts. For example, if you want to Swap tokens on Uniswap, the Uniswap router would typically be the recipient of the transaction. */
     recipient: string;
 }
+
+export interface StakingReport {
+    /** * The offset is the position of the log entry within an event log. */
+    log_offset?: number;
+    protocol?: {
+        name: string;
+        address?: string;
+        logo?: string;
+    };
+    /** * Stores the event taking place - e.g `deposit` and `withdraw`. */
+    event: string;
+    /** * Stores the address of token 0 in the specific pair. */
+    staked_asset_address?: string;
+    /** * Stores the ticker symbol of token 0 in the specific pair. */
+    staked_asset_ticker?: string;
+    /** * Stores the number of contract decimals of token 0 in the specific pair. */
+    staked_asset_num_decimals: number;
+    /** * Stores the contract name of token 0 in the specific pair. */
+    staked_asset_name: string;
+    /** * Stores the address of token 1 in the specific pair. */
+    minted_address?: string;
+    /** * Stores the ticker symbol of token 1 in the specific pair. */
+    minted_ticker?: string;
+    /** * Stores the number of contract decimals of token 1 in the specific pair. */
+    minted_num_decimals: number;
+    /** * Stores the contract name of token 1 in the specific pair. */
+    minted_name: string;
+    /** * Stores the amount of token 0 used in the transaction. For example, 1 ETH, 100 USDC, 30 UNI, etc. */
+    staked_asset_amount: string;
+    staked_asset_quote_rate: number;
+    staked_asset_usd_quote: number;
+    pretty_staked_asset_usd_quote: string;
+    minted_amount: string;
+    minted_quote_rate: number;
+    minted_usd_quote: number;
+    pretty_minted_usd_quote: string;
+    minted_logo_url?: string;
+    /** * Stores the wallet address that initiated the transaction (i.e the wallet paying the gas fee). */
+    depositor: string;
+
+}
+
+
+
 export interface NftSalesReport {
     /** * The offset is the position of the log entry within an event log. */
     log_offset: number;

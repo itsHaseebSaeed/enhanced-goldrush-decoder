@@ -56,7 +56,11 @@ const handleDecode = async (
         );
 
         const cate = await categorize(events);
+
         console.log(cate);
+        console.log(cate.dex_details[0]?.protocol);
+        console.log(cate.staking_details[0]?.protocol);
+
         
         const parsedTx = JSON.parse(
             JSON.stringify(tx_metadata, (_key, value) => {

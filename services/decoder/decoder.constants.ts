@@ -1,3 +1,5 @@
+import { Aggregators } from "./decoder.types";
+
 export enum DECODED_EVENT_CATEGORY {
     NFT = "NFT Transaction",
     LENDING = "Lending",
@@ -47,3 +49,4 @@ export enum DECODED_ACTION {
     DEPOSITED = "Deposited",
     WITHDRAWN="withdrawn"
 }
+
