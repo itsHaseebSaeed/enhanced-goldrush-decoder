@@ -16,16 +16,10 @@ export type Configs = {
     is_factory: boolean;
 }[];
 
-export type Aggregators = {
-    protocol_name: string;
-    chain_name: Chain;
-    address: string;
-}[];
-
 export type EventDetails = {
     heading: string;
     value: string;
-    type: "address" | "text";
+    type: number | "address" | "text";
 }[];
 
 export type EventNFTs = {

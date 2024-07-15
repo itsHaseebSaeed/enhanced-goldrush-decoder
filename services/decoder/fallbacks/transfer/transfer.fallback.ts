@@ -81,7 +81,6 @@ GoldRushDecoder.fallback(
             },
         ];
 
-
         const parsedData: EventType = {
             action: DECODED_ACTION.TRANSFERRED,
             category: DECODED_EVENT_CATEGORY.TOKEN,
@@ -108,14 +107,15 @@ GoldRushDecoder.fallback(
                         to: date,
                     }
                 );
-            
-            let usd_value = data?.[0]?.items?.[0]?.price *
-                (Number(decoded.value) /
-                    Math.pow(
-                        10,
-                        data?.[0]?.items?.[0]?.contract_metadata
-                            ?.contract_decimals ?? 18
-                    )) ?? 0;
+
+            let usd_value =
+                data?.[0]?.items?.[0]?.price *
+                    (Number(decoded.value) /
+                        Math.pow(
+                            10,
+                            data?.[0]?.items?.[0]?.contract_metadata
+                                ?.contract_decimals ?? 18
+                        )) ?? 0;
 
             const pretty_quote = prettifyCurrency(usd_value);
 
@@ -125,18 +125,17 @@ GoldRushDecoder.fallback(
 
             parsedData.tokens = [
                 {
-                    address: data?.[0]?.contract_address?? "",
+                    address: data?.[0]?.contract_address ?? "",
                     decimals: data?.[0]?.contract_decimals ?? 18,
                     heading: "Token Amount",
                     pretty_quote: pretty_quote,
-                    usd_value:usd_value,
-                    ticker_symbol: data?.[0]?.contract_ticker_symbol,
+                    usd_value: usd_value,
+                    ticker_symbol:
+                        data?.[0]?.contract_ticker_symbol ??
+                        data?.[0]?.contract_name,
                     value: decoded.value.toString(),
                 },
             ];
-
-            
-
         } else if (decoded.tokenId) {
             const { data } =
                 await covalent_client.NftService.getNftMetadataForGivenTokenIdForContract(
@@ -147,22 +146,26 @@ GoldRushDecoder.fallback(
                         withUncached: true,
                     }
                 );
-            
-                const transactionDate = new Date(log_event.block_signed_at);
-                const currentDate = new Date();
-                const timeDifference = Math.abs(currentDate.getTime() - transactionDate.getTime());
-                let daysDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
-            
-                // Limit the maximum days to 365
+
+            const transactionDate = new Date(log_event.block_signed_at);
+            const currentDate = new Date();
+            const timeDifference = Math.abs(
+                currentDate.getTime() - transactionDate.getTime()
+            );
+            let daysDifference = Math.ceil(
+                timeDifference / (1000 * 60 * 60 * 24)
+            );
+
+            // Limit the maximum days to 365
             daysDifference = Math.min(daysDifference, 365);
-            
-            const  priceData  =
+
+            const priceData =
                 await covalent_client.NftService.getNftMarketFloorPrice(
                     chain_name,
                     log_event.sender_address,
                     {
                         days: daysDifference,
-                        quoteCurrency:"USD"   
+                        quoteCurrency: "USD",
                     }
                 );
 
@@ -171,12 +174,16 @@ GoldRushDecoder.fallback(
                     heading: "NFT Transferred",
                     collection_address: data?.items?.[0]?.contract_address,
                     collection_name:
-                        data?.items?.[0]?.nft_data?.external_data?.name  || parsedData.protocol?.name|| null,
+                        data?.items?.[0]?.nft_data?.external_data?.name ||
+                        parsedData.protocol?.name ||
+                        null,
                     token_identifier:
                         data?.items?.[0]?.nft_data?.token_id?.toString() ||
                         null,
                     price: priceData.data.items[0].floor_price_quote,
-                    pretty_quote: prettifyCurrency(priceData.data.items[0].floor_price_quote),
+                    pretty_quote: prettifyCurrency(
+                        priceData.data.items[0].floor_price_quote
+                    ),
                     images: {
                         "1024":
                             data?.items?.[0]?.nft_data?.external_data

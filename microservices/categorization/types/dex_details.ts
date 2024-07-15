@@ -1,10 +1,10 @@
-import { EventType, type QueryOptions } from "../../../services/decoder/decoder.types";
+import { EventToken, EventType, type QueryOptions } from "../../../services/decoder/decoder.types";
 import { CategorizedTransaction,DexReport,NftSalesReport,LendingReport } from "../transaction_service_types";
 import { DECODED_ACTION, DECODED_EVENT_CATEGORY } from "../../../services/decoder/decoder.constants";
 
 
 export const mapDexEventToReport = (decodedEvent: EventType): DexReport | null => {
-    const commonFields = (inputToken: { heading: string; value: string; address?: string | undefined; decimals: number; ticker_symbol: string | null; ticker_logo?: string | null | undefined; pretty_quote: string; quote_rate?: number | undefined; usd_quote?: number | undefined; usd_value?: number | undefined; } | undefined, outputToken: { heading: string; value: string; address?: string | undefined; decimals: number; ticker_symbol: string | null; ticker_logo?: string | null | undefined; pretty_quote: string; quote_rate?: number | undefined; usd_quote?: number | undefined; usd_value?: number | undefined; } | undefined) => ({
+    const commonFields = (inputToken: EventToken | undefined, outputToken: EventToken | undefined) => ({
         protocol: decodedEvent.protocol,
         aggregator_name: decodedEvent.details.find(d => d.heading === "Aggregator")?.value ?? "",
         aggregator_address: decodedEvent.details.find(d => d.heading === "Aggregator Address")?.value ?? "",
@@ -37,6 +37,7 @@ export const mapDexEventToReport = (decodedEvent: EventType): DexReport | null =
         sender: decodedEvent.details.find(d => d.heading === "Sender")?.value ?? "",
         recipient: decodedEvent.details.find(d => d.heading === "To")?.value ?? ""
     });
+
 
     const tokens = decodedEvent.tokens;
     const inputToken = tokens?.[0];

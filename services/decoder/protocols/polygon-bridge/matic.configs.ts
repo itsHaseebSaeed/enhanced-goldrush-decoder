@@ -2,7 +2,7 @@ import { type Configs } from "../../decoder.types";
 
 const configs: Configs = [
     {
-        address: "0xa0c68c638235ee32657e8f720a23cec1bfc77c77", // Polygon Bridge contract address
+        address: "0xa0c68c638235ee32657e8f720a23cec1bfc77c77", // 1)Main Polygon Bridge contract address
         is_factory: false,
         protocol_name: "matic-eth-bridge",
         chain_name: "eth-mainnet",
@@ -14,14 +14,14 @@ const configs: Configs = [
         chain_name: "matic-mainnet",
     },
     {
-        address: "0x40ec5B33f54e0E8A33A975908C5BA1c14e5BbbDf", // Polygon erc20 Bridge contract address
+        address: "0x40ec5B33f54e0E8A33A975908C5BA1c14e5BbbDf", // 1.1) Polygon erc20 Bridge contract address
         is_factory: false,
         protocol_name: "matic-eth-bridge",
         chain_name: "eth-mainnet",
     },
 
     {
-        address: "0x8484Ef722627bf18ca5Ae6BcF031c23E6e922B30", // Polygon Bridge contract address
+        address: "0x8484Ef722627bf18ca5Ae6BcF031c23E6e922B30", // 1.2) Polygon-Ether Bridge contract address
         is_factory: false,
         protocol_name: "matic-eth-bridge",
         chain_name: "eth-mainnet",

@@ -1,0 +1,304 @@
+{
+    "chains": [
+        {
+            "chain_name": "solana",
+            "wormhole_chain_id": 1,
+            "mainnet_id": "Mainnet Beta - 5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d",
+            "testnet_id": "Devnet - EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG"
+        },
+        {
+            "chain_name": "eth-mainnet",
+            "wormhole_chain_id": 2,
+            "mainnet_id": 1,
+            "testnet_id": "Goerli - 5"
+        },
+        {
+            "chain_name": "terra",
+            "wormhole_chain_id": 3,
+            "mainnet_id": "columbus-5",
+            "testnet_id": "bombay-12"
+        },
+        {
+            "chain_name": "bsc",
+            "wormhole_chain_id": 4,
+            "mainnet_id": 56,
+            "testnet_id": 97
+        },
+        {
+            "chain_name": "matic-mainnet",
+            "wormhole_chain_id": 5,
+            "mainnet_id": 137,
+            "testnet_id": "Mumbai - 80001"
+        },
+        {
+            "chain_name": "avalanche",
+            "wormhole_chain_id": 6,
+            "mainnet_id": "C-Chain - 43114",
+            "testnet_id": "Fuji - 43113"
+        },
+        {
+            "chain_name": "oasis",
+            "wormhole_chain_id": 7,
+            "mainnet_id": 42262,
+            "testnet_id": 42261
+        },
+        {
+            "chain_name": "algorand",
+            "wormhole_chain_id": 8,
+            "mainnet_id": "mainnet-v1.0",
+            "testnet_id": "testnet-v1.0"
+        },
+        {
+            "chain_name": "fantom",
+            "wormhole_chain_id": 10,
+            "mainnet_id": 250,
+            "testnet_id": 4002
+        },
+        {
+            "chain_name": "karura",
+            "wormhole_chain_id": 11,
+            "mainnet_id": 686,
+            "testnet_id": 596
+        },
+        {
+            "chain_name": "acala",
+            "wormhole_chain_id": 12,
+            "mainnet_id": 787,
+            "testnet_id": 597
+        },
+        {
+            "chain_name": "klaytn",
+            "wormhole_chain_id": 13,
+            "mainnet_id": 8217,
+            "testnet_id": "Baobab - 1001"
+        },
+        {
+            "chain_name": "celo",
+            "wormhole_chain_id": 14,
+            "mainnet_id": 42220,
+            "testnet_id": "Alfajores - 44787"
+        },
+        {
+            "chain_name": "near",
+            "wormhole_chain_id": 15,
+            "mainnet_id": "mainnet",
+            "testnet_id": "testnet"
+        },
+        {
+            "chain_name": "moonbeam",
+            "wormhole_chain_id": 16,
+            "mainnet_id": 1284,
+            "testnet_id": "Moonbase-Alphanet - 1287"
+        },
+        {
+            "chain_name": "neon",
+            "wormhole_chain_id": 17,
+            "mainnet_id": 245022934,
+            "testnet_id": 245022940
+        },
+        {
+            "chain_name": "terra2",
+            "wormhole_chain_id": 18,
+            "mainnet_id": "phoenix-1",
+            "testnet_id": "pisco-1"
+        },
+        {
+            "chain_name": "injective",
+            "wormhole_chain_id": 19,
+            "mainnet_id": "injective-1",
+            "testnet_id": "injective-888"
+        },
+        {
+            "chain_name": "osmosis",
+            "wormhole_chain_id": 20,
+            "mainnet_id": "osmosis-1",
+            "testnet_id": "osmo-test-5"
+        },
+        {
+            "chain_name": "sui",
+            "wormhole_chain_id": 21,
+            "mainnet_id": "35834a8a",
+            "testnet_id": "4c78adac"
+        },
+        {
+            "chain_name": "aptos",
+            "wormhole_chain_id": 22,
+            "mainnet_id": 1,
+            "testnet_id": 2
+        },
+        {
+            "chain_name": "arbitrum",
+            "wormhole_chain_id": 23,
+            "mainnet_id": "Arbitrum One - 42161",
+            "testnet_id": "Goerli - 421613"
+        },
+        {
+            "chain_name": "optimism",
+            "wormhole_chain_id": 24,
+            "mainnet_id": 10,
+            "testnet_id": "Optimism Goerli - 420"
+        },
+        {
+            "chain_name": "gnosis",
+            "wormhole_chain_id": 25,
+            "mainnet_id": 100,
+            "testnet_id": "Chaido - 10200"
+        },
+        {
+            "chain_name": "pythnet",
+            "wormhole_chain_id": 26,
+            "mainnet_id": "xpla",
+            "testnet_id": "dimension_37-1"
+        },
+        {
+            "chain_name": "base",
+            "wormhole_chain_id": 30,
+            "mainnet_id": "Base - 8453",
+            "testnet_id": "Base Goerli - 84531"
+        },
+        {
+            "chain_name": "sei",
+            "wormhole_chain_id": 32,
+            "mainnet_id": "pacific-1",
+            "testnet_id": "atlantic-2"
+        },
+        {
+            "chain_name": "rootstock",
+            "wormhole_chain_id": 33,
+            "mainnet_id": 30,
+            "testnet_id": 31
+        },
+        {
+            "chain_name": "scroll",
+            "wormhole_chain_id": 34,
+            "mainnet_id": 534352,
+            "testnet_id": "Sepolia - 534351"
+        },
+        {
+            "chain_name": "mantle",
+            "wormhole_chain_id": 35,
+            "mainnet_id": 5000,
+            "testnet_id": "Sepolia - 5003"
+        },
+        {
+            "chain_name": "blast",
+            "wormhole_chain_id": 36,
+            "mainnet_id": 81457,
+            "testnet_id": 168587773
+        },
+        {
+            "chain_name": "xlayer",
+            "wormhole_chain_id": 37,
+            "mainnet_id": 195,
+            "testnet_id": ""
+        },
+        {
+            "chain_name": "linea",
+            "wormhole_chain_id": 38,
+            "mainnet_id": 59144,
+            "testnet_id": 59141
+        },
+        {
+            "chain_name": "berachain",
+            "wormhole_chain_id": 39,
+            "mainnet_id": 80085,
+            "testnet_id": ""
+        },
+        {
+            "chain_name": "seievm",
+            "wormhole_chain_id": 40,
+            "mainnet_id": "",
+            "testnet_id": ""
+        },
+        {
+            "chain_name": "cosmoshub",
+            "wormhole_chain_id": 4000,
+            "mainnet_id": "cosmoshub-4",
+            "testnet_id": "theta-testnet-001"
+        },
+        {
+            "chain_name": "evmos",
+            "wormhole_chain_id": 4001,
+            "mainnet_id": "evmos_9001-2",
+            "testnet_id": "evmos_9000-4"
+        },
+        {
+            "chain_name": "kujira",
+            "wormhole_chain_id": 4002,
+            "mainnet_id": "kaiyo-1",
+            "testnet_id": "harpoon-4"
+        },
+        {
+            "chain_name": "neutron",
+            "wormhole_chain_id": 4003,
+            "mainnet_id": "neutron-1",
+            "testnet_id": "pion-1"
+        },
+        {
+            "chain_name": "celestia",
+            "wormhole_chain_id": 4004,
+            "mainnet_id": "celestia",
+            "testnet_id": "mocha-4"
+        },
+        {
+            "chain_name": "stargaze",
+            "wormhole_chain_id": 4005,
+            "mainnet_id": "stargaze-1",
+            "testnet_id": ""
+        },
+        {
+            "chain_name": "seda",
+            "wormhole_chain_id": 4006,
+            "mainnet_id": "seda-1",
+            "testnet_id": "seda-1-testnet"
+        },
+        {
+            "chain_name": "dymension",
+            "wormhole_chain_id": 4007,
+            "mainnet_id": "dymension_1100-1",
+            "testnet_id": ""
+        },
+        {
+            "chain_name": "provenance",
+            "wormhole_chain_id": 4008,
+            "mainnet_id": "pio-mainnet-1",
+            "testnet_id": ""
+        },
+        {
+            "chain_name": "sepolia",
+            "wormhole_chain_id": 10002,
+            "mainnet_id": "N/A",
+            "testnet_id": "Sepolia - 11155111"
+        },
+        {
+            "chain_name": "arbitrum_sepolia",
+            "wormhole_chain_id": 10003,
+            "mainnet_id": "Sepolia - 421614",
+            "testnet_id": ""
+        },
+        {
+            "chain_name": "base_sepolia",
+            "wormhole_chain_id": 10004,
+            "mainnet_id": "Base Sepolia - 84532",
+            "testnet_id": ""
+        },
+        {
+            "chain_name": "optimism_sepolia",
+            "wormhole_chain_id": 10005,
+            "mainnet_id": "Optimism Sepolia - 11155420",
+            "testnet_id": ""
+        },
+        {
+            "chain_name": "holesky",
+            "wormhole_chain_id": 10006,
+            "mainnet_id": "N/A",
+            "testnet_id": "Holesky - 17000"
+        },
+        {
+            "chain_name": "polygon_sepolia",
+            "wormhole_chain_id": 10007,
+            "mainnet_id": "Sepolia - 80002",
+            "testnet_id": ""
+        }
+    ]
+}

@@ -1,97 +1,877 @@
 {
     "success": true,
-    "events": [
+    "items": [
         {
-            "action": "Transferred",
-            "category": "Token",
-            "name": "Transfer",
-            "protocol": { "name": "Liquid staked Ether 2.0" },
-            "details": [
-                {
-                    "heading": "From",
-                    "value": "0x6cC5F688a315f3dC28A7781717a9A798a59fDA7b",
-                    "type": "address"
-                },
-                {
-                    "heading": "To",
-                    "value": "0xF1154b4E127f2C4164a4eA15575bC61761E0c1Ed",
-                    "type": "address"
-                }
-            ],
-            "tokens": [
-                {
-                    "decimals": 18,
-                    "heading": "Token Amount",
-                    "pretty_quote": "$340.39",
-                    "usd_value": 340.39543487252996,
-                    "ticker_logo": "https://logos.covalenthq.com/tokens/1/0xae7ab96520de3a18e5e111b5eaab095312d7fe84.png",
-                    "ticker_symbol": "stETH",
-                    "value": "102861950000000000"
-                }
-            ]
-        },
-        {
-            "action": "Transferred",
-            "category": "Staking",
-            "name": "Transfer Shares",
-            "protocol": {
-                "logo": "https://logos.covalenthq.com/tokens/1/0xae7ab96520de3a18e5e111b5eaab095312d7fe84.png",
-                "name": "Lido"
-            },
-            "details": [
-                {
-                    "heading": "From",
-                    "value": "0x6cC5F688a315f3dC28A7781717a9A798a59fDA7b",
-                    "type": "address"
-                },
-                {
-                    "heading": "To",
-                    "value": "0xF1154b4E127f2C4164a4eA15575bC61761E0c1Ed",
-                    "type": "address"
-                },
-                {
-                    "heading": "Shares Value",
-                    "value": "88497808259350903",
-                    "type": "text"
-                }
-            ]
-        }
-    ],
-    "tx_metadata": {
-        "block_signed_at": "2024-04-03T06:47:11.000Z",
-        "block_height": 19573556,
-        "block_hash": "0xa77bc0134a8621ee5f358b36dec418e3271de01806715329d834b93320622b27",
-        "tx_hash": "0xaf9517bd9b5fb84130ce7a05a44371116591527deb0b3badd7eed05870813400",
-        "tx_offset": 35,
-        "successful": true,
-        "from_address": "0x6cc5f688a315f3dc28a7781717a9a798a59fda7b",
-        "miner_address": "0x95222290dd7278aa3ddd389cc1e1d165cc4bafe5",
-        "from_address_label": null,
-        "to_address": "0xae7ab96520de3a18e5e111b5eaab095312d7fe84",
-        "to_address_label": null,
-        "value": "0",
-        "value_quote": 0,
-        "pretty_value_quote": "$0.00",
-        "gas_offered": 420000,
-        "gas_spent": 88211,
-        "gas_price": 20442022823,
-        "fees_paid": "1803211275239653",
-        "gas_quote": 5.978753918580679,
-        "pretty_gas_quote": "$5.98",
-        "gas_quote_rate": 3315.614759444138,
-        "gas_metadata": {
-            "contract_decimals": 18,
-            "contract_name": "Ether",
-            "contract_ticker_symbol": "ETH",
-            "contract_address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
-            "supports_erc": [],
-            "logo_url": "https://www.datocms-assets.com/86369/1669653891-eth.svg"
-        },
-        "explorers": [
-            {
-                "label": null,
-                "url": "https://etherscan.io/tx/0xaf9517bd9b5fb84130ce7a05a44371116591527deb0b3badd7eed05870813400"
+            "tx_hash": "0x4bb7c8b36e29bc09dd88948162972cf9d003f12f110a20753db81b6dfeeee097",
+            "successful": true,
+            "from_address": "0x39f94621ede2ee07e8cfaf5e83004e637084dd02",
+            "to_address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+            "value": "0",
+            "value_quote": 0,
+            "pretty_value_quote": "$0.00",
+            "gas_offered": 57182,
+            "gas_spent": 40348,
+            "gas_price": 2294097579,
+            "fees_paid": "92562249117492",
+            "gas_quote": 0.32357927161791944,
+            "pretty_gas_quote": "$0.32",
+            "gas_quote_rate": 3495.8017410228513,
+            "dex_details": null,
+            "nft_sale_details": null,
+            "lending_details": null,
+            "categorization": {
+                "dex_details": [],
+                "transfer_details": [
+                    {
+                        "token_num_decimals": 6,
+                        "token_name": "USDC",
+                        "token_address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                        "token_amount": "10000000",
+                        "token_quote_rate": 0,
+                        "token_usd_quote": 9.997741,
+                        "pretty_token_usd_quote": "$9.99",
+                        "sender": "0x39F94621eDe2EE07e8CFAf5E83004E637084dd02",
+                        "recipient": "0xB9ce9882E4cAEd9d9454606de4f7DeaA0eA67095"
+                    }
+                ],
+                "nft_transfer_details": [],
+                "nft_sale_details": [],
+                "lending_details": [],
+                "perpetual_details": [],
+                "staking_details": [],
+                "log_events": []
             }
-        ]
-    }
+        },
+        {
+            "tx_hash": "0xb35a3c181dc289e48f44ab132560f8895cd0cab4ff6b077f95faad3aba642404",
+            "successful": true,
+            "from_address": "0x39f94621ede2ee07e8cfaf5e83004e637084dd02",
+            "to_address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+            "value": "0",
+            "value_quote": 0,
+            "pretty_value_quote": "$0.00",
+            "gas_offered": 78805,
+            "gas_spent": 62260,
+            "gas_price": 1982102739,
+            "fees_paid": "123405716530140",
+            "gas_quote": 0.4314019186982359,
+            "pretty_gas_quote": "$0.43",
+            "gas_quote_rate": 3495.8017410228513,
+            "dex_details": null,
+            "nft_sale_details": null,
+            "lending_details": null,
+            "categorization": {
+                "dex_details": [],
+                "transfer_details": [
+                    {
+                        "token_num_decimals": 6,
+                        "token_name": "USDC",
+                        "token_address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                        "token_amount": "439260000",
+                        "token_quote_rate": 0,
+                        "token_usd_quote": 439.160771166,
+                        "pretty_token_usd_quote": "$439.16",
+                        "sender": "0x39F94621eDe2EE07e8CFAf5E83004E637084dd02",
+                        "recipient": "0xB9ce9882E4cAEd9d9454606de4f7DeaA0eA67095"
+                    }
+                ],
+                "nft_transfer_details": [],
+                "nft_sale_details": [],
+                "lending_details": [],
+                "perpetual_details": [],
+                "staking_details": [],
+                "log_events": []
+            }
+        },
+        {
+            "tx_hash": "0xb57b49e613a3ccb346ae4ddc01c1f0a0c4ab528eae7eb2d869cf57c14897fa43",
+            "successful": true,
+            "from_address": "0x39f94621ede2ee07e8cfaf5e83004e637084dd02",
+            "to_address": "0xd54f502e184b6b739d7d27a6410a67dc462d69c8",
+            "value": "0",
+            "value_quote": 0,
+            "pretty_value_quote": "$0.00",
+            "gas_offered": 120767,
+            "gas_spent": 84962,
+            "gas_price": 1982102739,
+            "fees_paid": "168403412910918",
+            "gas_quote": 0.5887049440481772,
+            "pretty_gas_quote": "$0.59",
+            "gas_quote_rate": 3495.8017410228513,
+            "dex_details": null,
+            "nft_sale_details": null,
+            "lending_details": null,
+            "categorization": {
+                "dex_details": [],
+                "transfer_details": [],
+                "nft_transfer_details": [],
+                "nft_sale_details": [],
+                "lending_details": [],
+                "perpetual_details": [
+                    {
+                        "protocol": {
+                            "name": "dYdX",
+                            "address": "0xd54f502e184b6b739d7d27a6410a67dc462d69c8"
+                        },
+                        "event": "Perpetual withdraw",
+                        "token_address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                        "token_ticker": "USDC",
+                        "token_num_decimals": 6,
+                        "token_name": "USDC",
+                        "token_amount": "10000000",
+                        "token_quote_rate": 0,
+                        "token_usd_quote": 9.997741,
+                        "pretty_token_usd_quote": "$9.99",
+                        "From": "",
+                        "To": "0x39F94621eDe2EE07e8CFAf5E83004E637084dd02"
+                    }
+                ],
+                "staking_details": [],
+                "log_events": []
+            }
+        },
+        {
+            "tx_hash": "0x71b62fa1284b1c70a834b117a9ffb6b43057bccc8aeeccc902a14d1ab9d55eb5",
+            "successful": true,
+            "from_address": "0x01087f4e1dbc0c52690a9397677dd90983711c37",
+            "to_address": "0xbe9a129909ebcb954bc065536d2bfafbd170d27a",
+            "value": "0",
+            "value_quote": 0,
+            "pretty_value_quote": "$0.00",
+            "gas_offered": 127947,
+            "gas_spent": 84380,
+            "gas_price": 18043360222,
+            "fees_paid": "1522498735532360",
+            "gas_quote": 5.417648321623525,
+            "pretty_gas_quote": "$5.42",
+            "gas_quote_rate": 3558.3926575342466,
+            "dex_details": null,
+            "nft_sale_details": null,
+            "lending_details": null,
+            "categorization": {
+                "dex_details": [],
+                "transfer_details": [
+                    {
+                        "token_num_decimals": 6,
+                        "token_name": "USDC",
+                        "token_address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                        "token_amount": "429260000",
+                        "token_quote_rate": 0,
+                        "token_usd_quote": 429.575763656,
+                        "pretty_token_usd_quote": "$429.57",
+                        "sender": "0x01087f4e1dbc0c52690A9397677dD90983711c37",
+                        "recipient": "0x39F94621eDe2EE07e8CFAf5E83004E637084dd02"
+                    }
+                ],
+                "nft_transfer_details": [],
+                "nft_sale_details": [],
+                "lending_details": [],
+                "perpetual_details": [],
+                "staking_details": [],
+                "log_events": []
+            }
+        },
+        {
+            "tx_hash": "0xadf9438073b92049f9683972fc2082b918ce263e1710c43b09acee1da0a8b277",
+            "successful": true,
+            "from_address": "0x01087f4e1dbc0c52690a9397677dd90983711c37",
+            "to_address": "0xbe9a129909ebcb954bc065536d2bfafbd170d27a",
+            "value": "0",
+            "value_quote": 0,
+            "pretty_value_quote": "$0.00",
+            "gas_offered": 155161,
+            "gas_spent": 101468,
+            "gas_price": 16678221467,
+            "fees_paid": "1692305775813556",
+            "gas_quote": 6.021888446957755,
+            "pretty_gas_quote": "$6.02",
+            "gas_quote_rate": 3558.3926575342466,
+            "dex_details": null,
+            "nft_sale_details": null,
+            "lending_details": null,
+            "categorization": {
+                "dex_details": [],
+                "transfer_details": [
+                    {
+                        "token_num_decimals": 6,
+                        "token_name": "USDC",
+                        "token_address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                        "token_amount": "10000000",
+                        "token_quote_rate": 0,
+                        "token_usd_quote": 10.007356000000001,
+                        "pretty_token_usd_quote": "$10.00",
+                        "sender": "0x01087f4e1dbc0c52690A9397677dD90983711c37",
+                        "recipient": "0x39F94621eDe2EE07e8CFAf5E83004E637084dd02"
+                    }
+                ],
+                "nft_transfer_details": [],
+                "nft_sale_details": [],
+                "lending_details": [],
+                "perpetual_details": [],
+                "staking_details": [],
+                "log_events": []
+            }
+        },
+        {
+            "tx_hash": "0x5acf2ea4a9fada29a53103caf5464d5cca86ce8c25604e576e7c39fb28bb394b",
+            "successful": true,
+            "from_address": "0x39f94621ede2ee07e8cfaf5e83004e637084dd02",
+            "to_address": "0x8e8bd01b5a9eb272cc3892a2e40e64a716aa2a40",
+            "value": "103000000000000000",
+            "value_quote": 184.07728871962277,
+            "pretty_value_quote": "$184.08",
+            "gas_offered": 520781,
+            "gas_spent": 386142,
+            "gas_price": 12587205795,
+            "fees_paid": "4860448820092890",
+            "gas_quote": 8.68639068702125,
+            "pretty_gas_quote": "$8.69",
+            "gas_quote_rate": 1787.158142908959,
+            "dex_details": null,
+            "nft_sale_details": null,
+            "lending_details": null,
+            "categorization": {
+                "dex_details": [
+                    {
+                        "protocol": { "name": "Sushiswap" },
+                        "aggregator_name": "",
+                        "aggregator_address": "",
+                        "event": "Swap",
+                        "pair_address": "0x397ff1542f962076d0bfe58ea045ffa2d347aca0",
+                        "pair_lp_fee_bps": 0,
+                        "lp_token_address": "",
+                        "lp_token_ticker": "",
+                        "lp_token_num_decimals": 0,
+                        "lp_token_name": "",
+                        "lp_token_value": "",
+                        "exchange_rate_usd": 0,
+                        "token_0_num_decimals": 18,
+                        "token_0_name": "",
+                        "token_0_amount": "0",
+                        "token_0_quote_rate": 0,
+                        "token_0_usd_quote": 0,
+                        "pretty_token_0_usd_quote": "$0.00",
+                        "token_1_num_decimals": 18,
+                        "token_1_name": "",
+                        "token_1_amount": "0",
+                        "token_1_quote_rate": 0,
+                        "token_1_usd_quote": 0,
+                        "pretty_token_1_usd_quote": "$0.00",
+                        "sender": "0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F",
+                        "recipient": "0x22F9dCF4647084d6C31b2765F6910cd85C178C18"
+                    }
+                ],
+                "transfer_details": [
+                    {
+                        "token_num_decimals": 18,
+                        "token_name": "WETH",
+                        "token_address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+                        "token_amount": "103000000000000000",
+                        "token_quote_rate": 0,
+                        "token_usd_quote": 183.91572879999998,
+                        "pretty_token_usd_quote": "$183.91",
+                        "sender": "0x22F9dCF4647084d6C31b2765F6910cd85C178C18",
+                        "recipient": "0x397FF1542f962076d0BFE58eA045FfA2d347ACa0"
+                    },
+                    {
+                        "token_num_decimals": 6,
+                        "token_name": "USDC",
+                        "token_address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                        "token_amount": "182953713",
+                        "token_quote_rate": 0,
+                        "token_usd_quote": 183.0571733247015,
+                        "pretty_token_usd_quote": "$183.05",
+                        "sender": "0x397FF1542f962076d0BFE58eA045FfA2d347ACa0",
+                        "recipient": "0x22F9dCF4647084d6C31b2765F6910cd85C178C18"
+                    },
+                    {
+                        "token_num_decimals": 6,
+                        "token_name": "USDC",
+                        "token_address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                        "token_amount": "273744",
+                        "token_quote_rate": 0,
+                        "token_usd_quote": 0.27389880223199997,
+                        "pretty_token_usd_quote": "$0.27",
+                        "sender": "0x22F9dCF4647084d6C31b2765F6910cd85C178C18",
+                        "recipient": "0xaD01C20d5886137e056775af56915de824c8fCe5"
+                    },
+                    {
+                        "token_num_decimals": 6,
+                        "token_name": "USDC",
+                        "token_address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                        "token_amount": "182679969",
+                        "token_quote_rate": 0,
+                        "token_usd_quote": 182.7832745224695,
+                        "pretty_token_usd_quote": "$182.78",
+                        "sender": "0x22F9dCF4647084d6C31b2765F6910cd85C178C18",
+                        "recipient": "0x032B17633C956C10845643f0Bf9Ea7C16a3cFB62"
+                    },
+                    {
+                        "token_num_decimals": 6,
+                        "token_name": "USDC",
+                        "token_address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                        "token_amount": "182679969",
+                        "token_quote_rate": 0,
+                        "token_usd_quote": 182.7832745224695,
+                        "pretty_token_usd_quote": "$182.78",
+                        "sender": "0x032B17633C956C10845643f0Bf9Ea7C16a3cFB62",
+                        "recipient": "0x8e8bd01b5A9eb272CC3892a2E40E64A716aa2A40"
+                    },
+                    {
+                        "token_num_decimals": 6,
+                        "token_name": "USDC",
+                        "token_address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                        "token_amount": "182679969",
+                        "token_quote_rate": 0,
+                        "token_usd_quote": 182.7832745224695,
+                        "pretty_token_usd_quote": "$182.78",
+                        "sender": "0x8e8bd01b5A9eb272CC3892a2E40E64A716aa2A40",
+                        "recipient": "0xD54f502e184B6B739d7D27a6410a67dc462D69c8"
+                    }
+                ],
+                "nft_transfer_details": [],
+                "nft_sale_details": [],
+                "lending_details": [],
+                "perpetual_details": [
+                    {
+                        "protocol": {
+                            "name": "dYdX",
+                            "address": "0xd54f502e184b6b739d7d27a6410a67dc462d69c8"
+                        },
+                        "event": "Perpetual Deposit",
+                        "token_address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                        "token_ticker": "USDC",
+                        "token_num_decimals": 6,
+                        "token_name": "USDC",
+                        "token_amount": "182679969",
+                        "token_quote_rate": 0,
+                        "token_usd_quote": 182.7832745224695,
+                        "pretty_token_usd_quote": "$182.78",
+                        "From": "0x8e8bd01b5A9eb272CC3892a2E40E64A716aa2A40",
+                        "To": ""
+                    }
+                ],
+                "staking_details": [],
+                "log_events": []
+            }
+        },
+        {
+            "tx_hash": "0x96e5e03ef4aa7f39369880c2573ea3cf8cd227ca9115477ca467b10a337db5fa",
+            "successful": true,
+            "from_address": "0x46340b20830761efd32832a74d7169b29feb9758",
+            "to_address": "0x39f94621ede2ee07e8cfaf5e83004e637084dd02",
+            "value": "106970000000000000",
+            "value_quote": 188.8223660521525,
+            "pretty_value_quote": "$188.82",
+            "gas_offered": 350000,
+            "gas_spent": 21000,
+            "gas_price": 37444970859,
+            "fees_paid": "786344388039000",
+            "gas_quote": 1.388047189692025,
+            "pretty_gas_quote": "$1.39",
+            "gas_quote_rate": 1765.189922895695,
+            "dex_details": null,
+            "nft_sale_details": null,
+            "lending_details": null,
+            "categorization": {
+                "dex_details": [],
+                "transfer_details": [],
+                "nft_transfer_details": [],
+                "nft_sale_details": [],
+                "lending_details": [],
+                "perpetual_details": [],
+                "staking_details": [],
+                "log_events": []
+            }
+        },
+        {
+            "tx_hash": "0xe76f003629f0c530be17e6069660c9178fbd773ab276411bf37565d770f9f822",
+            "successful": true,
+            "from_address": "0x39f94621ede2ee07e8cfaf5e83004e637084dd02",
+            "to_address": "0x8e8bd01b5a9eb272cc3892a2e40e64a716aa2a40",
+            "value": "57000000000000000",
+            "value_quote": 92.82274028095394,
+            "pretty_value_quote": "$92.82",
+            "gas_offered": 499847,
+            "gas_spent": 369951,
+            "gas_price": 11792966482,
+            "fees_paid": "4362819742982382",
+            "gas_quote": 7.104717261324067,
+            "pretty_gas_quote": "$7.10",
+            "gas_quote_rate": 1628.469127736034,
+            "dex_details": null,
+            "nft_sale_details": null,
+            "lending_details": null,
+            "categorization": {
+                "dex_details": [],
+                "transfer_details": [
+                    {
+                        "token_num_decimals": 6,
+                        "token_name": "USDC",
+                        "token_address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                        "token_amount": "92790144",
+                        "token_quote_rate": 0,
+                        "token_usd_quote": 92.74754126118528,
+                        "pretty_token_usd_quote": "$92.74",
+                        "sender": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640",
+                        "recipient": "0x22F9dCF4647084d6C31b2765F6910cd85C178C18"
+                    },
+                    {
+                        "token_num_decimals": 18,
+                        "token_name": "WETH",
+                        "token_address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+                        "token_amount": "57000000000000000",
+                        "token_quote_rate": 0,
+                        "token_usd_quote": 92.7843378,
+                        "pretty_token_usd_quote": "$92.78",
+                        "sender": "0x22F9dCF4647084d6C31b2765F6910cd85C178C18",
+                        "recipient": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640"
+                    },
+                    {
+                        "token_num_decimals": 6,
+                        "token_name": "USDC",
+                        "token_address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                        "token_amount": "138801",
+                        "token_quote_rate": 0,
+                        "token_usd_quote": 0.13873727229687002,
+                        "pretty_token_usd_quote": "$0.13",
+                        "sender": "0x22F9dCF4647084d6C31b2765F6910cd85C178C18",
+                        "recipient": "0xaD01C20d5886137e056775af56915de824c8fCe5"
+                    },
+                    {
+                        "token_num_decimals": 6,
+                        "token_name": "USDC",
+                        "token_address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                        "token_amount": "92651343",
+                        "token_quote_rate": 0,
+                        "token_usd_quote": 92.60880398888841,
+                        "pretty_token_usd_quote": "$92.60",
+                        "sender": "0x22F9dCF4647084d6C31b2765F6910cd85C178C18",
+                        "recipient": "0x032B17633C956C10845643f0Bf9Ea7C16a3cFB62"
+                    },
+                    {
+                        "token_num_decimals": 6,
+                        "token_name": "USDC",
+                        "token_address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                        "token_amount": "92651343",
+                        "token_quote_rate": 0,
+                        "token_usd_quote": 92.60880398888841,
+                        "pretty_token_usd_quote": "$92.60",
+                        "sender": "0x032B17633C956C10845643f0Bf9Ea7C16a3cFB62",
+                        "recipient": "0x8e8bd01b5A9eb272CC3892a2E40E64A716aa2A40"
+                    },
+                    {
+                        "token_num_decimals": 6,
+                        "token_name": "USDC",
+                        "token_address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                        "token_amount": "92651343",
+                        "token_quote_rate": 0,
+                        "token_usd_quote": 92.60880398888841,
+                        "pretty_token_usd_quote": "$92.60",
+                        "sender": "0x8e8bd01b5A9eb272CC3892a2E40E64A716aa2A40",
+                        "recipient": "0xD54f502e184B6B739d7D27a6410a67dc462D69c8"
+                    }
+                ],
+                "nft_transfer_details": [],
+                "nft_sale_details": [],
+                "lending_details": [],
+                "perpetual_details": [
+                    {
+                        "protocol": {
+                            "name": "dYdX",
+                            "address": "0xd54f502e184b6b739d7d27a6410a67dc462d69c8"
+                        },
+                        "event": "Perpetual Deposit",
+                        "token_address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                        "token_ticker": "USDC",
+                        "token_num_decimals": 6,
+                        "token_name": "USDC",
+                        "token_amount": "92651343",
+                        "token_quote_rate": 0,
+                        "token_usd_quote": 92.60880398888841,
+                        "pretty_token_usd_quote": "$92.60",
+                        "From": "0x8e8bd01b5A9eb272CC3892a2E40E64A716aa2A40",
+                        "To": ""
+                    }
+                ],
+                "staking_details": [],
+                "log_events": []
+            }
+        },
+        {
+            "tx_hash": "0xe81c3ed757e4eb9e9a9885f3a40e3745c50e89631472597db8c6b6f3005c7e24",
+            "successful": true,
+            "from_address": "0x46340b20830761efd32832a74d7169b29feb9758",
+            "to_address": "0x39f94621ede2ee07e8cfaf5e83004e637084dd02",
+            "value": "61483370000000000",
+            "value_quote": 100.12376991417185,
+            "pretty_value_quote": "$100.12",
+            "gas_offered": 350000,
+            "gas_spent": 21000,
+            "gas_price": 13935972809,
+            "fees_paid": "292655428989000",
+            "gas_quote": 0.47658033117293164,
+            "pretty_gas_quote": "$0.48",
+            "gas_quote_rate": 1628.469127736034,
+            "dex_details": null,
+            "nft_sale_details": null,
+            "lending_details": null,
+            "categorization": {
+                "dex_details": [],
+                "transfer_details": [],
+                "nft_transfer_details": [],
+                "nft_sale_details": [],
+                "lending_details": [],
+                "perpetual_details": [],
+                "staking_details": [],
+                "log_events": []
+            }
+        },
+        {
+            "tx_hash": "0x30789d5ae535753a340bdeda1c9069f8e637615a68383354b1533f18f20181f6",
+            "successful": true,
+            "from_address": "0x39f94621ede2ee07e8cfaf5e83004e637084dd02",
+            "to_address": "0x8e8bd01b5a9eb272cc3892a2e40e64a716aa2a40",
+            "value": "10000000000000000",
+            "value_quote": 16.284691277360338,
+            "pretty_value_quote": "$16.28",
+            "gas_offered": 558386,
+            "gas_spent": 420328,
+            "gas_price": 6660197260,
+            "fees_paid": "2799467393901280",
+            "gas_quote": 4.5588462250718855,
+            "pretty_gas_quote": "$4.56",
+            "gas_quote_rate": 1628.469127736034,
+            "dex_details": null,
+            "nft_sale_details": null,
+            "lending_details": null,
+            "categorization": {
+                "dex_details": [
+                    {
+                        "protocol": { "name": "Uniswap V2" },
+                        "aggregator_name": "",
+                        "aggregator_address": "",
+                        "event": "Swap",
+                        "pair_address": "0xb4e16d0168e52d35cacd2c6185b44281ec28c9dc",
+                        "pair_lp_fee_bps": 0,
+                        "lp_token_address": "",
+                        "lp_token_ticker": "",
+                        "lp_token_num_decimals": 0,
+                        "lp_token_name": "",
+                        "lp_token_value": "",
+                        "exchange_rate_usd": 0,
+                        "token_0_num_decimals": 18,
+                        "token_0_name": "WETH",
+                        "token_0_amount": "10000000000000000",
+                        "token_0_quote_rate": 3517.1345,
+                        "token_0_usd_quote": 35.171345,
+                        "pretty_token_0_usd_quote": "$35.17",
+                        "token_1_num_decimals": 6,
+                        "token_1_name": "USDC",
+                        "token_1_amount": "16019811",
+                        "token_1_quote_rate": 1,
+                        "token_1_usd_quote": 16.019811,
+                        "pretty_token_1_usd_quote": "$16.01",
+                        "sender": "0xf164fC0Ec4E93095b804a4795bBe1e041497b92a",
+                        "recipient": "0x22F9dCF4647084d6C31b2765F6910cd85C178C18"
+                    }
+                ],
+                "transfer_details": [
+                    {
+                        "token_num_decimals": 18,
+                        "token_name": "WETH",
+                        "token_address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+                        "token_amount": "10000000000000000",
+                        "token_quote_rate": 0,
+                        "token_usd_quote": 16.277954,
+                        "pretty_token_usd_quote": "$16.27",
+                        "sender": "0x22F9dCF4647084d6C31b2765F6910cd85C178C18",
+                        "recipient": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc"
+                    },
+                    {
+                        "token_num_decimals": 6,
+                        "token_name": "USDC",
+                        "token_address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                        "token_amount": "16019811",
+                        "token_quote_rate": 0,
+                        "token_usd_quote": 16.01245582417557,
+                        "pretty_token_usd_quote": "$16.01",
+                        "sender": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc",
+                        "recipient": "0x22F9dCF4647084d6C31b2765F6910cd85C178C18"
+                    },
+                    {
+                        "token_num_decimals": 6,
+                        "token_name": "USDC",
+                        "token_address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                        "token_amount": "23969",
+                        "token_quote_rate": 0,
+                        "token_usd_quote": 0.02395799511303,
+                        "pretty_token_usd_quote": "$0.02",
+                        "sender": "0x22F9dCF4647084d6C31b2765F6910cd85C178C18",
+                        "recipient": "0xaD01C20d5886137e056775af56915de824c8fCe5"
+                    },
+                    {
+                        "token_num_decimals": 6,
+                        "token_name": "USDC",
+                        "token_address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                        "token_amount": "15995842",
+                        "token_quote_rate": 0,
+                        "token_usd_quote": 15.98849782906254,
+                        "pretty_token_usd_quote": "$15.98",
+                        "sender": "0x22F9dCF4647084d6C31b2765F6910cd85C178C18",
+                        "recipient": "0x032B17633C956C10845643f0Bf9Ea7C16a3cFB62"
+                    },
+                    {
+                        "token_num_decimals": 6,
+                        "token_name": "USDC",
+                        "token_address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                        "token_amount": "15995842",
+                        "token_quote_rate": 0,
+                        "token_usd_quote": 15.98849782906254,
+                        "pretty_token_usd_quote": "$15.98",
+                        "sender": "0x032B17633C956C10845643f0Bf9Ea7C16a3cFB62",
+                        "recipient": "0x8e8bd01b5A9eb272CC3892a2E40E64A716aa2A40"
+                    },
+                    {
+                        "token_num_decimals": 6,
+                        "token_name": "USDC",
+                        "token_address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                        "token_amount": "15995842",
+                        "token_quote_rate": 0,
+                        "token_usd_quote": 15.98849782906254,
+                        "pretty_token_usd_quote": "$15.98",
+                        "sender": "0x8e8bd01b5A9eb272CC3892a2E40E64A716aa2A40",
+                        "recipient": "0xD54f502e184B6B739d7D27a6410a67dc462D69c8"
+                    }
+                ],
+                "nft_transfer_details": [],
+                "nft_sale_details": [],
+                "lending_details": [],
+                "perpetual_details": [
+                    {
+                        "protocol": {
+                            "name": "dYdX",
+                            "address": "0xd54f502e184b6b739d7d27a6410a67dc462d69c8"
+                        },
+                        "event": "Perpetual Deposit",
+                        "token_address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                        "token_ticker": "USDC",
+                        "token_num_decimals": 6,
+                        "token_name": "USDC",
+                        "token_amount": "15995842",
+                        "token_quote_rate": 0,
+                        "token_usd_quote": 15.98849782906254,
+                        "pretty_token_usd_quote": "$15.98",
+                        "From": "0x8e8bd01b5A9eb272CC3892a2E40E64A716aa2A40",
+                        "To": ""
+                    }
+                ],
+                "staking_details": [],
+                "log_events": []
+            }
+        },
+        {
+            "tx_hash": "0xaf09a244fdb5c27441b032183c65484f8c6daee673465930eb76b182b6e6ec59",
+            "successful": true,
+            "from_address": "0x39f94621ede2ee07e8cfaf5e83004e637084dd02",
+            "to_address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+            "value": "0",
+            "value_quote": 0,
+            "pretty_value_quote": "$0.00",
+            "gas_offered": 41791,
+            "gas_spent": 30416,
+            "gas_price": 7073988281,
+            "fees_paid": "215162427554896",
+            "gas_quote": 0.3503853707218891,
+            "pretty_gas_quote": "$0.35",
+            "gas_quote_rate": 1628.469127736034,
+            "dex_details": null,
+            "nft_sale_details": null,
+            "lending_details": null,
+            "categorization": {
+                "dex_details": [],
+                "transfer_details": [],
+                "nft_transfer_details": [],
+                "nft_sale_details": [],
+                "lending_details": [],
+                "perpetual_details": [],
+                "staking_details": [],
+                "log_events": []
+            }
+        },
+        {
+            "tx_hash": "0xfc683b9bd87df954a4a3a1ef71313009d014d3a7461c5924d13ef1cd2fad3ee4",
+            "successful": true,
+            "from_address": "0x39f94621ede2ee07e8cfaf5e83004e637084dd02",
+            "to_address": "0x000000000000000000000000000000000000dead",
+            "value": "0",
+            "value_quote": 0,
+            "pretty_value_quote": "$0.00",
+            "gas_offered": 500000,
+            "gas_spent": 37376,
+            "gas_price": 7301590105,
+            "fees_paid": "272904231764480",
+            "gas_quote": 0.44441611625697514,
+            "pretty_gas_quote": "$0.44",
+            "gas_quote_rate": 1628.469127736034,
+            "dex_details": null,
+            "nft_sale_details": null,
+            "lending_details": null,
+            "categorization": {
+                "dex_details": [],
+                "transfer_details": [],
+                "nft_transfer_details": [],
+                "nft_sale_details": [],
+                "lending_details": [],
+                "perpetual_details": [],
+                "staking_details": [],
+                "log_events": []
+            }
+        },
+        {
+            "tx_hash": "0x6f40370de18404f7ce51acec410fee1660eb6382940b5dbf38ade683eee62dea",
+            "successful": true,
+            "from_address": "0x39f94621ede2ee07e8cfaf5e83004e637084dd02",
+            "to_address": "0x000000000000000000000000000000000000dead",
+            "value": "0",
+            "value_quote": 0,
+            "pretty_value_quote": "$0.00",
+            "gas_offered": 500000,
+            "gas_spent": 37376,
+            "gas_price": 8200000000,
+            "fees_paid": "306483200000000",
+            "gas_quote": 0.4990984293697484,
+            "pretty_gas_quote": "$0.50",
+            "gas_quote_rate": 1628.469127736034,
+            "dex_details": null,
+            "nft_sale_details": null,
+            "lending_details": null,
+            "categorization": {
+                "dex_details": [],
+                "transfer_details": [],
+                "nft_transfer_details": [],
+                "nft_sale_details": [],
+                "lending_details": [],
+                "perpetual_details": [],
+                "staking_details": [],
+                "log_events": []
+            }
+        },
+        {
+            "tx_hash": "0x3d71a67b3b0a2a856cad09694e8c005b1391c5f5ff872d9caa9f2a88b6b010dd",
+            "successful": true,
+            "from_address": "0x46340b20830761efd32832a74d7169b29feb9758",
+            "to_address": "0x39f94621ede2ee07e8cfaf5e83004e637084dd02",
+            "value": "10778450000000000",
+            "value_quote": 17.552373069846453,
+            "pretty_value_quote": "$17.55",
+            "gas_offered": 350000,
+            "gas_spent": 21000,
+            "gas_price": 8860324834,
+            "fees_paid": "186066821514000",
+            "gas_quote": 0.3030040745315199,
+            "pretty_gas_quote": "$0.30",
+            "gas_quote_rate": 1628.469127736034,
+            "dex_details": null,
+            "nft_sale_details": null,
+            "lending_details": null,
+            "categorization": {
+                "dex_details": [],
+                "transfer_details": [],
+                "nft_transfer_details": [],
+                "nft_sale_details": [],
+                "lending_details": [],
+                "perpetual_details": [],
+                "staking_details": [],
+                "log_events": []
+            }
+        },
+        {
+            "tx_hash": "0x23f9f65dcdb1ee833a1eb5d211c5c3c95a7db216d6526f75e8bce64af2ecc6d7",
+            "successful": true,
+            "from_address": "0x39f94621ede2ee07e8cfaf5e83004e637084dd02",
+            "to_address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+            "value": "0",
+            "value_quote": 0,
+            "pretty_value_quote": "$0.00",
+            "gas_offered": 51000,
+            "gas_spent": 46364,
+            "gas_price": 8352812744,
+            "fees_paid": "387269810062816",
+            "gas_quote": 0.6057113648844713,
+            "pretty_gas_quote": "$0.61",
+            "gas_quote_rate": 1564.0552120141344,
+            "dex_details": null,
+            "nft_sale_details": null,
+            "lending_details": null,
+            "categorization": {
+                "dex_details": [],
+                "transfer_details": [],
+                "nft_transfer_details": [],
+                "nft_sale_details": [],
+                "lending_details": [],
+                "perpetual_details": [],
+                "staking_details": [],
+                "log_events": []
+            }
+        },
+        {
+            "tx_hash": "0x05b7d191188c2e8f9aea20861024eae2d896b30ac4616d4b3e424c9f2cd41d72",
+            "successful": true,
+            "from_address": "0x39f94621ede2ee07e8cfaf5e83004e637084dd02",
+            "to_address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+            "value": "6404857443885001",
+            "value_quote": 10.017550667315861,
+            "pretty_value_quote": "$10.02",
+            "gas_offered": 52244,
+            "gas_spent": 45038,
+            "gas_price": 8953155176,
+            "fees_paid": "403232202816688",
+            "gas_quote": 0.6306774284673814,
+            "pretty_gas_quote": "$0.63",
+            "gas_quote_rate": 1564.0552120141344,
+            "dex_details": null,
+            "nft_sale_details": null,
+            "lending_details": null,
+            "categorization": {
+                "dex_details": [],
+                "transfer_details": [],
+                "nft_transfer_details": [],
+                "nft_sale_details": [],
+                "lending_details": [],
+                "perpetual_details": [],
+                "staking_details": [],
+                "log_events": []
+            }
+        },
+        {
+            "tx_hash": "0x4b0a55d861d139c1ab5767a30616953f5d5b89dec6ab18b97aefb2ea504782d3",
+            "successful": true,
+            "from_address": "0x46340b20830761efd32832a74d7169b29feb9758",
+            "to_address": "0x39f94621ede2ee07e8cfaf5e83004e637084dd02",
+            "value": "7408057020500000",
+            "value_quote": 11.595688226370267,
+            "pretty_value_quote": "$11.60",
+            "gas_offered": 350000,
+            "gas_spent": 21000,
+            "gas_price": 11026676013,
+            "fees_paid": "231560196273000",
+            "gas_quote": 0.36245669197583824,
+            "pretty_gas_quote": "$0.36",
+            "gas_quote_rate": 1565.28063894244,
+            "dex_details": null,
+            "nft_sale_details": null,
+            "lending_details": null,
+            "categorization": {
+                "dex_details": [],
+                "transfer_details": [],
+                "nft_transfer_details": [],
+                "nft_sale_details": [],
+                "lending_details": [],
+                "perpetual_details": [],
+                "staking_details": [],
+                "log_events": []
+            }
+        }
+    ]
 }

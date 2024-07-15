@@ -1,5 +1,3 @@
-import { Aggregators } from "./decoder.types";
-
 export enum DECODED_EVENT_CATEGORY {
     NFT = "NFT Transaction",
     LENDING = "Lending",
@@ -16,6 +14,7 @@ export enum DECODED_EVENT_CATEGORY {
     GAMING = "Gaming",
     SOCIAL = "Social",
     STAKING = "Staking",
+    PERPETUAL = "Perpetual",
     OTHERS = "Others",
 }
 
@@ -24,6 +23,7 @@ export enum DECODED_ACTION {
     MULTISIG_ACTION = "MultiSig",
     APPROVAL = "Approval",
     TRANSFERRED = "Transferred",
+    TRANSFERRED_SHARE = "Transferred Shares",
     NATIVE_TRANSFER = "Native Token Transfer",
     RECEIVED_BRIDGE = "Received Bridge",
     ACCOUNT_ABSTRACTION = "Account Abstraction Transaction",
@@ -33,6 +33,7 @@ export enum DECODED_ACTION {
     COLLECT = "Collect",
     WITHDRAW = "Withdraw",
     DEPOSIT = "Deposit",
+    SUPPLY = "SUPPLY",
     ADD_LIQUIDITY = "Add Liquidity",
     REMOVE_LIQUIDITY = "Remove Liquidity",
     UPDATE = "Update",
@@ -46,7 +47,5 @@ export enum DECODED_ACTION {
     INIT_ROUTER = "Init Router",
     ADD_ROUTER = "Add Router",
     REMOVE_ROUTER = "Remove Router",
-    DEPOSITED = "Deposited",
-    WITHDRAWN="withdrawn"
+    WITHDRAWN = "withdrawn",
 }
-

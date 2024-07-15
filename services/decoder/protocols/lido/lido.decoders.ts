@@ -54,10 +54,20 @@ GoldRushDecoder.on(
                 value: decoded.sharesValue.toString(),
                 type: "text",
             },
+            {
+                heading: "Token Address",
+                value: log_event.sender_address.toString(),
+                type: "text",
+            },
+            {
+                heading: "Token Name",
+                value: log_event.sender_contract_ticker_symbol.toString(),
+                type: "text",
+            },
         ];
 
         return {
-            action: DECODED_ACTION.TRANSFERRED,
+            action: DECODED_ACTION.TRANSFERRED_SHARE,
             category: DECODED_EVENT_CATEGORY.STAKING,
             name: "Transfer Shares",
             protocol: {
@@ -66,6 +76,7 @@ GoldRushDecoder.on(
             },
             ...(options.raw_logs ? { raw_log: log_event } : {}),
             details,
+            // tokens
         };
     }
 );
@@ -99,7 +110,7 @@ GoldRushDecoder.on(
 
         const details: EventDetails = [
             {
-                heading: "Sender",
+                heading: "Depositor",
                 value: decoded.sender,
                 type: "address",
             },
@@ -110,28 +121,24 @@ GoldRushDecoder.on(
             },
         ];
 
-        const usdValue = tx?.gas_quote_rate *
+        const usdValue =
+            tx?.gas_quote_rate *
             (Number(decoded.amount) /
-                Math.pow(
-                    10,
-                    tx?.gas_metadata?.contract_decimals ?? 18
-                ));
+                Math.pow(10, tx?.gas_metadata?.contract_decimals ?? 18));
 
         const tokens: EventTokens = [
             {
-                heading: "Tokens Staked",
+                heading: "Deposit Amount",
                 value: decoded.amount.toString(),
                 decimals: tx?.gas_metadata?.contract_decimals,
                 ticker_symbol: tx?.gas_metadata?.contract_ticker_symbol,
-                pretty_quote: prettifyCurrency(
-                    usdValue
-                ),
-                usd_value: usdValue
+                pretty_quote: prettifyCurrency(usdValue),
+                usd_value: usdValue,
             },
         ];
 
         return {
-            action: DECODED_ACTION.TRANSFERRED,
+            action: DECODED_ACTION.DEPOSIT,
             category: DECODED_EVENT_CATEGORY.STAKING,
             name: "Submitted",
             protocol: {
@@ -532,7 +539,7 @@ GoldRushDecoder.on(
                 logo: log_event.sender_logo_url as string,
                 name: "Lido" as string,
             },
-            details:[],
+            details: [],
             ...(options.raw_logs ? { raw_log: log_event } : {}),
             tokens,
         };
@@ -589,7 +596,7 @@ GoldRushDecoder.on(
                 logo: log_event.sender_logo_url as string,
                 name: "Lido" as string,
             },
-            details:[],
+            details: [],
             ...(options.raw_logs ? { raw_log: log_event } : {}),
             tokens,
         };
@@ -790,23 +797,24 @@ GoldRushDecoder.on(
                 value: decoded.receiver,
                 type: "address",
             },
+            {
+                heading: "amountOfETH",
+                value: decoded.amountOfETH.toString(),
+                type: "text",
+            },
         ];
-        const usdValue = (tx?.gas_quote_rate ?? 0) *
+        const usdValue =
+            (tx?.gas_quote_rate ?? 0) *
             (Number(decoded.amountOfETH) /
-                Math.pow(
-                    10,
-                    +(tx?.gas_metadata?.contract_decimals ?? 18)
-                ));
+                Math.pow(10, +(tx?.gas_metadata?.contract_decimals ?? 18)));
         const tokens: EventTokens = [
             {
-                heading: "Amount Of ETH",
+                heading: "WithdrawToken",
                 value: decoded.amountOfETH.toString(),
                 decimals: tx?.gas_metadata?.contract_decimals,
                 ticker_symbol: tx?.gas_metadata?.contract_ticker_symbol,
-                pretty_quote: prettifyCurrency(usdValue
-                    
-                ),
-                usd_value:usdValue
+                pretty_quote: prettifyCurrency(usdValue),
+                usd_value: usdValue,
             },
         ];
 

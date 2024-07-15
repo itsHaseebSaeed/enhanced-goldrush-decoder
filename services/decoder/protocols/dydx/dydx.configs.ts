@@ -7,6 +7,13 @@ const configs: Configs = [
         is_factory: false,
         chain_name: "eth-mainnet",
     },
+
+    {
+        protocol_name: "dydx",
+        address: "0xD54f502e184B6B739d7D27a6410a67dc462D69c8", //Perpctual smart contract
+        is_factory: false,
+        chain_name: "eth-mainnet",
+    },
 ];
 
 export default configs;

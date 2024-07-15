@@ -54,14 +54,16 @@ const handleDecode = async (
                 min_usd,
             }
         );
-
         const cate = await categorize(events);
-
         console.log(cate);
         console.log(cate.dex_details[0]?.protocol);
         console.log(cate.staking_details[0]?.protocol);
+        console.log(cate.perpetual_details[0]?.protocol);
+        console.log(cate.vault_details[0]?.protocol);
+        console.log(cate.synthetic_details[0]?.protocol);
+        console.log(cate.bridging_details[0]?.protocol);
+        console.log(cate.lending_details[0]?.protocol);
 
-        
         const parsedTx = JSON.parse(
             JSON.stringify(tx_metadata, (_key, value) => {
                 return typeof value === "bigint" ? value.toString() : value;

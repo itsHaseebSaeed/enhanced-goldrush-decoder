@@ -27,6 +27,5 @@ const configs: Configs = [
     },
 ];
 
-//0x5efc9D10E42FB517456f4ac41EB5e2eBe42C8918
 
 export default configs;

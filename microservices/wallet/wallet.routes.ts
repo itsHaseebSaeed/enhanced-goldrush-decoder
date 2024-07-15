@@ -47,9 +47,7 @@ const handleDecodeWallet = async (
                         min_usd,
                     }
                 );
-
                 const cate = await categorize(events);
-                // console.log(cate);
 
                 const {
                     block_hash,
@@ -73,15 +71,14 @@ const handleDecodeWallet = async (
                 );
 
                 return {
-                    tx_metadata: {
+                    
                         ...parsedTx,
-                        dex_details: cate.dex_details.length ? cate.dex_details : [],
-                        nft_sale_details: cate.nft_sale_details.length ? cate.nft_sale_details : [],
-                        lending_details: cate.lending_details.length ? cate.lending_details : [],
-                        transfer_details: cate.transfer_details.length ? cate.transfer_details : [],
-                        nft_transfer_details: cate.nft_transfer_details.length ? cate.nft_transfer_details : [],
-
-                    },
+                        // dex_details: cate.dex_details.length ? cate.dex_details : [],
+                        // nft_sale_details: cate.nft_sale_details.length ? cate.nft_sale_details : [],
+                        // lending_details: cate.lending_details.length ? cate.lending_details : [],
+                        // transfer_details: cate.transfer_details.length ? cate.transfer_details : [],
+                        // nft_transfer_details: cate.nft_transfer_details.length ? cate.nft_transfer_details : [],
+                        categorization:cate
                 };
             })
         );

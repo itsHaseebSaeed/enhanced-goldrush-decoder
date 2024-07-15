@@ -570,7 +570,7 @@ GoldRushDecoder.on(
                         (Number(decoded.params.bridgedAmt) /
                             Math.pow(
                                 10,
-                                TokenData?.[0]?.contract_decimals ?? 0
+                                TokenData?.[0]?.contract_decimals ?? 18
                             ))
                 ),
                 ticker_symbol: TokenData?.[0]?.contract_ticker_symbol,
@@ -584,7 +584,7 @@ GoldRushDecoder.on(
                         (Number(decoded.amount) /
                             Math.pow(
                                 10,
-                                TokenData?.[0]?.contract_decimals ?? 0
+                                TokenData?.[0]?.contract_decimals ?? 18
                             ))
                 ),
                 ticker_symbol: TokenData?.[0]?.contract_ticker_symbol,
@@ -808,7 +808,7 @@ GoldRushDecoder.on(
                         (Number(decoded.increase) /
                             Math.pow(
                                 10,
-                                TokenData?.[0]?.contract_decimals ?? 0
+                                TokenData?.[0]?.contract_decimals ?? 18
                             ))
                 ),
                 ticker_symbol: TokenData?.[0]?.contract_ticker_symbol,

@@ -73,10 +73,9 @@ GoldRushDecoder.on(
             },
             {
                 heading: "Borrow Rate",
-                value:
-                    new Intl.NumberFormat().format(
-                        (Number(decoded.borrowRate) / 1e27) * 100
-                    ) + " %",
+                value: new Intl.NumberFormat().format(
+                    (Number(decoded.borrowRate) / 1e27) * 100
+                ),
                 type: "text",
             },
             {
@@ -104,20 +103,17 @@ GoldRushDecoder.on(
                 }
             );
 
-        const usd_value = BorrowToken?.[0]?.prices?.[0]?.price *
-        (Number(decoded.amount) /
-            Math.pow(
-                10,
-                BorrowToken?.[0]?.contract_decimals ?? 0
-            ));
+        const usd_value =
+            BorrowToken?.[0]?.prices?.[0]?.price *
+            (Number(decoded.amount) /
+                Math.pow(10, BorrowToken?.[0]?.contract_decimals ?? 18));
         const tokens: EventTokens = [
             {
+                address: BorrowToken?.[0]?.contract_address,
                 decimals: BorrowToken?.[0]?.contract_decimals,
                 heading: "Borrow Amount",
-                pretty_quote: prettifyCurrency(
-                    usd_value
-                ),
-                usd_value:usd_value,
+                pretty_quote: prettifyCurrency(usd_value),
+                usd_value: usd_value,
                 ticker_symbol: BorrowToken?.[0]?.contract_ticker_symbol,
                 value: String(decoded.amount),
             },
@@ -215,35 +211,32 @@ GoldRushDecoder.on(
             },
         ];
 
-        const usd_value = FlashLoanToken?.[0]?.prices?.[0]?.price *
-        (Number(decoded.premium) /
-            Math.pow(
-                10,
-                FlashLoanToken?.[0]?.contract_decimals ?? 0
-            ))
+        const premium_usd_value =
+            FlashLoanToken?.[0]?.prices?.[0]?.price *
+            (Number(decoded.premium) /
+                Math.pow(10, FlashLoanToken?.[0]?.contract_decimals ?? 18));
+
+        let flash_loan_usd_value =
+            FlashLoanToken?.[0]?.prices?.[0]?.price *
+            (Number(decoded.amount) /
+                Math.pow(10, FlashLoanToken?.[0]?.contract_decimals ?? 18));
 
         const tokens: EventTokens = [
             {
+                address: FlashLoanToken?.[0]?.contract_address,
                 decimals: FlashLoanToken?.[0]?.contract_decimals,
                 heading: "Flash Loan Amount",
-                pretty_quote: prettifyCurrency(
-                    FlashLoanToken?.[0]?.prices?.[0]?.price *
-                        (Number(decoded.amount) /
-                            Math.pow(
-                                10,
-                                FlashLoanToken?.[0]?.contract_decimals ?? 0
-                            ))
-                ),
+                pretty_quote: prettifyCurrency(flash_loan_usd_value),
+                usd_value: flash_loan_usd_value,
                 ticker_symbol: FlashLoanToken?.[0]?.contract_ticker_symbol,
                 value: String(decoded.amount),
             },
             {
+                address: FlashLoanToken?.[0]?.contract_address,
                 decimals: FlashLoanToken?.[0]?.contract_decimals,
                 heading: "Flash Loan Premium",
-                pretty_quote: prettifyCurrency(
-                usd_value    
-                ),
-                usd_value:usd_value,
+                pretty_quote: prettifyCurrency(premium_usd_value),
+                usd_value: premium_usd_value,
                 ticker_symbol: FlashLoanToken?.[0]?.contract_ticker_symbol,
                 value: String(decoded.premium),
             },
@@ -351,13 +344,11 @@ GoldRushDecoder.on(
                 ),
             ]);
 
-        const usd_value = debtToken?.[0]?.prices?.[0]?.price *
+        const usd_value =
+            debtToken?.[0]?.prices?.[0]?.price *
             (Number(decoded.debtToCover) /
-                Math.pow(
-                    10,
-                    debtToken?.[0]?.contract_decimals ?? 0
-                ));
-        
+                Math.pow(10, debtToken?.[0]?.contract_decimals ?? 18));
+
         const tokens: EventTokens = [
             {
                 decimals: collateralToken?.[0]?.contract_decimals,
@@ -367,7 +358,7 @@ GoldRushDecoder.on(
                         (Number(decoded.liquidatedCollateralAmount) /
                             Math.pow(
                                 10,
-                                collateralToken?.[0]?.contract_decimals ?? 0
+                                collateralToken?.[0]?.contract_decimals ?? 18
                             ))
                 ),
                 ticker_symbol: collateralToken?.[0]?.contract_ticker_symbol,
@@ -376,10 +367,8 @@ GoldRushDecoder.on(
             {
                 decimals: debtToken?.[0]?.contract_decimals,
                 heading: "Debt Amount",
-                pretty_quote: prettifyCurrency(
-                    usd_value
-                ),
-                usd_value:usd_value,
+                pretty_quote: prettifyCurrency(usd_value),
+                usd_value: usd_value,
                 ticker_symbol: debtToken?.[0]?.contract_ticker_symbol,
                 value: String(decoded.debtToCover),
             },
@@ -474,22 +463,19 @@ GoldRushDecoder.on(
                     to: date,
                 }
             );
-        
-        const usd_value =RepayToken?.[0]?.prices?.[0]?.price *
-        (Number(decoded.amount) /
-            Math.pow(
-                10,
-                RepayToken?.[0]?.contract_decimals ?? 0
-            ));
+
+        const usd_value =
+            RepayToken?.[0]?.prices?.[0]?.price *
+            (Number(decoded.amount) /
+                Math.pow(10, RepayToken?.[0]?.contract_decimals ?? 18));
 
         const tokens: EventTokens = [
             {
+                address: RepayToken?.[0]?.contract_address,
                 decimals: RepayToken?.[0]?.contract_decimals,
                 heading: "Repay Amount",
-                pretty_quote: prettifyCurrency(usd_value
-                    
-                ),
-                usd_value:usd_value,
+                pretty_quote: prettifyCurrency(usd_value),
+                usd_value: usd_value,
                 ticker_symbol: RepayToken?.[0]?.contract_ticker_symbol,
                 value: String(decoded.amount),
             },
@@ -581,28 +567,25 @@ GoldRushDecoder.on(
                 decoded.reserve,
                 { from: date, to: date }
             );
-        const usd_value = SupplyToken?.[0]?.prices?.[0]?.price *
+        const usd_value =
+            SupplyToken?.[0]?.prices?.[0]?.price *
             (Number(decoded.amount) /
-                Math.pow(
-                    10,
-                    SupplyToken?.[0]?.contract_decimals ?? 0
-                ));
+                Math.pow(10, SupplyToken?.[0]?.contract_decimals ?? 18));
 
         const tokens: EventTokens = [
             {
+                address: SupplyToken?.[0]?.contract_address,
                 decimals: SupplyToken?.[0]?.contract_decimals,
                 heading: "Supply Amount",
-                pretty_quote: prettifyCurrency(usd_value
-                    
-                ),
-                usd_value:usd_value,
+                pretty_quote: prettifyCurrency(usd_value),
+                usd_value: usd_value,
                 ticker_symbol: SupplyToken?.[0]?.contract_ticker_symbol,
                 value: String(decoded.amount),
             },
         ];
 
         return {
-            action: DECODED_ACTION.DEPOSIT,
+            action: DECODED_ACTION.SUPPLY,
             category: DECODED_EVENT_CATEGORY.LENDING,
             name: "Supply",
             protocol: {
@@ -674,7 +657,7 @@ GoldRushDecoder.on(
 
         const date = timestampParser(tx.block_signed_at, "YYYY-MM-DD");
 
-        const { data: RepayToken } =
+        const { data: WithdrawToken } =
             await covalent_client.PricingService.getTokenPrices(
                 chain_name,
                 "USD",
@@ -685,21 +668,18 @@ GoldRushDecoder.on(
                 }
             );
 
-        const usd_value = RepayToken?.[0]?.prices?.[0]?.price *
+        const usd_value =
+            WithdrawToken?.[0]?.prices?.[0]?.price *
             (Number(decoded.amount) /
-                Math.pow(
-                    10,
-                    RepayToken?.[0]?.contract_decimals ?? 0
-                ));
+                Math.pow(10, WithdrawToken?.[0]?.contract_decimals ?? 18));
         const tokens: EventTokens = [
             {
-                decimals: RepayToken?.[0]?.contract_decimals,
+                address: WithdrawToken?.[0]?.contract_address,
+                decimals: WithdrawToken?.[0]?.contract_decimals,
                 heading: "Withdraw Amount",
-                pretty_quote: prettifyCurrency(usd_value
-                    
-                ),
-                usd_value:usd_value,
-                ticker_symbol: RepayToken?.[0]?.contract_ticker_symbol,
+                pretty_quote: prettifyCurrency(usd_value),
+                usd_value: usd_value,
+                ticker_symbol: WithdrawToken?.[0]?.contract_ticker_symbol,
                 value: String(decoded.amount),
             },
         ];

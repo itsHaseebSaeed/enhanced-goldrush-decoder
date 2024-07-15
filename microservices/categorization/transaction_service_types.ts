@@ -1,17 +1,20 @@
 import { ContractMetadata, LogEvent, Explorer } from "./generic_types";
 
-
 export interface CategorizedTransaction {
-
     dex_details: DexReport[];
     /** * The details for the NFT sale transaction. */
     transfer_details: TransferReport[];
-    nft_transfer_details: | NftTransferReport [],
+    nft_transfer_details: NftTransferReport[];
     /** * The details for the NFT sale transaction. */
     nft_sale_details: NftSalesReport[];
     /** * The details for the lending protocol transaction. */
     lending_details: LendingReport[];
 
+    perpetual_details: PerpectualReport[];
+    margin_details: MarginReport[];
+    vault_details: VaultReport[];
+    synthetic_details: SyntheticReport[];
+    bridging_details: BridgingReport[];
     /** * The details for the lending protocol transaction. */
     staking_details: StakingReport[];
     /** * The log events. */
@@ -50,8 +53,6 @@ export interface NftTransferReport {
     /** * Stores the recipient of the transaction - recipients can be other wallets or smart contracts. For example, if you want to Swap tokens on Uniswap, the Uniswap router would typically be the recipient of the transaction. */
     recipient: string;
 }
-
-
 
 export interface DexReport {
     /** * The offset is the position of the log entry within an event log. */
@@ -139,25 +140,151 @@ export interface StakingReport {
     /** * Stores the ticker symbol of token 1 in the specific pair. */
     minted_ticker?: string;
     /** * Stores the number of contract decimals of token 1 in the specific pair. */
-    minted_num_decimals: number;
+    minted_num_decimals?: number;
     /** * Stores the contract name of token 1 in the specific pair. */
-    minted_name: string;
+    minted_name?: string;
     /** * Stores the amount of token 0 used in the transaction. For example, 1 ETH, 100 USDC, 30 UNI, etc. */
     staked_asset_amount: string;
     staked_asset_quote_rate: number;
     staked_asset_usd_quote: number;
     pretty_staked_asset_usd_quote: string;
-    minted_amount: string;
-    minted_quote_rate: number;
-    minted_usd_quote: number;
-    pretty_minted_usd_quote: string;
+    minted_amount?: string;
+    minted_quote_rate?: number;
+    minted_usd_quote?: number;
+    pretty_minted_usd_quote?: string;
     minted_logo_url?: string;
     /** * Stores the wallet address that initiated the transaction (i.e the wallet paying the gas fee). */
     depositor: string;
-
 }
 
+export interface PerpectualReport {
+    /** * The offset is the position of the log entry within an event log. */
+    protocol?: {
+        name: string;
+        address?: string;
+        logo?: string;
+    };
+    /** * Stores the event taking place - e.g `deposit` and `withdraw`. */
+    event: string;
+    /** * Stores the address of token 0 in the specific pair. */
+    token_address?: string;
+    /** * Stores the ticker symbol of token 0 in the specific pair. */
+    token_ticker?: string;
+    /** * Stores the number of contract decimals of token 0 in the specific pair. */
+    token_num_decimals: number;
+    /** * Stores the contract name of token 0 in the specific pair. */
+    token_name: string;
+    token_amount: string;
+    token_quote_rate: number;
+    token_usd_quote: number;
+    pretty_token_usd_quote: string;
+    from: string;
+    to: string;
+}
 
+export interface BridgingReport {
+    /** * The offset is the position of the log entry within an event log. */
+    protocol?: {
+        name: string;
+        address?: string;
+        logo?: string;
+    };
+    /** * Stores the event taking place - e.g `deposit` and `withdraw`. */
+    event: string;
+    /** * Stores the address of token 0 in the specific pair. */
+    token_address?: string;
+    /** * Stores the ticker symbol of token 0 in the specific pair. */
+    token_ticker?: string;
+    /** * Stores the number of contract decimals of token 0 in the specific pair. */
+    token_num_decimals: number;
+    /** * Stores the contract name of token 0 in the specific pair. */
+    token_name: string;
+    token_amount: string;
+    token_quote_rate: number;
+    token_usd_quote: number;
+    pretty_token_usd_quote: string;
+    from: string;
+    to: string;
+    from_chain: string;
+    to_chain: string;
+}
+
+export interface MarginReport {
+    /** * The offset is the position of the log entry within an event log. */
+    protocol?: {
+        name: string;
+        address?: string;
+        logo?: string;
+    };
+    /** * Stores the event taking place - e.g `deposit` and `withdraw`. */
+    event: string;
+    /** * Stores the address of token 0 in the specific pair. */
+    token_address?: string;
+    /** * Stores the ticker symbol of token 0 in the specific pair. */
+    token_ticker?: string;
+    /** * Stores the number of contract decimals of token 0 in the specific pair. */
+    token_num_decimals: number;
+    /** * Stores the contract name of token 0 in the specific pair. */
+    token_name: string;
+    token_amount: string;
+    token_quote_rate: number;
+    token_usd_quote: number;
+    pretty_token_usd_quote: string;
+    from: string;
+    to: string;
+}
+
+export interface VaultReport {
+    /** * The offset is the position of the log entry within an event log. */
+    protocol?: {
+        name: string;
+        address?: string;
+        logo?: string;
+    };
+    vault_address: string;
+    /** * Stores the event taking place - e.g `deposit` and `withdraw`. */
+    event: string;
+    /** * Stores the address of token 0 in the specific pair. */
+    token_address?: string;
+    /** * Stores the ticker symbol of token 0 in the specific pair. */
+    token_ticker?: string;
+    /** * Stores the number of contract decimals of token 0 in the specific pair. */
+    token_num_decimals: number;
+    /** * Stores the contract name of token 0 in the specific pair. */
+    token_name: string;
+    token_amount: string;
+    token_quote_rate: number;
+    token_usd_quote: number;
+    pretty_token_usd_quote: string;
+    from: string;
+    to: string;
+}
+
+export interface SyntheticReport {
+    /** * The offset is the position of the log entry within an event log. */
+    protocol?: {
+        name: string;
+        address?: string;
+        logo?: string;
+    };
+    synthetic_asset_address: string;
+    /** * Stores the event taking place - e.g `deposit` and `withdraw`. */
+    event: string;
+    /** * Stores the address of token 0 in the specific pair. */
+    token_address?: string;
+    /** * Stores the ticker symbol of token 0 in the specific pair. */
+    token_ticker?: string;
+    /** * Stores the number of contract decimals of token 0 in the specific pair. */
+    token_num_decimals: number;
+    /** * Stores the contract name of token 0 in the specific pair. */
+    token_name: string;
+    token_amount: string;
+    token_quote_rate: number;
+    token_usd_quote: number;
+    pretty_token_usd_quote: string;
+    from: string;
+    to: string;
+}
 
 export interface NftSalesReport {
     /** * The offset is the position of the log entry within an event log. */
@@ -212,76 +339,39 @@ export interface NftSalesReport {
 }
 export interface LendingReport {
     /** * The offset is the position of the log entry within an event log. */
-    log_offset: number;
-    /** * Stores the name of the lending protocol that facilitated the event. */
-    protocol_name: string;
-    /** * Stores the contract address of the lending protocol that facilitated the event. */
-    protocol_address: string;
-    /** * The protocol logo URL. */
-    protocol_logo_url: string;
-    /** * Lending protocols often have multiple version (e.g. Aave V1, V2 and V3). The `version` field allows you to look at a specific version of the Lending protocol. */
-    version: string;
-    /** * Many lending protocols are a fork of an already established protocol. The fork column allows you to see which lending protocol has been forked. */
-    fork: string;
-    /** * Similarly to the `version` column, `fork_version` gives you the version of the forked lending protocol. For example, most lending protocols in the space are a fork of Aave V2; therefore, `fork` = `aave` & `fork_version` = `2` */
-    fork_version: string;
+    protocol?: {
+        name: string;
+        address?: string;
+        logo?: string;
+    };
     /** * Stores the event taking place - e.g `borrow`, `deposit`, `liquidation`, 'repay' and 'withdraw'. */
     event: string;
     /** * Stores the name of the LP token issued by the lending protocol. LP tokens can be debt or interest bearing tokens. */
-    lp_token_name: string;
-    /** * Stores the number decimal of the LP token. */
-    lp_decimals: number;
-    /** * Stores the ticker symbol of the LP token. */
-    lp_ticker_symbol: string;
-    /** * Stores the token address of the LP token. */
-    lp_token_address: string;
-    /** * Stores the amount of LP token used in the event (e.g. 1 aETH, 100 cUSDC, etc). */
-    lp_token_amount: number;
-    /** * Stores the total USD amount of all the LP Token used in the event. */
-    lp_token_price: number;
-    /** * Stores the exchange rate between the LP and underlying token. */
-    exchange_rate: number;
-    /** * Stores the USD price of the LP Token used in the event. */
-    exchange_rate_usd: number;
-    /** * Stores the name of the token going into the lending protocol (e.g the token getting deposited). */
-    token_name_in: string;
-    /** * Stores the number decimal of the token going into the lending protocol. */
-    token_decimal_in: number;
-    /** * Stores the address of the token going into the lending protocol. */
-    token_address_in: string;
-    /** * Stores the ticker symbol of the token going into the lending protocol. */
-    token_ticker_in: string;
-    /** * Stores the logo URL of the token going into the lending protocol. */
-    token_logo_in: string;
-    /** * Stores the amount of tokens going into the lending protocol (e.g 1 ETH, 100 USDC, etc). */
-    token_amount_in: number;
-    /** * Stores the total USD amount of all tokens going into the lending protocol. */
-    amount_in_usd: number;
-    pretty_amount_in_usd: string;
-    /** * Stores the name of the token going out of the lending protocol (e.g the token getting deposited). */
-    token_name_out: string;
-    /** * Stores the number decimal of the token going out of the lending protocol. */
-    token_decimals_out: number;
-    /** * Stores the address of the token going out of the lending protocol. */
-    token_address_out: string;
-    /** * Stores the ticker symbol of the token going out of the lending protocol. */
-    token_ticker_out: string;
-    /** * Stores the logo URL of the token going out of the lending protocol. */
-    token_logo_out: string;
-    /** * Stores the amount of tokens going out of the lending protocol (e.g 1 ETH, 100 USDC, etc). */
-    token_amount_out: number;
-    /** * Stores the total USD amount of all tokens going out of the lending protocol. */
-    amount_out_usd: number;
-    pretty_amount_out_usd: string;
-    /** * Stores the type of loan the user is taking out. Lending protocols enable you to take out a stable or variable loan. Only relevant to borrow events. */
-    borrow_rate_mode: number;
+    reserve_name: string;
+    /** * Stores the address of token 0 in the specific pair. */
+    reserve_address?: string;
+    /** * Stores the ticker symbol of token 0 in the specific pair. */
+    reserve_ticker?: string;
+    /** * Stores the number of contract decimals of token 0 in the specific pair. */
+    reserve_decimals: number;
+    /** * Stores the contract name of token 0 in the specific pair. */
+    reserve_amount: string;
+    reserve_quote_rate: number;
+    reserve_usd_quote: number;
+    pretty_reserve_usd_quote: string;
+    borrow_rate_mode?: string;
     /** * Stores the interest rate of the loan. Only relevant to borrow events. */
-    borrow_rate: number;
-    on_behalf_of: string;
+    borrow_rate?: number;
+    on_behalf_of?: string;
     /** * Stores the wallet address liquidating the loan. Only relevant to liquidation events. */
-    liquidator: string;
+    liquidator?: string;
     /** * Stores the wallet address of the user initiating the event. */
-    user: string;
+    premium_amount?: number;
+    /** * Stores the wallet address of the user initiating the event. */
+    premium_usd_quote?: number;
+    user?: string;
+    /** * Stores the address of token 0 in the specific pair. */
+    target_address?: string;
 }
 export interface SafeDetails {
     /** * The address that signed the safe transaction. */

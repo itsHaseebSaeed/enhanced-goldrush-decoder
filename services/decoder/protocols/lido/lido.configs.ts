@@ -8,7 +8,7 @@ const configs: Configs = [
         chain_name: "eth-mainnet",
     },
     {
-        address: "0x889edc2edab5f40e902b864ad4d7ade8e412f9b1",
+        address: "0x889edc2edab5f40e902b864ad4d7ade8e412f9b1", //withdrawl queue
         is_factory: false,
         protocol_name: "lido",
         chain_name: "eth-mainnet",

@@ -2,13 +2,19 @@ import { type Configs } from "../../decoder.types";
 
 const configs: Configs = [
     {
-        address: "0x3ee18b2214aff97000d974cf647e7c347e8fa585",
+        address: "0x3ee18b2214aff97000d974cf647e7c347e8fa585", //Tokens Bridge
         is_factory: false,
         protocol_name: "wormhole",
         chain_name: "eth-mainnet",
     },
     {
-        address: "0x98f3c9e6E3fAce36bAAd05FE09d375Ef1464288B",
+        address: "0x98f3c9e6E3fAce36bAAd05FE09d375Ef1464288B", //Native Bridge
+        is_factory: false,
+        protocol_name: "wormhole",
+        chain_name: "eth-mainnet",
+    },
+    {
+        address: "0x6FFd7EdE62328b3Af38FCD61461Bbfc52F5651fE", //NFT Bridge
         is_factory: false,
         protocol_name: "wormhole",
         chain_name: "eth-mainnet",

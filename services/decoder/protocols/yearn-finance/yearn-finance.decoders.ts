@@ -1,7 +1,7 @@
 import { prettifyCurrency } from "@covalenthq/client-sdk";
 import { Abi, decodeEventLog } from "viem";
 import { GoldRushDecoder } from "../../decoder";
-import { EventType } from "../../decoder.types";
+import { EventDetails, EventTokens, EventType } from "../../decoder.types";
 import YearnFinanceABI from "./abis/yearn-finance.abi.json";
 import { DECODED_ACTION, DECODED_EVENT_CATEGORY } from "../../decoder.constants";
 import { timestampParser } from "../../../../utils/functions/timestamp-parser";
@@ -55,96 +55,95 @@ GoldRushDecoder.on(
           10,
           data?.[0]?.items?.[0]?.contract_metadata
             ?.contract_decimals ?? 18
-                )) ?? 0;
-        
+        )) ?? 0;
+    
+    const tokens: EventTokens = [
+          {
+              heading: "Deposit",
+              value: decoded.value.toString(),
+              decimals: data?.[0]?.contract_decimals,
+              ticker_symbol: data?.[0]?.contract_ticker_symbol,
+              pretty_quote: prettifyCurrency(usd_value),
+              usd_value: usd_value,
+              address: log_event.sender_address
+          },
+      ];
+    
+    
+    let details:EventDetails = [
+      {
+        heading: "From",
+        type: "address",
+        value: decoded.sender,
+      },
+      {
+        heading: "To",
+        type: "address",
+        value: decoded.receiver,
+      },
+      {
+        heading: "Value",
+        type: "text",
+        value: usd_value.toString(),
+      },
+    ];
+
 
     // Ensure that 'sender' and 'receiver' are defined before calling 'toLowerCase'
     if (decoded.sender && yearnVaultAddresses.has(decoded.sender.toLowerCase())) {
+      const protocol = {
+        name: "Yearn Finance" as string,
+        address: decoded.sender as string,
+      };
+
+      details.push(      {
+        heading: "Vault Address",
+        type: "text",
+        value: decoded.sender.toString(),
+      },)
+          
       return {
         action: DECODED_ACTION.WITHDRAW,
         category: DECODED_EVENT_CATEGORY.VAULT,
         name: "Withdraw",
-        protocol: {
-          logo: log_event.sender_logo_url as string,
-          name: log_event.sender_name as string,
-          address: log_event.sender_address as string,
-        },
+        protocol,
         ...(options.raw_logs ? { raw_log: log_event } : {}),
-        details: [
-          {
-            heading: "From",
-            type: "address",
-            value: decoded.sender,
-          },
-          {
-            heading: "To",
-            type: "address",
-            value: decoded.receiver,
-          },
-          {
-            heading: "Value",
-            type: "text",
-            value: usd_value.toString(),
-          },
-        ],
+        details,
+        tokens
       };
     } else if (decoded.receiver && yearnVaultAddresses.has(decoded.receiver.toLowerCase())) {
+      const protocol = {
+        name: "Yearn Finance" as string,
+        address: decoded.receiver as string,
+      };
+
+      details.push(      {
+        heading: "Vault Address",
+        type: "text",
+        value: decoded.receiver.toString(),
+      },)
+          
       return {
         action: DECODED_ACTION.DEPOSIT,
         category: DECODED_EVENT_CATEGORY.VAULT,
         name: "Deposit",
-        protocol: {
-          logo: log_event.sender_logo_url as string,
-          name: log_event.sender_name as string,
-          address: log_event.sender_address as string,
-        },
+        protocol,
         ...(options.raw_logs ? { raw_log: log_event } : {}),
-        details: [
-          {
-            heading: "From",
-            type: "address",
-            value: decoded.sender,
-          },
-          {
-            heading: "To",
-            type: "address",
-            value: decoded.receiver,
-          },
-          {
-            heading: "Value",
-            type: "text",
-            value: usd_value.toString(),
-          },
-        ],
+        details,
+        tokens
       };
     } else {
+      const protocol = {
+        name: "Yearn Finance" as string,
+      };
       return {
         action: DECODED_ACTION.TRANSFERRED,
         category: DECODED_EVENT_CATEGORY.TOKEN,
         name: "Transfer",
-        protocol: {
-          logo: log_event.sender_logo_url as string,
-          name: log_event.sender_name as string,
-          address: log_event.sender_address as string,
-        },
+        protocol,
         ...(options.raw_logs ? { raw_log: log_event } : {}),
-        details: [
-          {
-            heading: "From",
-            type: "address",
-            value: decoded.sender,
-          },
-          {
-            heading: "To",
-            type: "address",
-            value: decoded.receiver,
-          },
-          {
-            heading: "Value",
-            type: "text",
-            value: usd_value.toString(),
-          },
-        ],
+        details,
+        tokens
       };
     }
   }

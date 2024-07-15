@@ -307,7 +307,7 @@ GoldRushDecoder.on(
         (Number(decoded.amountToRedeem) /
             Math.pow(
                 10,
-                TokenData?.[0]?.contract_decimals ?? 0
+                TokenData?.[0]?.contract_decimals ?? 18
             ));
     
     
@@ -316,7 +316,7 @@ GoldRushDecoder.on(
         (Number(decoded.ezETHAmountLocked) /
             Math.pow(
                 10,
-                ezETHData?.[0]?.contract_decimals ?? 0
+                ezETHData?.[0]?.contract_decimals ?? 18
             ));
         
             const tokens: EventTokens = [
@@ -435,7 +435,7 @@ GoldRushDecoder.on(
             (Number(decoded.amount) /
                 Math.pow(
                     10,
-                    TokenData?.[0]?.contract_decimals ?? 0
+                    TokenData?.[0]?.contract_decimals ?? 18
                 ));
         
         
@@ -444,7 +444,7 @@ GoldRushDecoder.on(
             (Number(decoded.ezETHMinted) /
                 Math.pow(
                     10,
-                    ezETHData?.[0]?.contract_decimals ?? 0
+                    ezETHData?.[0]?.contract_decimals ?? 18
                 ));
         
 

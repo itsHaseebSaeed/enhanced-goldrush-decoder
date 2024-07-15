@@ -204,7 +204,7 @@ GoldRushDecoder.on(
                         (Number(decoded.startingPrice) /
                             Math.pow(
                                 10,
-                                JewelToken?.[0]?.contract_decimals ?? 0
+                                JewelToken?.[0]?.contract_decimals ?? 18
                             ))
                 ),
                 ticker_symbol: JewelToken?.[0]?.contract_ticker_symbol,
@@ -218,7 +218,7 @@ GoldRushDecoder.on(
                         (Number(decoded.endingPrice) /
                             Math.pow(
                                 10,
-                                JewelToken?.[0]?.contract_decimals ?? 0
+                                JewelToken?.[0]?.contract_decimals ?? 18
                             ))
                 ),
                 ticker_symbol: JewelToken?.[0]?.contract_ticker_symbol,
@@ -410,7 +410,7 @@ GoldRushDecoder.on(
                         (Number(decoded.totalPrice) /
                             Math.pow(
                                 10,
-                                JewelToken?.[0]?.contract_decimals ?? 0
+                                JewelToken?.[0]?.contract_decimals ?? 18
                             ))
                 ),
                 ticker_symbol: JewelToken?.[0]?.contract_ticker_symbol,

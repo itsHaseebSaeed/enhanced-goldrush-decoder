@@ -79,7 +79,7 @@ GoldRushDecoder.on(
                 heading: "Expected Amount",
                 value: calculatePrettyBalance(
                     decoded.expectedAmount,
-                    destToken?.[0]?.contract_decimals ?? 0
+                    destToken?.[0]?.contract_decimals ?? 18
                 ),
                 type: "text",
             },
@@ -87,18 +87,18 @@ GoldRushDecoder.on(
 
         const srcTokenUsdValue = srcToken?.[0]?.prices?.[0].price *
         (Number(decoded.srcAmount) /
-            Math.pow(10, srcToken?.[0]?.contract_decimals ?? 0));
+            Math.pow(10, srcToken?.[0]?.contract_decimals ?? 18));
         
         const destTokenUsdValue = destToken?.[0]?.prices?.[0].price *
         (Number(decoded.receivedAmount) /
             Math.pow(
                 10,
-                destToken?.[0]?.contract_decimals ?? 0
+                destToken?.[0]?.contract_decimals ?? 18
             ))
 
         const tokens: EventTokens = [
             {
-                decimals: srcToken?.[0]?.contract_decimals ?? 0,
+                decimals: srcToken?.[0]?.contract_decimals ?? 18,
                 heading: "Input",
                 pretty_quote: prettifyCurrency(srcTokenUsdValue
                 ),
@@ -107,7 +107,7 @@ GoldRushDecoder.on(
                 value: decoded.srcAmount.toString(),
             },
             {
-                decimals: destToken?.[0]?.contract_decimals ?? 0,
+                decimals: destToken?.[0]?.contract_decimals ?? 18,
                 heading: "Output",
                 pretty_quote: prettifyCurrency(destTokenUsdValue      
                 ),
