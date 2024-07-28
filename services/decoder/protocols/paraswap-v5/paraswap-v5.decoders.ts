@@ -17,7 +17,15 @@ import {
 
 GoldRushDecoder.on(
     "paraswap-v5:SwappedV3",
-    ["eth-mainnet", "matic-mainnet", "avalanche-mainnet"],
+    [
+        "bsc-mainnet",
+        "eth-mainnet",
+        "optimism-mainnet",
+        "arbitrum-mainnet",
+        "fantom-mainnet",
+        "matic-mainnet",
+        "avalanche-mainnet",
+    ],
     SimpleSwapABI as Abi,
     async (
         log_event,

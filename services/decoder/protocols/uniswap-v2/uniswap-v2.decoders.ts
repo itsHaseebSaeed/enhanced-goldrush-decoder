@@ -20,7 +20,18 @@ const infuraProvider = new ethers.InfuraProvider(
 
 GoldRushDecoder.on(
     "uniswap-v2:Swap",
-    ["eth-mainnet", "defi-kingdoms-mainnet"],
+    [
+        "eth-mainnet",
+        "arbitrum-mainnet",
+        "optimism-mainnet",
+        "matic-mainnet",
+        "base-mainnet",
+        "bsc-mainnet",
+        "avalanche-mainnet",
+        "celo-mainnet",
+        "zora-mainnet",
+        "zksync-mainnet",
+    ],
     PairABI as Abi,
     async (
         log_event,
@@ -250,7 +261,18 @@ GoldRushDecoder.on(
 
 GoldRushDecoder.on(
     "uniswap-v2:Mint",
-    ["eth-mainnet"],
+    [
+        "eth-mainnet",
+        "arbitrum-mainnet",
+        "optimism-mainnet",
+        "matic-mainnet",
+        "base-mainnet",
+        "bsc-mainnet",
+        "avalanche-mainnet",
+        "celo-mainnet",
+        "zora-mainnet",
+        "zksync-mainnet",
+    ],
     PairABI as Abi,
     async (
         log_event,
@@ -385,7 +407,18 @@ GoldRushDecoder.on(
 
 GoldRushDecoder.on(
     "uniswap-v2:Burn",
-    ["eth-mainnet"],
+    [
+        "eth-mainnet",
+        "arbitrum-mainnet",
+        "optimism-mainnet",
+        "matic-mainnet",
+        "base-mainnet",
+        "bsc-mainnet",
+        "avalanche-mainnet",
+        "celo-mainnet",
+        "zora-mainnet",
+        "zksync-mainnet",
+    ],
     PairABI as Abi,
     async (
         log_event,
@@ -526,7 +559,18 @@ GoldRushDecoder.on(
 
 GoldRushDecoder.on(
     "uniswap-v2:Sync",
-    ["eth-mainnet"],
+    [
+        "eth-mainnet",
+        "arbitrum-mainnet",
+        "optimism-mainnet",
+        "matic-mainnet",
+        "base-mainnet",
+        "bsc-mainnet",
+        "avalanche-mainnet",
+        "celo-mainnet",
+        "zora-mainnet",
+        "zksync-mainnet",
+    ],
     PairABI as Abi,
     async (
         log_event,
@@ -631,7 +675,18 @@ GoldRushDecoder.on(
 
 GoldRushDecoder.on(
     "uniswap-v2:PairCreated",
-    ["eth-mainnet"],
+    [
+        "eth-mainnet",
+        "arbitrum-mainnet",
+        "optimism-mainnet",
+        "matic-mainnet",
+        "base-mainnet",
+        "bsc-mainnet",
+        "avalanche-mainnet",
+        "celo-mainnet",
+        "zora-mainnet",
+        "zksync-mainnet",
+    ],
     FactoryABI as Abi,
     async (
         log_event,

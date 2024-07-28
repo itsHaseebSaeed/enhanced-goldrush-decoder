@@ -17,7 +17,13 @@ const ezEthAddress = "0xbf5495Efe5DB9ce00f80364C8B423567e58d2110";
 
 GoldRushDecoder.on(
     "renzo:ShareWithdrawalQueued",
-    ["eth-mainnet"],
+    [
+        "eth-mainnet",
+        "arbitrum-mainnet",
+        "bsc-mainnet",
+        "base-mainnet",
+        "linea-mainnet",
+    ],
     STRATEGY_MANAGER_ABI as Abi,
     async (
         log_event,
@@ -81,7 +87,13 @@ GoldRushDecoder.on(
 
 GoldRushDecoder.on(
     "renzo:WithdrawalQueued",
-    ["eth-mainnet"],
+    [
+        "eth-mainnet",
+        "arbitrum-mainnet",
+        "bsc-mainnet",
+        "base-mainnet",
+        "linea-mainnet",
+    ],
     STRATEGY_MANAGER_ABI as Abi,
     async (
         log_event,
@@ -151,7 +163,13 @@ GoldRushDecoder.on(
 
 GoldRushDecoder.on(
     "renzo:WithdrawalCompleted",
-    ["eth-mainnet"],
+    [
+        "eth-mainnet",
+        "arbitrum-mainnet",
+        "bsc-mainnet",
+        "base-mainnet",
+        "linea-mainnet",
+    ],
     STRATEGY_MANAGER_ABI as Abi,
     async (
         log_event,
@@ -215,7 +233,13 @@ GoldRushDecoder.on(
 
 GoldRushDecoder.on(
     "renzo:WithdrawRequestCreated",
-    ["eth-mainnet"],
+    [
+        "eth-mainnet",
+        "arbitrum-mainnet",
+        "bsc-mainnet",
+        "base-mainnet",
+        "linea-mainnet",
+    ],
     WITHDRAW_ABI as Abi,
     async (
         log_event,
@@ -349,7 +373,13 @@ GoldRushDecoder.on(
 
 GoldRushDecoder.on(
     "renzo:Deposit",
-    ["eth-mainnet"],
+    [
+        "eth-mainnet",
+        "arbitrum-mainnet",
+        "bsc-mainnet",
+        "base-mainnet",
+        "linea-mainnet",
+    ],
     RESTAKE_STRATEGY_ABI as Abi,
     async (
         log_event,

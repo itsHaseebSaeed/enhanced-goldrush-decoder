@@ -27,7 +27,18 @@ const infuraProvider = new ethers.InfuraProvider(
 
 GoldRushDecoder.on(
     "uniswap-v3:PoolCreated",
-    ["eth-mainnet"],
+    [
+        "eth-mainnet",
+        "arbitrum-mainnet",
+        "optimism-mainnet",
+        "matic-mainnet",
+        "base-mainnet",
+        "bsc-mainnet",
+        "avalanche-mainnet",
+        "celo-mainnet",
+        "zora-mainnet",
+        "zksync-mainnet",
+    ],
     FactoryABI as Abi,
     async (
         log_event,
@@ -144,7 +155,18 @@ GoldRushDecoder.on(
 
 GoldRushDecoder.on(
     "uniswap-v3:Burn",
-    ["eth-mainnet"],
+    [
+        "eth-mainnet",
+        "arbitrum-mainnet",
+        "optimism-mainnet",
+        "matic-mainnet",
+        "base-mainnet",
+        "bsc-mainnet",
+        "avalanche-mainnet",
+        "celo-mainnet",
+        "zora-mainnet",
+        "zksync-mainnet",
+    ],
     PairABI as Abi,
     async (
         log_event,
@@ -290,7 +312,18 @@ GoldRushDecoder.on(
 
 GoldRushDecoder.on(
     "uniswap-v3:Mint",
-    ["eth-mainnet"],
+    [
+        "eth-mainnet",
+        "arbitrum-mainnet",
+        "optimism-mainnet",
+        "matic-mainnet",
+        "base-mainnet",
+        "bsc-mainnet",
+        "avalanche-mainnet",
+        "celo-mainnet",
+        "zora-mainnet",
+        "zksync-mainnet",
+    ],
     PairABI as Abi,
     async (
         log_event,
@@ -441,7 +474,18 @@ GoldRushDecoder.on(
 
 GoldRushDecoder.on(
     "uniswap-v3:Swap",
-    ["eth-mainnet"],
+    [
+        "eth-mainnet",
+        "arbitrum-mainnet",
+        "optimism-mainnet",
+        "matic-mainnet",
+        "base-mainnet",
+        "bsc-mainnet",
+        "avalanche-mainnet",
+        "celo-mainnet",
+        "zora-mainnet",
+        "zksync-mainnet",
+    ],
     PairABI as Abi,
     async (
         log_event,
@@ -637,7 +681,18 @@ GoldRushDecoder.on(
 
 GoldRushDecoder.on(
     "uniswap-v3:Flash",
-    ["eth-mainnet"],
+    [
+        "eth-mainnet",
+        "arbitrum-mainnet",
+        "optimism-mainnet",
+        "matic-mainnet",
+        "base-mainnet",
+        "bsc-mainnet",
+        "avalanche-mainnet",
+        "celo-mainnet",
+        "zora-mainnet",
+        "zksync-mainnet",
+    ],
     PairABI as Abi,
     async (
         log_event,
@@ -785,7 +840,18 @@ GoldRushDecoder.on(
 
 GoldRushDecoder.on(
     "uniswap-v3:DecreaseLiquidity",
-    ["eth-mainnet"],
+    [
+        "eth-mainnet",
+        "arbitrum-mainnet",
+        "optimism-mainnet",
+        "matic-mainnet",
+        "base-mainnet",
+        "bsc-mainnet",
+        "avalanche-mainnet",
+        "celo-mainnet",
+        "zora-mainnet",
+        "zksync-mainnet",
+    ],
     PositionManagerABI as Abi,
     async (
         log_event,
@@ -921,7 +987,18 @@ GoldRushDecoder.on(
 
 GoldRushDecoder.on(
     "uniswap-v3:IncreaseLiquidity",
-    ["eth-mainnet"],
+    [
+        "eth-mainnet",
+        "arbitrum-mainnet",
+        "optimism-mainnet",
+        "matic-mainnet",
+        "base-mainnet",
+        "bsc-mainnet",
+        "avalanche-mainnet",
+        "celo-mainnet",
+        "zora-mainnet",
+        "zksync-mainnet",
+    ],
     PositionManagerABI as Abi,
     async (
         log_event,
@@ -1057,7 +1134,18 @@ GoldRushDecoder.on(
 
 GoldRushDecoder.on(
     "uniswap-v3:Collect",
-    ["eth-mainnet"],
+    [
+        "eth-mainnet",
+        "arbitrum-mainnet",
+        "optimism-mainnet",
+        "matic-mainnet",
+        "base-mainnet",
+        "bsc-mainnet",
+        "avalanche-mainnet",
+        "celo-mainnet",
+        "zora-mainnet",
+        "zksync-mainnet",
+    ],
     PairABI as Abi,
     async (
         log_event,
