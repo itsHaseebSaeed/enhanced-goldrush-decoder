@@ -137,7 +137,7 @@ GoldRushDecoder.on(
         ];
 
         return {
-            action: DECODED_ACTION.WITHDRAW,
+            action: DECODED_ACTION.WITHDRAW_QUEUED,
             category: DECODED_EVENT_CATEGORY.STAKING,
             name: "WithdrawalQueued",
             protocol: {
@@ -201,7 +201,7 @@ GoldRushDecoder.on(
         ];
 
         return {
-            action: DECODED_ACTION.WITHDRAW,
+            action: DECODED_ACTION.WITHDRAW_COMPLETED,
             category: DECODED_EVENT_CATEGORY.STAKING,
             name: "WithdrawalCompleted",
             protocol: {
@@ -275,7 +275,7 @@ GoldRushDecoder.on(
                 type: "text",
             },
         ];
-        
+
         const date = timestampParser(tx.block_signed_at, "YYYY-MM-DD");
 
         const { data: TokenData } =
@@ -288,9 +288,8 @@ GoldRushDecoder.on(
                     to: date,
                 }
             );
-        
-        
-            const { data: ezETHData } =
+
+        const { data: ezETHData } =
             await covalent_client.PricingService.getTokenPrices(
                 chain_name,
                 "USD",
@@ -300,63 +299,53 @@ GoldRushDecoder.on(
                     to: date,
                 }
             );
-        
-        
-  
-        const depositUsdValue = TokenData?.[0]?.prices?.[0]?.price *
-        (Number(decoded.amountToRedeem) /
-            Math.pow(
-                10,
-                TokenData?.[0]?.contract_decimals ?? 18
-            ));
-    
-    
-    
-    const ezETHMintUsdValue = ezETHData?.[0]?.prices?.[0]?.price *
-        (Number(decoded.ezETHAmountLocked) /
-            Math.pow(
-                10,
-                ezETHData?.[0]?.contract_decimals ?? 18
-            ));
-        
-            const tokens: EventTokens = [
-                {
-                    decimals: TokenData?.[0]?.contract_decimals,
-                    heading: "Deposit Amount",
-                    address: decoded.claimToken,
-                    value: String(decoded.amountToRedeem),
-                    pretty_quote: prettifyCurrency(depositUsdValue),
-                    usd_value: depositUsdValue,
-                    quote_rate: TokenData?.[0]?.prices?.[0]?.price ,
-                    ticker_symbol: TokenData?.[0]?.contract_ticker_symbol,
-                },
-                {
-                    decimals: ezETHData?.[0]?.contract_decimals,
-                    heading: "ezETH Minted",
-                    address: ezEthAddress,
-                    value: String(decoded.ezETHAmountLocked),
-                    pretty_quote: prettifyCurrency(ezETHMintUsdValue),
-                    usd_value: ezETHMintUsdValue,
-                    quote_rate:ezETHData?.[0]?.prices?.[0]?.price,
-                    ticker_symbol: ezETHData?.[0]?.contract_ticker_symbol,
-                },
-            ];
 
+        const depositUsdValue =
+            TokenData?.[0]?.prices?.[0]?.price *
+            (Number(decoded.amountToRedeem) /
+                Math.pow(10, TokenData?.[0]?.contract_decimals ?? 18));
+
+        const ezETHMintUsdValue =
+            ezETHData?.[0]?.prices?.[0]?.price *
+            (Number(decoded.ezETHAmountLocked) /
+                Math.pow(10, ezETHData?.[0]?.contract_decimals ?? 18));
+
+        const tokens: EventTokens = [
+            {
+                decimals: TokenData?.[0]?.contract_decimals,
+                heading: "Deposit Amount",
+                address: decoded.claimToken,
+                value: String(decoded.amountToRedeem),
+                pretty_quote: prettifyCurrency(depositUsdValue),
+                usd_value: depositUsdValue,
+                quote_rate: TokenData?.[0]?.prices?.[0]?.price,
+                ticker_symbol: TokenData?.[0]?.contract_ticker_symbol,
+            },
+            {
+                decimals: ezETHData?.[0]?.contract_decimals,
+                heading: "ezETH Minted",
+                address: ezEthAddress,
+                value: String(decoded.ezETHAmountLocked),
+                pretty_quote: prettifyCurrency(ezETHMintUsdValue),
+                usd_value: ezETHMintUsdValue,
+                quote_rate: ezETHData?.[0]?.prices?.[0]?.price,
+                ticker_symbol: ezETHData?.[0]?.contract_ticker_symbol,
+            },
+        ];
 
         return {
             action: DECODED_ACTION.WITHDRAW,
             category: DECODED_EVENT_CATEGORY.STAKING,
-            name: "WithdrawalCompleted",
+            name: "WithdrawalRequested",
             protocol: {
                 name: "Renzo",
             },
             ...(options.raw_logs ? { raw_log: log_event } : {}),
             details,
-            tokens
+            tokens,
         };
     }
 );
-
 
 GoldRushDecoder.on(
     "renzo:Deposit",
@@ -385,9 +374,8 @@ GoldRushDecoder.on(
                 ezETHMinted: bigint;
                 referralId: bigint;
             };
-            };
-        
-        
+        };
+
         const details: EventDetails = [
             {
                 heading: "Depositor",
@@ -418,7 +406,7 @@ GoldRushDecoder.on(
                     to: date,
                 }
             );
-    
+
         //Hardcoded Because only ezEth is minted by any asset.
         const { data: ezETHData } =
             await covalent_client.PricingService.getTokenPrices(
@@ -430,24 +418,16 @@ GoldRushDecoder.on(
                     to: date,
                 }
             );
-        
-        const depositUsdValue = TokenData?.[0]?.prices?.[0]?.price *
-            (Number(decoded.amount) /
-                Math.pow(
-                    10,
-                    TokenData?.[0]?.contract_decimals ?? 18
-                ));
-        
-        
-        
-        const ezETHMintUsdValue = ezETHData?.[0]?.prices?.[0]?.price *
-            (Number(decoded.ezETHMinted) /
-                Math.pow(
-                    10,
-                    ezETHData?.[0]?.contract_decimals ?? 18
-                ));
-        
 
+        const depositUsdValue =
+            TokenData?.[0]?.prices?.[0]?.price *
+            (Number(decoded.amount) /
+                Math.pow(10, TokenData?.[0]?.contract_decimals ?? 18));
+
+        const ezETHMintUsdValue =
+            ezETHData?.[0]?.prices?.[0]?.price *
+            (Number(decoded.ezETHMinted) /
+                Math.pow(10, ezETHData?.[0]?.contract_decimals ?? 18));
 
         const tokens: EventTokens = [
             {
@@ -457,7 +437,7 @@ GoldRushDecoder.on(
                 value: String(decoded.amount),
                 pretty_quote: prettifyCurrency(depositUsdValue),
                 usd_value: depositUsdValue,
-                quote_rate: TokenData?.[0]?.prices?.[0]?.price ,
+                quote_rate: TokenData?.[0]?.prices?.[0]?.price,
                 ticker_symbol: TokenData?.[0]?.contract_ticker_symbol,
             },
             {
@@ -467,7 +447,7 @@ GoldRushDecoder.on(
                 value: String(decoded.ezETHMinted),
                 pretty_quote: prettifyCurrency(ezETHMintUsdValue),
                 usd_value: ezETHMintUsdValue,
-                quote_rate:ezETHData?.[0]?.prices?.[0]?.price,
+                quote_rate: ezETHData?.[0]?.prices?.[0]?.price,
                 ticker_symbol: ezETHData?.[0]?.contract_ticker_symbol,
             },
         ];
@@ -485,5 +465,3 @@ GoldRushDecoder.on(
         };
     }
 );
-
-

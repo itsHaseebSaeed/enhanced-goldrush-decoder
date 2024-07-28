@@ -180,9 +180,9 @@ GoldRushDecoder.fallback(
                     token_identifier:
                         data?.items?.[0]?.nft_data?.token_id?.toString() ||
                         null,
-                    price: priceData.data.items[0].floor_price_quote,
+                    price: priceData?.data?.items[0]?.floor_price_quote,
                     pretty_quote: prettifyCurrency(
-                        priceData.data.items[0].floor_price_quote
+                        priceData?.data?.items[0]?.floor_price_quote
                     ),
                     images: {
                         "1024":

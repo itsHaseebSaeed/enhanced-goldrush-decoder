@@ -14,6 +14,7 @@ export const mapBridgingEventToReport = (
     allEvents: EventType[]
 ): BridgingReport | null => {
     const createFields = (inputToken?: EventToken): BridgingReport => ({
+        action: decodedEvent.action,
         protocol: decodedEvent.protocol,
         event: decodedEvent.name,
         token_address: inputToken?.address ?? "",

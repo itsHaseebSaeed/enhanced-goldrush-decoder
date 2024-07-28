@@ -144,6 +144,9 @@ GoldRushDecoder.on(
             };
         };
 
+        console.log("PRICE ", decoded.startingPrice);
+        console.log("PRICE ", decoded.endingPrice);
+
         const date = timestampParser(tx.block_signed_at, "YYYY-MM-DD");
 
         // * INFO: Fetching Jewel Token Price from Avalanche Mainnet as it is a native token on Defi Kingdoms

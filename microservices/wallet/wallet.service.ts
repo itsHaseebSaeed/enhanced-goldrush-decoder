@@ -1,4 +1,3 @@
-import { GoldRushDecoder } from "../../services";
 import {
     CovalentClient,
     type Chain,
@@ -29,6 +28,9 @@ import { mapValutEventToReport } from "../categorization/types/vault_details";
 import { mapSyntheticEventToReport } from "../categorization/types/synthetic_details";
 import { mapBridgingEventToReport } from "../categorization/types/bridging_details";
 import { mapLendingEventToReport } from "../categorization/types/lending_details";
+import { mapNftSaleReport } from "../categorization/types/nft_details";
+import { mapMetaverseEventToReport } from "../categorization/types/metaverse_details";
+import ProgressBar from "progress";
 
 export const fetchTxsFromWallet = async (
     chain_name: Chain,
@@ -39,7 +41,25 @@ export const fetchTxsFromWallet = async (
     let page = 0;
     let allTransactions: Transaction[] = [];
 
+    let total = await covalentClient.TransactionService.getTransactionSummary(
+        chain_name,
+        walletAddress
+    ); // TODO remove this query
+
+    let counter = 0;
+    const progressBar = new ProgressBar("Fetched: :percent :total", {
+        complete: "#",
+        incomplete: " ",
+        width: 150,
+        total: total?.data?.items[0]?.total_count,
+    }); // TODO remove this progress bar
+    progressBar.tick(0); // Update the progress bar after processing each transaction // TODO remove this progress bar
+
     while (true) {
+        counter++;
+
+        // USE THIS VALUE OVER HERE
+
         const { data, error_code, error_message } =
             await covalentClient.TransactionService.getTransactionsForAddressV3(
                 chain_name,
@@ -51,6 +71,8 @@ export const fetchTxsFromWallet = async (
                     withSafe: false,
                 }
             );
+        progressBar.tick(data?.items.length); // Update the progress bar after processing each transaction
+
         if (error_code) {
             throw {
                 errorCode: error_code,
@@ -58,9 +80,10 @@ export const fetchTxsFromWallet = async (
             };
         }
         allTransactions = [...allTransactions, ...data.items];
+
         page++;
 
-        if (!data?.items || data.items.length < 100) {
+        if (!data?.items || data?.items.length < 100) {
             break;
         }
     }
@@ -73,6 +96,8 @@ export const categorize = async (
     let cat: CategorizedTransaction = {
         dex_details: [],
         transfer_details: [],
+        metaverse_details: [],
+        metaverse_nft_details: [],
         nft_transfer_details: [],
         nft_sale_details: [],
         lending_details: [],
@@ -138,10 +163,23 @@ export const categorize = async (
                     }
                 }
                 break;
+            case DECODED_EVENT_CATEGORY.METAVERSE:
+                const metaverseReport = mapMetaverseEventToReport(event);
+                if (metaverseReport) {
+                    if (isTransferReport(metaverseReport)) {
+                        cat.metaverse_details.push(metaverseReport);
+                    } else if (isNftTransferReport(metaverseReport)) {
+                        cat.metaverse_nft_details.push(metaverseReport);
+                    }
+                }
+                break;
             case DECODED_EVENT_CATEGORY.NFT:
-                const nftReport = mapNftEventToReport(event);
-                if (nftReport) {
-                    cat.nft_sale_details.push(nftReport);
+                const nftSaleReport = mapNftSaleReport(event);
+                if (nftSaleReport) {
+                    cat.nft_sale_details = [
+                        ...cat.nft_sale_details,
+                        ...nftSaleReport,
+                    ];
                 }
                 break;
             case DECODED_EVENT_CATEGORY.LENDING:
@@ -156,12 +194,6 @@ export const categorize = async (
     }
 
     return cat;
-};
-
-// Example mapping function for NFT events
-const mapNftEventToReport = (event: EventType): NftSalesReport | null => {
-    // Your logic to map NFT event to NftSaleReport
-    return null;
 };
 
 // Type guard for TransferReport

@@ -13,6 +13,7 @@ export const mapPerpetualEventToReport = (
     decodedEvent: EventType
 ): PerpectualReport | null => {
     const createFields = (inputToken?: EventToken): PerpectualReport => ({
+        action: decodedEvent.action,
         protocol: decodedEvent.protocol,
         event: decodedEvent.name,
         token_address: inputToken?.address ?? "",

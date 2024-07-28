@@ -13,6 +13,7 @@ export const mapMarginEventToReport = (
     decodedEvent: EventType
 ): MarginReport | null => {
     const createFields = (inputToken?: EventToken): MarginReport => ({
+        action: decodedEvent.action,
         protocol: decodedEvent.protocol,
         event: decodedEvent.name,
         token_address: inputToken?.address ?? "",

@@ -164,11 +164,21 @@ GoldRushDecoder.on(
             };
         };
 
-        const perpContract = new ethers.Contract(
-            log_event.sender_address,
-            DydxPerpetualABI,
-            infuraProvider
-        );
+        let perpContract;
+
+        try {
+            perpContract = new ethers.Contract(
+                log_event.sender_address,
+                DydxPerpetualABI,
+                infuraProvider
+            );
+        } catch (e) {
+            perpContract = new ethers.Contract(
+                log_event.sender_address,
+                DydxPerpetualABI,
+                infuraProvider
+            );
+        }
 
         // Ensure assetType is passed correctly as a BigNumber
         const assetTypeBigNumber = BigInt(decoded.assetType);
@@ -278,12 +288,21 @@ GoldRushDecoder.on(
                 recipient: string;
             };
         };
+        let perpContract;
 
-        const perpContract = new ethers.Contract(
-            log_event.sender_address,
-            DydxPerpetualABI,
-            infuraProvider
-        );
+        try {
+            perpContract = new ethers.Contract(
+                log_event.sender_address,
+                DydxPerpetualABI,
+                infuraProvider
+            );
+        } catch (e) {
+            perpContract = new ethers.Contract(
+                log_event.sender_address,
+                DydxPerpetualABI,
+                infuraProvider
+            );
+        }
 
         // Ensure assetType is passed correctly as a BigNumber
         const assetTypeBigNumber = BigInt(decoded.assetType);

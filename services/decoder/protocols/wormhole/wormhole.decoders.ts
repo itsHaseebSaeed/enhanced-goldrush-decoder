@@ -295,11 +295,26 @@ function decodeWormholeVAAPayload(payload: string): DecodedPayload {
     if (payload.startsWith("0x")) {
         payload = payload.slice(2);
     }
-    const hexToBigInt = (hex: string): bigint => BigInt(`0x${hex}`);
-    const hexToInt = (hex: string): number => parseInt(hex, 16);
-    const hexToAddress = (hex: string): string => `0x${hex.slice(-40)}`;
+    const hexToBigInt = (hex: string | undefined | null): bigint => {
+        if (!hex) {
+            return BigInt(0);
+        }
+        return BigInt(`0x${hex}`);
+    };
 
-    console.log("Payload ", payload.slice(2, 66));
+    const hexToInt = (hex: string | undefined | null): number => {
+        if (!hex) {
+            return 0;
+        }
+        return parseInt(hex, 16);
+    };
+
+    const hexToAddress = (hex: string | undefined | null): string => {
+        if (!hex) {
+            return "";
+        }
+        return `0x${hex.slice(-40)}`;
+    };
 
     const payloadId = hexToInt(payload.slice(0, 2));
     const amount = normalizeAmount(hexToBigInt(payload.slice(2, 66)), 18);
@@ -307,6 +322,9 @@ function decodeWormholeVAAPayload(payload: string): DecodedPayload {
     const tokenChain = hexToInt(payload.slice(130, 134));
     const toAddress = hexToAddress(payload.slice(134, 198));
     const toChain = hexToInt(payload.slice(198, 202));
+
+    console.log(toChain);
+
     const fee = hexToBigInt(payload.slice(202, 266));
 
     return {

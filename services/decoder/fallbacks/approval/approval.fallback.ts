@@ -33,13 +33,13 @@ GoldRushDecoder.fallback(
 
         let decoded:
             | {
-                  owner: string;
+                  owner?: string;
                   spender: string;
                   value: bigint;
                   tokenId?: never;
               }
             | {
-                  owner: string;
+                  owner?: string;
                   spender: string;
                   tokenId: bigint;
                   value?: never;
@@ -54,7 +54,7 @@ GoldRushDecoder.fallback(
             }) as {
                 eventName: "Approval";
                 args: {
-                    owner: string;
+                    owner?: string;
                     spender: string;
                     value: bigint;
                 };
@@ -69,18 +69,17 @@ GoldRushDecoder.fallback(
             }) as {
                 eventName: "Approval";
                 args: {
-                    owner: string;
+                    owner?: string;
                     spender: string;
                     tokenId: bigint;
                 };
             };
             decoded = args;
         }
-
         const details: EventDetails = [
             {
                 heading: "Owner",
-                value: decoded.owner,
+                value: decoded?.owner ?? "",
                 type: "address",
             },
             {

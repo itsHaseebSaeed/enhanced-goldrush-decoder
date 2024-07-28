@@ -13,6 +13,7 @@ export const mapValutEventToReport = (
     decodedEvent: EventType
 ): VaultReport | null => {
     const createFields = (inputToken?: EventToken): VaultReport => ({
+        action: decodedEvent.action,
         protocol: decodedEvent.protocol,
         event: decodedEvent.name,
         token_address: inputToken?.address ?? "",

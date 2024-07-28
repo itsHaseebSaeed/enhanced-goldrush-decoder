@@ -51,6 +51,21 @@ export type EventTokens = {
     loan_paid_usd_value?: number;
 }[];
 
+export type EventNFT = {
+    heading: string;
+    collection_name: string | null;
+    token_identifier: string | null;
+    collection_address: string;
+    price?: number;
+    pretty_quote?: string;
+    images: {
+        default: string | null;
+        256: string | null;
+        512: string | null;
+        1024: string | null;
+    };
+};
+
 export type EventToken = {
     heading: string;
     value: string;

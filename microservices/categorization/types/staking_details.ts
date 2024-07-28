@@ -17,6 +17,7 @@ export const mapStakingEventToReport = (
         inputToken?: EventToken,
         outputToken?: EventToken
     ): StakingReport => ({
+        action: decodedEvent.action,
         protocol: decodedEvent.protocol,
         event: decodedEvent.name,
         staked_asset_address: inputToken?.address ?? "",
@@ -43,6 +44,7 @@ export const mapStakingEventToReport = (
     const createWithdrawalFields = (
         inputToken?: EventToken
     ): StakingReport => ({
+        action: decodedEvent.action,
         protocol: decodedEvent.protocol,
         event: decodedEvent.name,
         staked_asset_address: inputToken?.address ?? "",

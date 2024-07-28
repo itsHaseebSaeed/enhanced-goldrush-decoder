@@ -1,6 +1,5 @@
 Swap(ERC-20 to ERC-20):0xb94db10ffb8caaf8b6c61982f464a663ca93238b65acd88c7cc8a1746d12d4e9
-burn/decrease liq/collect: 0x469e9c045cde030ae9d0f6b454afcf0ee510f3066502edf5b76783fbbfe4aaed
-Mint/Add liq: 0x06b7536d49c87677fc9c32c4298af618eefc3ad09e8d0d0d4aba2f607c85b43f
+burn/decrease liq/collect: 0x469e9c045cde030ae9d0f6b454afcf0ee510f3066502edf5b76783fbbfe4aaed 
+Mint/Add liq: 0x06b7536d49c87677fc9c32c4298af618eefc3ad09e8d0d0d4aba2f607c85b43f /0xd344dc384C403Fa273a294ef10da039b2e3dc97E
 flash:
-
 aggregator 1-inch: 0x0b97881c909407d8d791031bd98c3f7e931825fc5a86e7b3f25b6df433ed2089

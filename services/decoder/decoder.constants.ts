@@ -32,8 +32,11 @@ export enum DECODED_ACTION {
     BURN = "Burn",
     COLLECT = "Collect",
     WITHDRAW = "Withdraw",
+    WITHDRAW_COMPLETED = "Withdraw Completed",
+    WITHDRAW_QUEUED = "Withdraw Queued",
+    WITHDRAW_REQUEST = "Withdraw Requested",
     DEPOSIT = "Deposit",
-    SUPPLY = "SUPPLY",
+    SUPPLY = "Supply",
     ADD_LIQUIDITY = "Add Liquidity",
     REMOVE_LIQUIDITY = "Remove Liquidity",
     UPDATE = "Update",
@@ -47,5 +50,4 @@ export enum DECODED_ACTION {
     INIT_ROUTER = "Init Router",
     ADD_ROUTER = "Add Router",
     REMOVE_ROUTER = "Remove Router",
-    WITHDRAWN = "withdrawn",
 }

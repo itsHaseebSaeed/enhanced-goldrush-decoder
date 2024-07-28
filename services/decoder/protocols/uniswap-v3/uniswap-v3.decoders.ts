@@ -25,11 +25,6 @@ const infuraProvider = new ethers.InfuraProvider(
     "578f8e9e011c421a91e20f214e86d7de"
 );
 
-const fallbackProvider = new ethers.AlchemyProvider(
-    "mainnet",
-    "NZbREPPNxLgSH3jD1DPQrmIy3p1NKbXm"
-);
-
 GoldRushDecoder.on(
     "uniswap-v3:PoolCreated",
     ["eth-mainnet"],
@@ -158,6 +153,7 @@ GoldRushDecoder.on(
         covalent_client,
         options
     ): Promise<EventType> => {
+        console.log(tx.tx_hash);
         const {
             sender_address: exchange_contract,
             raw_log_data,
@@ -203,7 +199,7 @@ GoldRushDecoder.on(
             token1Price,
         ] = await Promise.all([
             getTokenDetails(token0Address, infuraProvider),
-            getTokenDetails(token1Address, fallbackProvider), // Use fallback provider for one of the requests
+            getTokenDetails(token1Address, infuraProvider), // Use fallback provider for one of the requests
             getTokenPrice(covalent_client, chain_name, token0Address, date),
             getTokenPrice(covalent_client, chain_name, token1Address, date),
         ]);
@@ -695,7 +691,7 @@ GoldRushDecoder.on(
             token1Price,
         ] = await Promise.all([
             getTokenDetails(token0Address, infuraProvider),
-            getTokenDetails(token1Address, fallbackProvider), // Use fallback provider for one of the requests
+            getTokenDetails(token1Address, infuraProvider), // Use fallback provider for one of the requests
             getTokenPrice(covalent_client, chain_name, token0Address, date),
             getTokenPrice(covalent_client, chain_name, token1Address, date),
         ]);
@@ -846,7 +842,7 @@ GoldRushDecoder.on(
             token1Price,
         ] = await Promise.all([
             getTokenDetails(token0Address, infuraProvider),
-            getTokenDetails(token1Address, fallbackProvider), // Use fallback provider for one of the requests
+            getTokenDetails(token1Address, infuraProvider), // Use fallback provider for one of the requests
             getTokenPrice(covalent_client, chain_name, token0Address, date),
             getTokenPrice(covalent_client, chain_name, token1Address, date),
         ]);
@@ -1115,7 +1111,7 @@ GoldRushDecoder.on(
             token1Price,
         ] = await Promise.all([
             getTokenDetails(token0Address, infuraProvider),
-            getTokenDetails(token1Address, fallbackProvider), // Use fallback provider for one of the requests
+            getTokenDetails(token1Address, infuraProvider), // Use fallback provider for one of the requests
             getTokenPrice(covalent_client, chain_name, token0Address, date),
             getTokenPrice(covalent_client, chain_name, token1Address, date),
         ]);
@@ -1246,7 +1242,7 @@ async function getTokenPrice(
             tokenAddress,
             { from: date, to: date }
         );
-        return priceData.data[0]?.prices[0]?.price || 0;
+        return priceData?.data[0]?.prices[0]?.price || 0;
     } catch (error) {
         console.error(
             `Error fetching token price for ${tokenAddress} on ${date}:`,

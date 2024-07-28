@@ -10,6 +10,7 @@ export const mapLendingEventToReport = (
     decodedEvent: EventType
 ): LendingReport | null => {
     const createFields = (inputToken?: EventToken): LendingReport => ({
+        action: decodedEvent.action,
         protocol: decodedEvent.protocol,
         event: decodedEvent.name,
         reserve_address: inputToken?.address ?? "",
@@ -18,7 +19,7 @@ export const mapLendingEventToReport = (
         reserve_name: inputToken?.ticker_symbol ?? "",
         reserve_amount: inputToken?.value ?? "0",
         reserve_quote_rate: inputToken?.quote_rate ?? 0,
-        reserve_usd_quote: inputToken?.usd_value ?? 0,
+        reserve_usd_value: inputToken?.usd_value ?? 0,
         pretty_reserve_usd_quote: inputToken?.pretty_quote ?? "",
         borrow_rate_mode:
             decodedEvent.details.find((d) => d.heading === "Interest Rate Mode")

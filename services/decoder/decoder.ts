@@ -175,7 +175,6 @@ export class GoldRushDecoder {
         }
         const lowerCaseToAddress = tx.to_address?.toLowerCase();
 
-
         const logChunks = chunkify(tx.log_events ?? [], 100);
         for (const logChunk of logChunks) {
             const decodedChunk = await Promise.all(
@@ -189,25 +188,24 @@ export class GoldRushDecoder {
                         chain_name.toLowerCase() as Chain;
                     const lowercaseSenderAddress =
                         sender_address?.toLowerCase();
-                        console.log("lowerCaseToAddress "+lowerCaseToAddress);
-                    console.log("lowercaseSenderAddress "+lowercaseSenderAddress);
+                    // console.log("lowerCaseToAddress "+lowerCaseToAddress);
+                    // console.log("lowercaseSenderAddress "+lowercaseSenderAddress);
                     // console.log(tx.tx_hash);
                     const lowercaseSenderFactoryAddress =
                         sender_factory_address?.toLowerCase();
-                    console.log("lowercaseSenderFactoryAddress "+lowercaseSenderFactoryAddress);
+                    // console.log("lowercaseSenderFactoryAddress "+lowercaseSenderFactoryAddress);
                     const lowercaseTopic0Hash = topic0_hash?.toLowerCase();
                     const decoding_index =
                         this.decoders[lowercaseChainName]?.[
-                        lowercaseSenderAddress
+                            lowercaseSenderAddress
                         ]?.[lowercaseTopic0Hash] ??
                         this.decoders[lowercaseChainName]?.[
-                        lowercaseSenderFactoryAddress
-                        ]?.[lowercaseTopic0Hash]
-                        ?? this.decoders[lowercaseChainName]?.[
-                        lowerCaseToAddress
+                            lowercaseSenderFactoryAddress
+                        ]?.[lowercaseTopic0Hash] ??
+                        this.decoders[lowercaseChainName]?.[
+                            lowerCaseToAddress
                         ]?.[lowercaseTopic0Hash]; // TODO: Remove lowerCaseToAddres
-                
-                    
+
                     const fallback_index = this.fallbacks[lowercaseTopic0Hash];
                     const logFunction =
                         (decoding_index !== undefined &&

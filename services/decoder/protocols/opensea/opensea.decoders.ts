@@ -105,21 +105,18 @@ GoldRushDecoder.on(
                                 to: date,
                             }
                         );
+                    const usd_value =
+                        data?.[0]?.prices?.[0]?.price *
+                        (Number(amount) /
+                            Math.pow(10, data?.[0]?.contract_decimals ?? 18));
                     tokens.push({
                         heading: recipient
                             ? `Sent to ${recipient}`
                             : `Offered to ${decoded.recipient}`,
                         value: amount.toString(),
                         decimals: data?.[0]?.contract_decimals ?? 18,
-                        pretty_quote: prettifyCurrency(
-                            data?.[0]?.items?.[0]?.price *
-                                (Number(amount) /
-                                    Math.pow(
-                                        10,
-                                        data?.[0]?.items?.[0]?.contract_metadata
-                                            ?.contract_decimals ?? 18
-                                    ))
-                        ),
+                        pretty_quote: prettifyCurrency(usd_value),
+                        usd_value: usd_value,
                         ticker_symbol: data?.[0]?.contract_ticker_symbol,
                     });
                     break;
@@ -183,7 +180,6 @@ GoldRushDecoder.on(
             category: DECODED_EVENT_CATEGORY.NFT,
             name: "Basic Order Fulfilled",
             protocol: {
-                logo: log_event.sender_logo_url as string,
                 name: "Opensea",
             },
             ...(options.raw_logs ? { raw_log: log_event } : {}),

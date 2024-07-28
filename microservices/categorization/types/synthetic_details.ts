@@ -3,13 +3,14 @@ import {
     EventType,
     type QueryOptions,
 } from "../../../services/decoder/decoder.types";
-import { SyntheticReport, VaultReport } from "../transaction_service_types";
+import { SyntheticReport } from "../transaction_service_types";
 import { DECODED_ACTION } from "../../../services/decoder/decoder.constants";
 
 export const mapSyntheticEventToReport = (
     decodedEvent: EventType
 ): SyntheticReport | null => {
     const createFields = (inputToken?: EventToken): SyntheticReport => ({
+        action: decodedEvent.action,
         protocol: decodedEvent.protocol,
         event: decodedEvent.name,
         token_address: inputToken?.address ?? "",

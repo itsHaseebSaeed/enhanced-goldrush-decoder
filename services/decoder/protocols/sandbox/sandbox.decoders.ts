@@ -12,11 +12,17 @@ import { currencyToNumber, timestampParser } from "../../../../utils/functions";
 import { prettifyCurrency } from "@covalenthq/client-sdk";
 
 GoldRushDecoder.on(
-      "sandbox:Transfer",
-      ["eth-mainnet"],
-      ERC721ABI as Abi,
-      async (log_event, tx, chain_name, covalent_client, options): Promise<EventType | null> => {
-            const { raw_log_data, raw_log_topics } = log_event;
+    "sandbox:Transfer",
+    ["eth-mainnet"],
+    ERC721ABI as Abi,
+    async (
+        log_event,
+        tx,
+        chain_name,
+        covalent_client,
+        options
+    ): Promise<EventType | null> => {
+        const { raw_log_data, raw_log_topics } = log_event;
 
         let decoded:
             | {
@@ -77,8 +83,6 @@ GoldRushDecoder.on(
             },
         ];
 
-        
-
         const parsedData: EventType = {
             action: DECODED_ACTION.TRANSFERRED,
             category: DECODED_EVENT_CATEGORY.METAVERSE,
@@ -105,16 +109,17 @@ GoldRushDecoder.on(
                         to: date,
                     }
                 );
-            
-            let usd_value = data?.[0]?.items?.[0]?.price *
-                (Number(decoded.value) /
-                    Math.pow(
-                        10,
-                        data?.[0]?.items?.[0]?.contract_metadata
-                            ?.contract_decimals ?? 18
-                    )) ?? 0;
 
-            const pretty_quote = prettifyCurrency( usd_value);
+            let usd_value =
+                data?.[0]?.items?.[0]?.price *
+                    (Number(decoded.value) /
+                        Math.pow(
+                            10,
+                            data?.[0]?.items?.[0]?.contract_metadata
+                                ?.contract_decimals ?? 18
+                        )) ?? 0;
+
+            const pretty_quote = prettifyCurrency(usd_value);
 
             if (currencyToNumber(pretty_quote) < options.min_usd!) {
                 return null;
@@ -125,12 +130,12 @@ GoldRushDecoder.on(
                     decimals: data?.[0]?.contract_decimals ?? 18,
                     heading: "Token Amount",
                     pretty_quote: pretty_quote,
-                    usd_value:usd_value,
+                    usd_value: usd_value,
                     ticker_symbol: data?.[0]?.contract_ticker_symbol,
                     value: decoded.value.toString(),
                 },
             ];
-              parsedData.name ="Transfer ERC20"
+            parsedData.name = "Transfer ERC20";
         } else if (decoded.tokenId) {
             const { data } =
                 await covalent_client.NftService.getNftMetadataForGivenTokenIdForContract(
@@ -167,12 +172,9 @@ GoldRushDecoder.on(
                     },
                 },
             ];
-            parsedData.name ="Transfer ERC721"
-
+            parsedData.name = "Transfer ERC721";
         }
 
         return parsedData;
     }
-      
-    
 );
