@@ -17,7 +17,11 @@ const yearnVaultAddresses: Set<string> = new Set(
 
 GoldRushDecoder.on(
     "yearn-finance:Transfer",
-    ["eth-mainnet", "arbitrum-mainnet", "matic-mainnet"],
+    [
+        "eth-mainnet",
+
+        // "arbitrum-mainnet", "matic-mainnet"
+    ],
     YearnFinanceABI as Abi,
     async (
         log_event,

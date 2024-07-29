@@ -18,11 +18,10 @@ import {
 GoldRushDecoder.on(
     "paraswap-v5:SwappedV3",
     [
-        "bsc-mainnet",
         "eth-mainnet",
-        "optimism-mainnet",
-        "arbitrum-mainnet",
-        "fantom-mainnet",
+        // "optimism-mainnet",
+        // "arbitrum-mainnet",
+        // "fantom-mainnet",
         "matic-mainnet",
         "avalanche-mainnet",
     ],

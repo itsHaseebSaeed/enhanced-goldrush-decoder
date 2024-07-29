@@ -12,7 +12,12 @@ import { timestampParser } from "../../../../utils/functions/timestamp-parser";
 // Decoder for the Synthetix Issued event
 GoldRushDecoder.on(
     "synthetix:Issued",
-    ["base-mainnet", "eth-mainnet", "optimism-mainnet", "arbitrum-mainnet"],
+    [
+        // "base-mainnet",
+        "eth-mainnet",
+        // "optimism-mainnet",
+        // "arbitrum-mainnet",
+    ],
     SynthetixABI as Abi,
     async (
         log_event,
@@ -107,7 +112,12 @@ GoldRushDecoder.on(
 // Decoder for the Synthetix Burned event
 GoldRushDecoder.on(
     "synthetix:Burned",
-    ["base-mainnet", "eth-mainnet", "optimism-mainnet", "arbitrum-mainnet"],
+    [
+        // "base-mainnet",
+        "eth-mainnet",
+        // "optimism-mainnet",
+        // "arbitrum-mainnet",
+    ],
     SynthetixABI as Abi,
     async (
         log_event,

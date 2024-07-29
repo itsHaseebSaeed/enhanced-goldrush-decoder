@@ -13,7 +13,7 @@ import { timestampParser } from "../../../../utils/functions";
 
 GoldRushDecoder.on(
     "lido:TransferShares",
-    ["eth-mainnet", "matic-mainnet"],
+    ["eth-mainnet"],
     ABI as Abi,
     async (
         log_event,
@@ -83,7 +83,7 @@ GoldRushDecoder.on(
 
 GoldRushDecoder.on(
     "lido:Submitted",
-    ["eth-mainnet", "matic-mainnet"],
+    ["eth-mainnet"],
     ABI as Abi,
     async (
         log_event,
@@ -154,7 +154,7 @@ GoldRushDecoder.on(
 
 GoldRushDecoder.on(
     "lido:TokenRebased",
-    ["eth-mainnet", "matic-mainnet"],
+    ["eth-mainnet"],
     ABI as Abi,
     async (
         log_event,
@@ -262,7 +262,7 @@ GoldRushDecoder.on(
 
 GoldRushDecoder.on(
     "lido:SharesBurnt",
-    ["eth-mainnet", "matic-mainnet"],
+    ["eth-mainnet"],
     ABI as Abi,
     async (
         log_event,
@@ -362,7 +362,7 @@ GoldRushDecoder.on(
 
 GoldRushDecoder.on(
     "lido:ETHDistributed",
-    ["eth-mainnet", "matic-mainnet"],
+    ["eth-mainnet"],
     ABI as Abi,
     async (
         log_event,
@@ -491,7 +491,7 @@ GoldRushDecoder.on(
 
 GoldRushDecoder.on(
     "lido:WithdrawalsReceived",
-    ["eth-mainnet", "matic-mainnet"],
+    ["eth-mainnet"],
     ABI as Abi,
     async (
         log_event,
@@ -548,7 +548,7 @@ GoldRushDecoder.on(
 
 GoldRushDecoder.on(
     "lido:ELRewardsReceived",
-    ["eth-mainnet", "matic-mainnet"],
+    ["eth-mainnet"],
     ABI as Abi,
     async (
         log_event,
@@ -605,7 +605,7 @@ GoldRushDecoder.on(
 
 GoldRushDecoder.on(
     "lido:CLValidatorsUpdated",
-    ["eth-mainnet", "matic-mainnet"],
+    ["eth-mainnet"],
     ABI as Abi,
     async (
         log_event,
@@ -658,7 +658,7 @@ GoldRushDecoder.on(
 
 GoldRushDecoder.on(
     "lido:WithdrawalRequested",
-    ["eth-mainnet", "matic-mainnet"],
+    ["eth-mainnet"],
     WithdrawalABI as Abi,
     async (
         log_event,
@@ -755,7 +755,7 @@ GoldRushDecoder.on(
 
 GoldRushDecoder.on(
     "lido:WithdrawalClaimed",
-    ["eth-mainnet", "matic-mainnet"],
+    ["eth-mainnet"],
     WithdrawalABI as Abi,
     async (
         log_event,
@@ -835,7 +835,7 @@ GoldRushDecoder.on(
 
 GoldRushDecoder.on(
     "lido:BatchMetadataUpdate",
-    ["eth-mainnet", "matic-mainnet"],
+    ["eth-mainnet"],
     WithdrawalABI as Abi,
     async (
         log_event,
@@ -888,7 +888,7 @@ GoldRushDecoder.on(
 
 GoldRushDecoder.on(
     "lido:WithdrawalsFinalized",
-    ["eth-mainnet", "matic-mainnet"],
+    ["eth-mainnet"],
     WithdrawalABI as Abi,
     async (
         log_event,
