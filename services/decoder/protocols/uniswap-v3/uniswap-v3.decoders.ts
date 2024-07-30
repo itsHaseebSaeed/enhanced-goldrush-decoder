@@ -1330,7 +1330,22 @@ async function getTokenPrice(
             tokenAddress,
             { from: date, to: date }
         );
-        return priceData?.data[0]?.prices[0]?.price || 0;
+        if (
+            priceData &&
+            priceData.data &&
+            Array.isArray(priceData.data) &&
+            priceData.data.length > 0 &&
+            priceData.data[0].prices &&
+            Array.isArray(priceData.data[0].prices) &&
+            priceData.data[0].prices.length > 0
+        ) {
+            return priceData.data[0].prices[0].price || 0;
+        } else {
+            console.warn(
+                `No price data available for ${tokenAddress} on ${date}`
+            );
+            return 0;
+        }
     } catch (error) {
         console.error(
             `Error fetching token price for ${tokenAddress} on ${date}:`,
