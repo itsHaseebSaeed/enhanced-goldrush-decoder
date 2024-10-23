@@ -14,9 +14,8 @@ import { ethers } from "ethers";
 
 const infuraProvider = new ethers.InfuraProvider(
     "mainnet",
-    "578f8e9e011c421a91e20f214e86d7de"
+    process.env.INFURA_API_KEY
 );
-
 const SOLO_MARGIN_CONTRACT_ADDRESS =
     "0x1E0447b19BB6EcFdAe1e4AE1694b0C3659614e4e";
 
@@ -60,12 +59,11 @@ GoldRushDecoder.on(
 
         let usd_value =
             data?.[0]?.items?.[0]?.price *
-                (Number(decoded.value) /
-                    Math.pow(
-                        10,
-                        data?.[0]?.items?.[0]?.contract_metadata
-                            ?.contract_decimals ?? 18
-                    )) ?? 0;
+            (Number(decoded.value) /
+                Math.pow(
+                    10,
+                    data?.[0]?.items?.[0]?.contract_metadata?.contract_decimals
+                ));
 
         const tokens: EventTokens = [
             {
@@ -227,12 +225,12 @@ GoldRushDecoder.on(
 
         const usdValue =
             data?.[0]?.items?.[0]?.price *
-                (Number(decoded.nonQuantizedAmount) /
-                    Math.pow(
-                        10,
-                        data?.[0]?.items?.[0]?.contract_metadata
-                            ?.contract_decimals ?? 18
-                    )) ?? 0;
+            (Number(decoded.nonQuantizedAmount) /
+                Math.pow(
+                    10,
+                    data?.[0]?.items?.[0]?.contract_metadata
+                        ?.contract_decimals || 18
+                ));
 
         const tokens: EventTokens = [
             {
@@ -354,8 +352,8 @@ GoldRushDecoder.on(
                     Math.pow(
                         10,
                         data?.[0]?.items?.[0]?.contract_metadata
-                            ?.contract_decimals ?? 18
-                    )) ?? 0;
+                            ?.contract_decimals || 18
+                    )) || 0;
         const tokens: EventTokens = [
             {
                 heading: "Withdraw",

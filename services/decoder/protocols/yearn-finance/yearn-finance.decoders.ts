@@ -58,13 +58,13 @@ GoldRushDecoder.on(
         );
 
         let usd_value =
-            data?.[0]?.items?.[0]?.price *
+            (data?.[0]?.items?.[0]?.price || 0) *
                 (Number(decoded.value) /
                     Math.pow(
                         10,
                         data?.[0]?.items?.[0]?.contract_metadata
-                            ?.contract_decimals ?? 18
-                    )) ?? 0;
+                            ?.contract_decimals || 18
+                    )) || 0;
 
         const tokens: EventTokens = [
             {

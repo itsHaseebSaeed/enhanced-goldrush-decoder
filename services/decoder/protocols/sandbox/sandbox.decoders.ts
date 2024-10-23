@@ -116,8 +116,8 @@ GoldRushDecoder.on(
                         Math.pow(
                             10,
                             data?.[0]?.items?.[0]?.contract_metadata
-                                ?.contract_decimals ?? 18
-                        )) ?? 0;
+                                ?.contract_decimals || 18
+                        )) || 0;
 
             const pretty_quote = prettifyCurrency(usd_value);
 

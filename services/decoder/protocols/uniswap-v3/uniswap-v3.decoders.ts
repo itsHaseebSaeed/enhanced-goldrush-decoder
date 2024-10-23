@@ -22,7 +22,7 @@ import AGGREGATORS from "../aggregators/aggregators";
 
 const infuraProvider = new ethers.InfuraProvider(
     "mainnet",
-    "578f8e9e011c421a91e20f214e86d7de"
+    process.env.INFURA_API_KEY
 );
 
 GoldRushDecoder.on(
