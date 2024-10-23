@@ -1,3 +1,4 @@
+
 import {
     Router,
     type Request,
@@ -18,6 +19,8 @@ import { categorize, fetchTxsFromWallet } from "./wallet.service";
 import { Transaction, type Chain } from "@covalenthq/client-sdk";
 import pLimit from "p-limit";
 import ProgressBar from "progress";
+import fs from "fs";
+import path from "path";
 
 export const walletRouter = Router();
 
@@ -132,11 +135,34 @@ const handleDeveloperDecodeWallet = async (
             (req.query as DecodeWalletQuery)["raw_logs"] === "true";
         const min_usd = (req.query as DecodeWalletQuery)["min_usd"] ?? 0;
         const { chain_name, wallet_address } = req.body as DecodeWalletRequest;
-        const transactions = await fetchTxsFromWallet(
-            chain_name as Chain,
-            wallet_address,
-            covalentApiKey
+        const transactionsFilePath = path.join(
+            __dirname,
+            `${wallet_address}_transactions.json`
         );
+
+        let transactions: Transaction[];
+
+        if (fs.existsSync(transactionsFilePath)) {
+            const fileContent = fs.readFileSync(transactionsFilePath, "utf-8");
+            transactions = JSON.parse(fileContent);
+        } else {
+            transactions = await fetchTxsFromWallet(
+                chain_name as Chain,
+                wallet_address,
+                covalentApiKey
+            );
+
+            // Handle bigint before storing in file
+            transactions = JSON.parse(
+                JSON.stringify(transactions, (_key, value) => {
+                    return typeof value === "bigint" ? value.toString() : value;
+                })
+            );
+            fs.writeFileSync(
+                transactionsFilePath,
+                JSON.stringify(transactions, null, 2)
+            );
+        }
 
         let total = transactions.length;
 
@@ -200,15 +226,10 @@ const handleDeveloperDecodeWallet = async (
         const decodedEventsPromises = transactions.map((tx) =>
             limit(async () => {
                 try {
-                    // await simulateTask();
-
-                    if (errorOccurred) return;
                     let res = await processTransaction(tx);
                     progressBar.tick(); // Update the progress bar after processing each transaction
                     return res;
                 } catch (err) {
-                    errorOccurred = true;
-
                     throw new Error(
                         `Error processing transaction ${tx.tx_hash}: ${err}`
                     );
@@ -235,3 +256,4 @@ walletRouter.post(
     validateQuery("body", decodeWalletBodySchema),
     handleDeveloperDecodeWallet
 );
+
