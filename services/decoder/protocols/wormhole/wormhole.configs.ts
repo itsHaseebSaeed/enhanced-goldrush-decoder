@@ -13,12 +13,12 @@ const configs: Configs = [
         protocol_name: "wormhole",
         chain_name: "eth-mainnet",
     },
-    {
-        address: "0x6FFd7EdE62328b3Af38FCD61461Bbfc52F5651fE", //NFT Bridge
-        is_factory: false,
-        protocol_name: "wormhole",
-        chain_name: "eth-mainnet",
-    },
+    // {
+    //     address: "0x6FFd7EdE62328b3Af38FCD61461Bbfc52F5651fE", //NFT Bridge
+    //     is_factory: false,
+    //     protocol_name: "wormhole",
+    //     chain_name: "eth-mainnet",
+    // },
     {
         address: "0xB6F6D86a8f9879A9c87f643768d9efc38c1Da6E7",
         is_factory: false,

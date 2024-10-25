@@ -27,6 +27,7 @@ GoldRushDecoder.on(
         covalent_client,
         options
     ): Promise<EventType> => {
+        console.log("LockedEther function visited");
         const { raw_log_data, raw_log_topics } = log_event;
 
         const { args: decoded } = decodeEventLog({
@@ -108,6 +109,7 @@ GoldRushDecoder.on(
         covalent_client,
         options
     ): Promise<EventType> => {
+        console.log("LockedERC20 function visited");
         const { raw_log_data, raw_log_topics } = log_event;
 
         const { args: decoded } = decodeEventLog({
@@ -171,12 +173,12 @@ GoldRushDecoder.on(
 
         const usdValue =
             data?.[0]?.items?.[0]?.price *
-                (Number(decoded.amount) /
-                    Math.pow(
-                        10,
-                        data?.[0]?.items?.[0]?.contract_metadata
-                            ?.contract_decimals || 18
-                    )) || 0;
+            (Number(decoded.amount) /
+                Math.pow(
+                    10,
+                    data?.[0]?.items?.[0]?.contract_metadata
+                        ?.contract_decimals ?? 18
+                ));
 
         const tokens: EventTokens = [
             {
@@ -216,6 +218,7 @@ GoldRushDecoder.on(
         covalent_client,
         options
     ): Promise<EventType> => {
+        console.log("ExitedEther function visited");
         const { raw_log_data, raw_log_topics } = log_event;
 
         const { args: decoded } = decodeEventLog({
@@ -305,6 +308,7 @@ GoldRushDecoder.on(
         covalent_client,
         options
     ): Promise<EventType> => {
+        console.log("Transfer function visited");
         const { raw_log_data, raw_log_topics } = log_event;
 
         let decoded:
@@ -408,12 +412,12 @@ GoldRushDecoder.on(
 
             let usd_value =
                 data?.[0]?.items?.[0]?.price *
-                    (Number(decoded.value) /
-                        Math.pow(
-                            10,
-                            data?.[0]?.items?.[0]?.contract_metadata
-                                ?.contract_decimals || 18
-                        )) || 0;
+                (Number(decoded.value) /
+                    Math.pow(
+                        10,
+                        data?.[0]?.items?.[0]?.contract_metadata
+                            ?.contract_decimals ?? 18
+                    ));
 
             const pretty_quote = prettifyCurrency(usd_value);
 

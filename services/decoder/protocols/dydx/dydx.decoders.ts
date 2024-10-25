@@ -229,7 +229,7 @@ GoldRushDecoder.on(
                 Math.pow(
                     10,
                     data?.[0]?.items?.[0]?.contract_metadata
-                        ?.contract_decimals || 18
+                        ?.contract_decimals ?? 18
                 ));
 
         const tokens: EventTokens = [
@@ -352,7 +352,7 @@ GoldRushDecoder.on(
                     Math.pow(
                         10,
                         data?.[0]?.items?.[0]?.contract_metadata
-                            ?.contract_decimals || 18
+                            ?.contract_decimals ?? 18
                     )) || 0;
         const tokens: EventTokens = [
             {

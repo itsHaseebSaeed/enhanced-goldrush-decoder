@@ -30,7 +30,6 @@ import { mapBridgingEventToReport } from "../categorization/types/bridging_detai
 import { mapLendingEventToReport } from "../categorization/types/lending_details";
 import { mapNftSaleReport } from "../categorization/types/nft_details";
 import { mapMetaverseEventToReport } from "../categorization/types/metaverse_details";
-import ProgressBar from "progress";
 
 export const fetchTxsFromWallet = async (
     chain_name: Chain,

@@ -11,7 +11,6 @@ import ETH_CORE_ABI from "./abis/wormhole-eth-core.abi.json";
 import wormholeChainData from "./wormhole_chain_id.json";
 import { timestampParser } from "../../../../utils/functions/timestamp-parser";
 import { prettifyCurrency } from "@covalenthq/client-sdk";
-import { currencyToNumber } from "../../../../utils/functions";
 
 //Withdraw back to eth
 GoldRushDecoder.on(
@@ -154,7 +153,16 @@ GoldRushDecoder.on(
             };
         };
 
+        const Nft_bridge = "0x6FFd7EdE62328b3Af38FCD61461Bbfc52F5651fE";
+
         const decodedPayload = decodeWormholeVAAPayload(decoded.payload);
+
+        if (
+            tx.to_address.toLowerCase() === Nft_bridge.toLowerCase() ||
+            tx.from_address.toLowerCase() === Nft_bridge.toLowerCase()
+        ) {
+            decodedPayload.amount = BigInt(0);
+        }
 
         const from_chain = getChainNameById(
             decodedPayload.tokenChain,
@@ -248,12 +256,12 @@ GoldRushDecoder.on(
 
             let usd_value =
                 data?.[0]?.items?.[0]?.price *
-                    (Number(decodedPayload.amount) /
-                        Math.pow(
-                            10,
-                            data?.[0]?.items?.[0]?.contract_metadata
-                                ?.contract_decimals || 18
-                        )) || 0;
+                (Number(decodedPayload.amount) /
+                    Math.pow(
+                        10,
+                        data?.[0]?.items?.[0]?.contract_metadata
+                            ?.contract_decimals ?? 18
+                    ));
 
             const pretty_quote = prettifyCurrency(usd_value);
 
@@ -273,14 +281,6 @@ GoldRushDecoder.on(
         return parsedData;
     }
 );
-
-// For Token Transfer actions, the Payload ID is 1. This is used when tokens are transferred from one chain to another using a lockup/mint and burn/unlock mechanism. Source
-
-// For Token + Message actions, also referred to as a payload3 message or a Contract Controlled Transfer, the Payload ID is 3. This is used when an app may include additional data in the transfer to inform some application-specific behavior. Source
-
-// In the Token Bridge App, the Payload IDs are 1 for Transfer, 2 for AssetMeta, and 3 for TransferWithPayload. Source
-
-// In the NFT Bridge App, the Payload IDs are 1 for Transfer, 2 for RegisterChain, and 3 for UpgradeContract. Source
 
 type DecodedPayload = {
     payloadId: number;
@@ -322,9 +322,6 @@ function decodeWormholeVAAPayload(payload: string): DecodedPayload {
     const tokenChain = hexToInt(payload.slice(130, 134));
     const toAddress = hexToAddress(payload.slice(134, 198));
     const toChain = hexToInt(payload.slice(198, 202));
-
-    console.log(toChain);
-
     const fee = hexToBigInt(payload.slice(202, 266));
 
     return {

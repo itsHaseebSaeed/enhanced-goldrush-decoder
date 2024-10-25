@@ -4,7 +4,7 @@ curl --location 'http://localhost:8080/api/v1/tx/decode' \
 --header 'Content-Type: application/json' \
 --data '{
 "chain_name": "eth-mainnet",
-"tx_hash": "0xb94db10ffb8caaf8b6c61982f464a663ca93238b65acd88c7cc8a1746d12d4e9"
+"tx_hash": "0xd4431b922e31ec4e825b472266c126511f8a61813cb545a8203b44557b34d2dc"
 }'
 
 
@@ -13,7 +13,7 @@ curl --location 'http://localhost:8080/api/v1/wallet/decode' \
 --header 'Content-Type: application/json' \
 --data '{
 "chain_name": "eth-mainnet",
-"wallet_address": "0x4a6b6964856fba43e4c09f645584e5fee8faf659"
+"wallet_address": "0x01eb75e09b387350500c31e285a26c9a219dee88"
 }'
 
 
