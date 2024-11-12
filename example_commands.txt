@@ -4,7 +4,7 @@ curl --location 'http://localhost:8080/api/v1/tx/decode' \
 --header 'Content-Type: application/json' \
 --data '{
 "chain_name": "eth-mainnet",
-"tx_hash": "0xd4431b922e31ec4e825b472266c126511f8a61813cb545a8203b44557b34d2dc"
+"tx_hash": "0xdac086df9520bbd73ff259b05fe70cd74dd02cca44107b88868f98aadbfe371e"
 }'
 
 

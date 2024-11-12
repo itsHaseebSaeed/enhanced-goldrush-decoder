@@ -13,10 +13,7 @@ import { ethers } from "ethers";
 import erc20ABI from "./abis/erc20.abi.json";
 import { timestampParser } from "../../../../utils/functions";
 
-const infuraProvider = new ethers.InfuraProvider(
-    "mainnet",
-    process.env.INFURA_API_KEY
-);
+import getInfuraProvider from "../../InfuraConstants";
 
 GoldRushDecoder.on(
     "sushiswap-v2:Swap",
@@ -85,6 +82,7 @@ GoldRushDecoder.on(
             outputTokenSymbol: string | null = null,
             inputValue: bigint = BigInt(0),
             outputValue: bigint = BigInt(0);
+            let infuraProvider= await getInfuraProvider(chain_name);
 
         const pairContract = new ethers.Contract(
             exchange_contract,
@@ -326,6 +324,7 @@ GoldRushDecoder.on(
                 amount1: bigint;
             };
         };
+        let infuraProvider= await getInfuraProvider(chain_name);
 
         const pairContract = new ethers.Contract(
             exchange_contract,
@@ -486,6 +485,7 @@ GoldRushDecoder.on(
                 to: string;
             };
         };
+        let infuraProvider= await getInfuraProvider(chain_name);
 
         const pairContract = new ethers.Contract(
             exchange_contract,
