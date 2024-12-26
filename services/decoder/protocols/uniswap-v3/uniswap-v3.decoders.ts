@@ -20,10 +20,8 @@ import {
 import { ethers } from "ethers";
 import AGGREGATORS from "../aggregators/aggregators";
 
-const infuraProvider = new ethers.InfuraProvider(
-    "mainnet",
-    process.env.INFURA_API_KEY
-);
+import getInfuraProvider from "../../InfuraConstants";
+
 
 GoldRushDecoder.on(
     "uniswap-v3:PoolCreated",
@@ -181,6 +179,7 @@ GoldRushDecoder.on(
             raw_log_data,
             raw_log_topics,
         } = log_event;
+        let infuraProvider= await getInfuraProvider(chain_name);
 
         const { args: decoded } = decodeEventLog({
             abi: PairABI,
@@ -355,6 +354,7 @@ GoldRushDecoder.on(
                 amount1: bigint;
             };
         };
+        let infuraProvider= await getInfuraProvider(chain_name);
 
         const pairContract = new ethers.Contract(
             exchange_contract,
@@ -516,6 +516,7 @@ GoldRushDecoder.on(
                 tick: bigint;
             };
         };
+        let infuraProvider= await getInfuraProvider(chain_name);
 
         const pairContract = new ethers.Contract(
             exchange_contract,
@@ -723,6 +724,7 @@ GoldRushDecoder.on(
                 paid1: bigint;
             };
         };
+        let infuraProvider= await getInfuraProvider(chain_name);
 
         const pairContract = new ethers.Contract(
             exchange_contract,
@@ -880,6 +882,7 @@ GoldRushDecoder.on(
                 amount1: bigint;
             };
         };
+        let infuraProvider= await getInfuraProvider(chain_name);
 
         const positionManagerContract = new ethers.Contract(
             log_event.sender_address,
@@ -1027,6 +1030,7 @@ GoldRushDecoder.on(
                 amount1: bigint;
             };
         };
+        let infuraProvider= await getInfuraProvider(chain_name);
 
         const positionManagerContract = new ethers.Contract(
             log_event.sender_address,
@@ -1176,6 +1180,7 @@ GoldRushDecoder.on(
                 amount1: bigint;
             };
         };
+        let infuraProvider= await getInfuraProvider(chain_name);
 
         const pairContract = new ethers.Contract(
             exchange_contract,

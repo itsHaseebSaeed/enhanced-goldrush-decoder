@@ -11,12 +11,11 @@ import {
 import AGGREGATORS from "../aggregators/aggregators";
 import { timestampParser } from "../../../../utils/functions";
 import erc20ABI from "./abis/erc20.abi.json";
-
 import { ethers } from "ethers";
-const infuraProvider = new ethers.InfuraProvider(
-    "mainnet",
-    process.env.INFURA_API_KEY
-);
+
+import getInfuraProvider from "../../InfuraConstants";
+
+
 
 GoldRushDecoder.on(
     "uniswap-v2:Swap",
@@ -46,6 +45,7 @@ GoldRushDecoder.on(
             raw_log_data,
             raw_log_topics,
         } = log_event;
+        let infuraProvider= await getInfuraProvider(chain_name);
 
         const { args: decoded } = decodeEventLog({
             abi: PairABI,
@@ -286,6 +286,7 @@ GoldRushDecoder.on(
             raw_log_data,
             raw_log_topics,
         } = log_event;
+        let infuraProvider= await getInfuraProvider(chain_name);
 
         const { args: decoded } = decodeEventLog({
             abi: PairABI,
@@ -432,6 +433,7 @@ GoldRushDecoder.on(
             raw_log_data,
             raw_log_topics,
         } = log_event;
+        let infuraProvider= await getInfuraProvider(chain_name);
 
         const { args: decoded } = decodeEventLog({
             abi: PairABI,

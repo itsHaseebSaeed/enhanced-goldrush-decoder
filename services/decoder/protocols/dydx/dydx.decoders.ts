@@ -12,10 +12,8 @@ import {
 import { timestampParser } from "../../../../utils/functions/timestamp-parser";
 import { ethers } from "ethers";
 
-const infuraProvider = new ethers.InfuraProvider(
-    "mainnet",
-    process.env.INFURA_API_KEY
-);
+import getInfuraProvider from "../../InfuraConstants";
+
 const SOLO_MARGIN_CONTRACT_ADDRESS =
     "0x1E0447b19BB6EcFdAe1e4AE1694b0C3659614e4e";
 
@@ -163,6 +161,7 @@ GoldRushDecoder.on(
         };
 
         let perpContract;
+        let infuraProvider= await getInfuraProvider(chain_name);
 
         try {
             perpContract = new ethers.Contract(
@@ -287,6 +286,7 @@ GoldRushDecoder.on(
             };
         };
         let perpContract;
+        let infuraProvider= await getInfuraProvider(chain_name);
 
         try {
             perpContract = new ethers.Contract(

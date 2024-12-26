@@ -38,23 +38,9 @@ const handleDeveloperCategorizedWallet = async (
         const min_usd = (req.query as DecodeWalletQuery)["min_usd"] ?? 0;
         const { chain_name, wallet_address } = req.body as DecodeWalletRequest;
 
-        const cacheFilePath = path.join(
-            __dirname,
-            `cache_${chain_name}_${wallet_address}.json`
-        );
-
-        if (fs.existsSync(cacheFilePath)) {
-            const cachedData = fs.readFileSync(cacheFilePath, "utf-8");
-            const parsedData = JSON.parse(cachedData);
-            return res.json({
-                success: true,
-                items: parsedData,
-            });
-        }
-
         let page = 0;
         const pageSize = 100;
-        const limit = pLimit(20);
+        const limit = pLimit(100);
         let allDecodedEvents: any[] = [];
         // TODO remove this query
         const covalentClient = new CovalentClient(covalentApiKey);
@@ -63,14 +49,14 @@ const handleDeveloperCategorizedWallet = async (
                 chain_name as Chain,
                 wallet_address
             );
+            const fetchProgressBar = new ProgressBar("Fetched: :percent :total", {
+                complete: "#",
+                incomplete: " ",
+                width: 150,
+                total: total?.data?.items[0]?.total_count,
+            }); // TODO remove this progress bar
 
-        const progressBar = new ProgressBar("Fetched: :percent :total", {
-            complete: "#",
-            incomplete: " ",
-            width: 150,
-            total: total?.data?.items[0]?.total_count,
-        }); // TODO remove this progress bar
-        progressBar.tick(0); // Update the progress bar after processing each transaction // TODO remove this progress bar
+        fetchProgressBar.tick(0); // Update the progress bar after processing each transaction // TODO remove this progress bar
 
         while (true) {
             const transactions = await fetchTxsFromWallet(
@@ -79,10 +65,21 @@ const handleDeveloperCategorizedWallet = async (
                 covalentApiKey,
                 page
             );
-            progressBar.tick(transactions.length);
+            fetchProgressBar.tick(transactions.length);
             if (transactions.length === 0) {
                 break;
             }
+
+            let decodedCount = 0;
+
+        const progressBar = new ProgressBar("Progressed: :percent :total", {
+            complete: "#",
+            incomplete: " ",
+            width: 150,
+            total: total?.data?.items[0]?.total_count,
+        }); // TODO remove this progress bar
+        progressBar.tick(0); // Update the progress bar after processing each transaction // TODO remove this progress bar
+
 
             const decodedEventsPromises = transactions.map((tx) =>
                 limit(async () => {
@@ -96,7 +93,7 @@ const handleDeveloperCategorizedWallet = async (
                                 min_usd,
                             }
                         );
-                        const cate = await categorize(events);
+                        const categorizedEvents = await categorize(events);
 
                         const {
                             block_hash,
@@ -124,9 +121,14 @@ const handleDeveloperCategorizedWallet = async (
                             })
                         );
 
+                        decodedCount++;
+                        progressBar.tick({
+                            decodedCount,
+                        });
+
                         return {
                             ...parsedTx,
-                            categorization: cate,
+                            categorization: categorizedEvents,
                         };
                     } catch (err) {
                         // TODO: find some way to log this error
@@ -135,7 +137,7 @@ const handleDeveloperCategorizedWallet = async (
                 })
             );
 
-            const results = await Promise.all(decodedEventsPromises);
+            const results = await Promise.all(decodedEventsPromises);   
             const decodedEvents = results.filter((result) => result !== null);
             allDecodedEvents = allDecodedEvents.concat(decodedEvents);
 
@@ -149,12 +151,6 @@ const handleDeveloperCategorizedWallet = async (
             allDecodedEvents,
             wallet_address
         );
-
-        // //TODO remove this.
-        // fs.writeFileSync(
-        //     cacheFilePath,
-        //     JSON.stringify(final_categorization, null, 2)
-        // );
 
         res.json({
             success: true,
