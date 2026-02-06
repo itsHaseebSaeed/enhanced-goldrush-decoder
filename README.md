@@ -1,13 +1,6 @@
-<div align="center">
-    <img alt="GoldRush Kit Logo" src="assets/goldrush-decoder-banner.png" style="max-width: 100%;"/>
-</div>
-
-<p align="center">
-  <img src="https://img.shields.io/github/license/covalenthq/goldrush-decoder" alt="MIT">
-</p>
 
 <h1 align="center">
-Decode unstructured, raw event logs into structured data with a simple API and **categorize transaction into defi, transfer, lending, staking etc**
+Decode unstructured, raw event logs into structured data with a simple API AND categorize transaction into defi, transfer, lending, staking etc
 </h1>
 
 <div align="center">
