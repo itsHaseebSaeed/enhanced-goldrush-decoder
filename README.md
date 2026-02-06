@@ -7,7 +7,7 @@
 </p>
 
 <h1 align="center">
-Decode unstructured, raw event logs into structured data with a simple API.
+Decode unstructured, raw event logs into structured data with a simple API and **categorize transaction into defi, transfer, lending, staking etc**
 </h1>
 
 <div align="center">
